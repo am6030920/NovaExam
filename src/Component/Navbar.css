@@ -1,31 +1,69 @@
+@keyframes slideInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes navGlowBackground {
+  0% {
+    background-position: 0% 50%;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.905);
+  }
+  50% {
+    background-position: 100% 50%;
+    box-shadow: 0 0 20px rgba(127, 174, 134, 0.827);
+  }
+  100% {
+    background-position: 0% 50%;
+    box-shadow: 0 0 10px rgba(113, 189, 204, 0.866);
+  }
+}
+
 .Nav {
-    margin: 0;
-    padding: 0;
-    display: flex;
-    background: linear-gradient(45deg, rgb(255, 245, 202), rgb(84, 209, 101));
-    height: 10vh;
-    padding-left:10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  position: fixed;       /* Fix nav at top */
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;        /* Stay above other content */
+  margin: 0;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(270deg, rgb(255, 245, 202), rgb(84, 209, 101), rgb(255, 245, 202));
+  background-size: 400% 400%;
+  height: 10vh;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  animation: 
+    slideInDown 1s ease-in-out,
+    navGlowBackground 8s ease-in-out infinite;
 }
 
-.nova{
-    color: rgb(52, 90, 54);
-    font-family: 'Montserrat', sans-serif;
-    padding-top: 10px;
-    padding-left: 15px;
 
+.nova {
+  color: rgb(52, 90, 54);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 22px;
+  font-weight: bold;
 }
-.exam{
-     font-family: 'Montserrat', sans-serif;
-    color: rgb(84, 209, 101);
-    padding-top: 10px;
+
+.exam {
+  font-family: 'Montserrat', sans-serif;
+  color: rgba(12, 219, 40, 0.845);
+  font-size: 22px;
+  font-weight: bold;
 }
 
 button {
-  padding: 12px 24px;
-  font-size: 16px;
+  padding: 10px 20px;
+  font-size: 15px;
   font-family: 'Montserrat', sans-serif;
-  font-weight: 600;
+  font-weight: 550;
   border-radius: 30px; 
   border: none;
   outline: none;
@@ -34,45 +72,56 @@ button {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
   display: inline-block; 
   margin: 10px;
-  margin-right: 1090px;
+  height: 40px;
 }
 
 .signup {
-  background-color: #4CAF50; 
+  background-color: #7bdb7f; 
   color: white;
   border: 2px solid #4CAF50;
 }
 
 .signup:hover {
   background-color: white;
-  color: #4CAF50;
+  color: #141414;
   transform: translateY(-5px); 
   box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15); 
+}
 
-.LogIn {
-  background-color: #007BFF; 
+.Log {
+  background-color: #7bdb7f; 
   color: white;
-  border: 2px solid #007BFF; 
+  border: 2px solid #4CAF50;
 }
 
-.LogIn:hover {
+.Log:hover {
   background-color: white;
-  color: #007BFF;
+  color: #141414;
   transform: translateY(-5px); 
-  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15); 
 }
-
 
 button:focus {
   outline: none;
   box-shadow: 0 0 10px rgba(0, 123, 255, 0.5); 
 }
 
-
+/* Responsive css it is*/
 @media (max-width: 768px) {
+  .Nav {
+    flex-direction: column;
+    height: auto;
+    padding: 10px;
+  }
+
   button {
-    width: 100%;             
+    width: 90%;             
     margin: 10px 0;       
   }
 }
 
+.jabo {
+  margin: 0;
+  padding: 0;
+  height: 70px;
+}
