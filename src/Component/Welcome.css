@@ -669,3 +669,120 @@ h2 {
   animation: floatImage 4s ease-in-out infinite;
   will-change: transform;
 }
+
+.okey {
+  text-align: center;
+  margin: 12px 24px;
+}
+
+.okey img {
+  height: 200px;
+  display: block;
+  margin: 0 auto;
+}
+
+
+
+/* it is a Footer */
+.last{
+  color: #2b88f3;
+  font-size: 34px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: bold;
+}
+.footer6 {
+  background-color: #2e2e2e;
+  color: white;
+  padding: 20px 50px;
+  font-family: Arial, sans-serif;
+}
+
+.footer-content6 {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.footer-left6 {
+  max-width: 60%;
+}
+
+.footer-left6 h2 {
+  color: #4CAF50;
+  font-size: 24px;
+}
+
+.footer-left6 p {
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.footer-right6 h4 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.footer-right6 p {
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.social-icons {
+  display: flex;
+  gap: 15px;
+}
+
+.social-icons a img {
+  width: 25px;
+  height: 25px;
+  transition: transform 0.3s ease;
+}
+
+.social-icons a img:hover {
+  transform: scale(1.1);
+}
+
+/* it is a Chat Button Styling */
+.chat-support {
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+
+}
+
+.chat-button img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: #4CAF50;
+  padding: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
+
+.chat-button img:hover {
+  background-color: #dbfddd;
+}
+
+.power{
+  font-size: 16px;
+  padding-bottom: 8px;
+  margin-bottom: 60px;
+}
+
+.lo{
+  color: #f0fffa;
+}
+
+.face{
+  width: 20px;
+  height: 20px;
+  padding-left: 45px;
+}
+
+
+
+
+
+

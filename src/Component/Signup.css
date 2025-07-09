@@ -1,0 +1,104 @@
+.signup-root {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: #eef3f8;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.signup-card {
+  background: #fff;
+  padding: 40px 50px;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  width: 100%;
+  max-width: 420px;
+  text-align: center;
+}
+
+.logo {
+  width: 120px;
+  margin-bottom: 20px;
+}
+
+.signup-card h1 {
+  margin-bottom: 25px;
+  color: #222;
+  font-size: 22px;
+}
+
+.signup-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.signup-form input[type="text"],
+.signup-form input[type="email"],
+.signup-form input[type="password"] {
+  padding: 12px 14px;
+  font-size: 16px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  transition: 0.3s;
+}
+
+.signup-form input:focus {
+  border-color: #007BFF;
+  outline: none;
+}
+
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  text-align: left;
+  margin-top: 10px;
+}
+
+.checkbox-container input {
+  margin-right: 8px;
+}
+
+.checkbox-container a {
+  color: #007BFF;
+  text-decoration: none;
+}
+
+.checkbox-container a:hover {
+  text-decoration: underline;
+}
+
+.btn-signup {
+  padding: 14px;
+  font-size: 16px;
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: 0.3s;
+}
+
+.btn-signup:hover {
+  background-color: #0056b3;
+}
+
+.signin-link {
+  margin-top: 16px;
+  font-size: 14px;
+  color: #666;
+}
+
+.signin-link a {
+  color: #007BFF;
+  text-decoration: none;
+}
+
+@media (max-width: 480px) {
+  .signup-card {
+    padding: 30px 20px;
+  }
+}

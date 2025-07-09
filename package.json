@@ -1,8 +1,20 @@
 {
-  "name": "novaexam",
+  "name": "routes",
+  "version": "7.6.3",
   "private": true,
-  "version": "0.0.0",
+  "description": "This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.",
+  "homepage": "https://github.com/am6030920/novaeaxm#readme",
+  "bugs": {
+    "url": "https://github.com/am6030920/novaeaxm/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/am6030920/novaeaxm.git"
+  },
+  "license": "ISC",
+  "author": "",
   "type": "module",
+  "main": "eslint.config.js",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -11,7 +23,8 @@
   },
   "dependencies": {
     "react": "^19.1.0",
-    "react-dom": "^19.1.0"
+    "react-dom": "^19.1.0",
+    "react-router-dom": "^7.6.3"
   },
   "devDependencies": {
     "@eslint/js": "^9.29.0",

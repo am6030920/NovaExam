@@ -374,6 +374,36 @@ const Welcome = () => {
         </div>
       </div>
     </div>
+        <div className="okey">
+        <img src="https://examonline.in/wp-content/uploads/2024/05/captera-review-1-3.png" alt="" srcset="" />
+        </div>
+
+
+             <footer className="footer6">
+      <div className="footer-content6">
+        <div className="footer-left6">
+          <div className="last">NOVA EXAM🔥</div>
+          <p className='power'>It sounds like you want to check something on your Nova Exam Portal, which is used for computer-based online exams (from candidate registration to result processing). However, since I don't have direct access to external sites or portals, I can guide you through the general steps you might take to check your exam details or access the platform.</p>
+          <p>&copy; 2025 NovaExam. Terms and Conditions Apply. All Rights Reserved.🎓</p>
+        </div>
+        <div className="footer-right6">
+          <h4>Contacts📞</h4>
+          <p><a className='lo' href="mailto:contact@examonline.in">am6030920@gmail.com</a></p>
+          <div className="social-icons6">
+            <img className='face' src="https://openvisualfx.com/wp-content/uploads/2019/10/linkedin-icon-logo-png-transparent.png" alt="LinkedIn" />
+            <img className='face' src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/2023_Facebook_icon.svg/2048px-2023_Facebook_icon.svg.png" alt="Facebook" />
+            <img className='face' src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Instagram_icon.png/2048px-Instagram_icon.png" alt="Instagram" />
+            <img className='face' src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Logo_of_Twitter.svg/2491px-Logo_of_Twitter.svg.png" alt="Twitter" />
+          </div>
+        </div>
+      </div>
+      <div className="chat-support">
+        <a href="javascript:void(0);" className="chat-button">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmOB60gV5qGtk_mKoCCPR36uhcA8jI_COmqOtovYLN1ef40fdp2d2jXTGz5al8TVcOoGM&usqp=CAU" alt="Chat Support" />
+        </a>
+      </div>
+    </footer>
+
 
 
     </div>
