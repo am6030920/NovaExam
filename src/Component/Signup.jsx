@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import './Signup.css'; 
-
+import { Link } from 'react-router-dom';
+import './Signup.css';
 
 function SignupPage() {
   const [formData, setFormData] = useState({
@@ -17,12 +17,11 @@ function SignupPage() {
     setFormData({
       ...formData,
       [name]: type === 'checkbox' ? checked : value,
-      errorMessage: '', // Clear any error messages when user makes a change
+      errorMessage: '', 
     });
   };
 
   const validatePassword = (password) => {
-    // Add custom validation rules here, like checking for a minimum length, uppercase, etc.
     if (password.length < 8) {
       return 'Password must be at least 8 characters long.';
     }
@@ -38,7 +37,6 @@ function SignupPage() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Validation example
     if (formData.password !== formData.confirmPassword) {
       setFormData({ ...formData, errorMessage: 'Passwords do not match!' });
       return;
@@ -57,7 +55,8 @@ function SignupPage() {
 
     console.log('NovaExam Signup Data:', formData);
     // TODO: Send data to backend API
-    // Reset form on successful submission
+
+    // Reset form
     setFormData({
       name: '',
       email: '',
@@ -67,7 +66,7 @@ function SignupPage() {
       errorMessage: '',
     });
 
-    // You could redirect or show a success message here
+ 
   };
 
   return (
@@ -124,7 +123,10 @@ function SignupPage() {
               checked={formData.agree}
               onChange={handleChange}
             />
-            I agree to the <a href="/terms" target="_blank" rel="noopener noreferrer">Terms & Conditions</a>
+            I agree to the{' '}
+            <a href="/terms" target="_blank" rel="noopener noreferrer">
+              Terms & Conditions
+            </a>
           </label>
 
           {formData.errorMessage && (
@@ -132,8 +134,9 @@ function SignupPage() {
           )}
 
           <button type="submit" className="btn-signup">Sign Up</button>
+
           <p className="signin-link">
-            Already have an account? <a href="/login">Log In</a>
+            Already have an account? <Link to="/login">Log In</Link>
           </p>
         </form>
       </div>

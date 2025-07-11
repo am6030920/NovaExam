@@ -35,7 +35,7 @@ const Welcome = () => {
             <img className='fine'
               width={550}
               
-              src="https://cdn.edclass.com/wp-content/uploads/online-exams.jpg"
+              src="online-exams.jpg"
               alt="ExamOnline Illustration"
             />
           </div>
@@ -374,15 +374,25 @@ const Welcome = () => {
         </div>
       </div>
     </div>
-        <div className="okey">
-        <img src="https://examonline.in/wp-content/uploads/2024/05/captera-review-1-3.png" alt="" srcset="" />
+        <div class="try-wrapper">
+        <div className="try"> <span>🎓Try it for free</span>
+        <span>🎓Try it for free</span>
+        <span>🎓Try it for free</span>
+        <span>🎓Try it for free</span>
+        <span>🎓Try it for free</span>
+        <span>🎓Try it for free</span>
         </div>
-
-
+</div>
+        {/* <div className="okey">
+        <img src="https://examonline.in/wp-content/uploads/2024/05/captera-review-1-3.png" alt="" srcset="" />
+        </div> */}
              <footer className="footer6">
       <div className="footer-content6">
         <div className="footer-left6">
-          <div className="last">NOVA EXAM🔥</div>
+          <div className="last">
+            NOVA EXAM🔥
+            
+          </div>
           <p className='power'>It sounds like you want to check something on your Nova Exam Portal, which is used for computer-based online exams (from candidate registration to result processing). However, since I don't have direct access to external sites or portals, I can guide you through the general steps you might take to check your exam details or access the platform.</p>
           <p>&copy; 2025 NovaExam. Terms and Conditions Apply. All Rights Reserved.🎓</p>
         </div>

@@ -16,7 +16,7 @@
   }
   50% {
     background-position: 100% 50%;
-    box-shadow: 0 0 20px rgba(127, 174, 134, 0.827);
+    box-shadow: 0 0 20px rgba(166, 214, 228, 0.827);
   }
   100% {
     background-position: 0% 50%;
@@ -25,11 +25,11 @@
 }
 
 .Nav {
-  position: fixed;       /* Fix nav at top */
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  z-index: 9999;        /* Stay above other content */
+  z-index: 9999;
   margin: 0;
   padding: 0 20px;
   display: flex;
@@ -39,89 +39,143 @@
   background-size: 400% 400%;
   height: 10vh;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  animation: 
+  animation:
     slideInDown 1s ease-in-out,
     navGlowBackground 8s ease-in-out infinite;
 }
 
+.name {
+  height: 70px;
+  padding-bottom: 12px;
+  padding-left: 20px;
+}
 
-.nova {
-  color: rgb(52, 90, 54);
-  font-family: 'Montserrat', sans-serif;
+.nova, .exam {
+  color: #00b386;
+  font-family: ADORN serif;
   font-size: 22px;
   font-weight: bold;
 }
 
-.exam {
-  font-family: 'Montserrat', sans-serif;
-  color: rgba(12, 219, 40, 0.845);
-  font-size: 22px;
-  font-weight: bold;
-}
-
-button {
-  padding: 10px 20px;
-  font-size: 15px;
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 550;
-  border-radius: 30px; 
-  border: none;
-  outline: none;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
-  display: inline-block; 
-  margin: 10px;
-  height: 40px;
-}
-
-.signup {
-  background-color: #7bdb7f; 
-  color: white;
-  border: 2px solid #4CAF50;
-}
-
-.signup:hover {
-  background-color: white;
-  color: #141414;
-  transform: translateY(-5px); 
-  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15); 
-}
-
+.signup,
 .Log {
-  background-color: #7bdb7f; 
+  position: relative;
+  background: linear-gradient(135deg, #a6c8a7, #78d6b3);
   color: white;
-  border: 2px solid #4CAF50;
+  border: 2px solid rgba(24, 132, 83, 0.3);
+  padding: 12px 24px;
+  font-size: 15px;
+  font-family: ADORN serif;
+  font-weight: 600;
+  border-radius: 30px;
+  cursor: pointer;
+  display: inline-block;
+  text-decoration: none;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  background-size: 200% auto;
+  animation: buttonShine 3s linear infinite;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  margin: 10px;
 }
 
+
+.signup:hover,
 .Log:hover {
-  background-color: white;
-  color: #141414;
-  transform: translateY(-5px); 
-  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15); 
+  background: linear-gradient(135deg, #e5e9e8, #eef0ef);
+  color: #055881;
+  transform: scale(1.05) translateY(-3px);
+  box-shadow: 0 10px 18px rgba(0, 0, 0, 0.2);
 }
 
-button:focus {
+.signup:hover::before,
+.Log:hover::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  border: 2px solid rgba(91, 240, 212, 0.7);
+  animation: glowBorder 1.5s infinite alternate;
+  pointer-events: none;
+}
+
+.signup:focus,
+.Log:focus {
   outline: none;
-  box-shadow: 0 0 10px rgba(0, 123, 255, 0.5); 
+  box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
 }
 
-/* Responsive css it is*/
-@media (max-width: 768px) {
+@keyframes buttonShine {
+  0% {
+    background-position: -100% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* Glow Border Animation */
+@keyframes glowBorder {
+  0% {
+    opacity: 0.4;
+    box-shadow: 0 0 8px rgba(91, 240, 212, 0.3);
+  }
+  100% {
+    opacity: 1;
+    box-shadow: 0 0 18px rgba(91, 240, 212, 0.7);
+  }
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
   .Nav {
     flex-direction: column;
+    align-items: flex-start;
     height: auto;
+    padding: 15px 20px;
+    gap: 10px;
+  }
+
+  .name {
+    padding-left: 0;
+    height: auto;
+  }
+
+  .nova, .exam {
+    font-size: 20px;
+    text-align: left;
+  }
+
+  .signup, .Log {
+    width: 100%;
+    font-size: 16px;
+    padding: 10px 20px;
+    margin: 5px 0;
+    text-align: center;
+  }
+}
+
+@media (max-width: 600px) {
+  .Nav {
+    flex-direction: column;
+    align-items: center;
     padding: 10px;
   }
 
-  button {
-    width: 90%;             
-    margin: 10px 0;       
+  .name {
+    text-align: center;
+    padding-left: 0;
   }
-}
 
-.jabo {
-  margin: 0;
-  padding: 0;
-  height: 70px;
+  .nova, .exam {
+    font-size: 18px;
+    text-align: center;
+  }
+
+  .signup,
+  .Log {
+    width: 90%;
+    font-size: 14px;
+    padding: 10px 16px;
+  }
 }
