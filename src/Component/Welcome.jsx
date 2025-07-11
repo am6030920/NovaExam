@@ -35,7 +35,7 @@ const Welcome = () => {
             <img className='fine'
               width={550}
               
-              src="online-exams.jpg"
+              src='exams.jpg'
               alt="ExamOnline Illustration"
             />
           </div>
