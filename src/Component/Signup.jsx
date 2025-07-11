@@ -17,20 +17,14 @@ function SignupPage() {
     setFormData({
       ...formData,
       [name]: type === 'checkbox' ? checked : value,
-      errorMessage: '', 
+      errorMessage: '',
     });
   };
 
   const validatePassword = (password) => {
-    if (password.length < 8) {
-      return 'Password must be at least 8 characters long.';
-    }
-    if (!/[A-Z]/.test(password)) {
-      return 'Password must contain at least one uppercase letter.';
-    }
-    if (!/[0-9]/.test(password)) {
-      return 'Password must contain at least one number.';
-    }
+    if (password.length < 8) return 'Password must be at least 8 characters long.';
+    if (!/[A-Z]/.test(password)) return 'Password must contain at least one uppercase letter.';
+    if (!/[0-9]/.test(password)) return 'Password must contain at least one number.';
     return '';
   };
 
@@ -54,9 +48,8 @@ function SignupPage() {
     }
 
     console.log('NovaExam Signup Data:', formData);
-    // TODO: Send data to backend API
 
-    // Reset form
+    // Reset
     setFormData({
       name: '',
       email: '',
@@ -65,80 +58,91 @@ function SignupPage() {
       agree: false,
       errorMessage: '',
     });
-
- 
   };
 
   return (
-    <div className="signup-root">
-      <div className="signup-card">
-        <img
-          src="/images/novaexam-logo.png"
-          alt="NovaExam Logo"
-          className="logo"
-        />
-        <h1>Create Your NovaExam Account</h1>
+    <div className="signup-container">
+      <div className="left-panel">
+        <h1 className="logo">NovaExam</h1>
+        <h2 className="title">Let's, <span>Get Started ! 🚀</span></h2>
+        <p className="subtitle">Sign up now and put your knowledge to the test!</p>
+
         <form className="signup-form" onSubmit={handleSubmit}>
-          <input
-            type="text"
-            name="name"
-            placeholder="Full Name"
-            value={formData.name}
-            onChange={handleChange}
-            required
-          />
+          <label>Name</label>
+          <div className="input-group">
+            <i className="fa fa-user icon"></i>
+            <input
+              type="text"
+              name="name"
+              placeholder="Akash"
+              value={formData.name}
+              onChange={handleChange}
+              required
+            />
+          </div>
 
-          <input
-            type="email"
-            name="email"
-            placeholder="Email Address"
-            value={formData.email}
-            onChange={handleChange}
-            required
-          />
+          <label>Email</label>
+          <div className="input-group">
+            <i className="fa fa-envelope icon"></i>
+            <input
+              type="email"
+              name="email"
+              placeholder="am6030920@gmail.com"
+              value={formData.email}
+              onChange={handleChange}
+              required
+            />
+          </div>
 
-          <input
-            type="password"
-            name="password"
-            placeholder="Password"
-            value={formData.password}
-            onChange={handleChange}
-            required
-          />
+          <label>Password</label>
+          <div className="input-group">
+            <i className="fa fa-lock icon"></i>
+            <input
+              type="password"
+              name="password"
+              placeholder="********"
+              value={formData.password}
+              onChange={handleChange}
+              required
+            />
+          </div>
 
-          <input
-            type="password"
-            name="confirmPassword"
-            placeholder="Confirm Password"
-            value={formData.confirmPassword}
-            onChange={handleChange}
-            required
-          />
+          <label>Confirm Password</label>
+          <div className="input-group">
+            <i className="fa fa-lock icon"></i>
+            <input
+              type="password"
+              name="confirmPassword"
+              placeholder="********"
+              value={formData.confirmPassword}
+              onChange={handleChange}
+              required
+            />
+          </div>
 
-          <label className="checkbox-container" htmlFor="agree">
+          <label className="checkbox">
             <input
               type="checkbox"
-              id="agree"
               name="agree"
               checked={formData.agree}
               onChange={handleChange}
-            />
-            I agree to the{' '}
-            <a href="/terms" target="_blank" rel="noopener noreferrer">
-              Terms & Conditions
-            </a>
+            />{' '}
+            I agree to the terms and conditions
           </label>
 
           {formData.errorMessage && (
             <p className="error-message">{formData.errorMessage}</p>
           )}
 
-          <button type="submit" className="btn-signup">Sign Up</button>
-
-          <p className="signin-link">
-            Already have an account? <Link to="/login">Log In</Link>
-          </p>
+          <button type="submit" className="create-account">Create An Account 🚀</button>
+          <Link to="#" className="forgot-password">Forgot Password</Link>
         </form>
+
+        
+      </div>
+
+      <div className="right-panel">
+        <img src="https://img.freepik.com/free-vector/mobile-login-concept-illustration_114360-83.jpg?semt=ais_hybrid&w=740" alt="Signup Illustration" />
       </div>
     </div>
   );
