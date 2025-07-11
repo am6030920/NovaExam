@@ -1,6 +1,6 @@
 body {
   margin: 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: ADORN serif;
 }
 
 .signup-container {
@@ -21,39 +21,43 @@ body {
 
 .right-panel {
   width: 50%;
-  background-color: #fef3e8;
+  background-color: #fcfcfc;
   display: flex;
-  align-items: center;
-  justify-content: center;
+   align-items: center;
+  /* justify-content: center; */ 
 }
 
 .right-panel img {
-  width: 80%;
-  max-width: 500px;
+  padding: 0;
+  padding-left: 105px;
+  width: 1000px;
+  height: 700px;
 }
 
 .logo {
   font-size: 32px;
-  color: #ffffff;
+  color: #00b894;
   font-weight: bold;
 }
 
 .title {
-  font-size: 38px;
+  color: #fcfffe;
+  font-size: 48px;
   margin-top: 30px;
 }
 
 .title span {
-  color: #ff4081;
+  color: #f6f7f6;
 }
 
 .subtitle {
+  color: rgb(218, 218, 218);
   margin: 10px 0 30px;
   font-size: 16px;
 }
 
 .signup-form label {
-  margin-top: 20px;
+  margin-top: 10px;
   font-size: 15px;
   display: block;
 }
@@ -94,6 +98,9 @@ body {
   font-weight: 600;
   width: 100%;
 }
+.create-account:hover{
+  background-color: #9e9e9e;
+}
 
 .forgot-password {
   margin-top: 10px;
@@ -119,3 +126,5 @@ body {
   gap: 10px;
   cursor: pointer;
 }
+
+

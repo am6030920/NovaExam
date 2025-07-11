@@ -383,9 +383,7 @@ const Welcome = () => {
         <span>🎓Try it for free</span>
         </div>
 </div>
-        {/* <div className="okey">
-        <img src="https://examonline.in/wp-content/uploads/2024/05/captera-review-1-3.png" alt="" srcset="" />
-        </div> */}
+       
              <footer className="footer6">
       <div className="footer-content6">
         <div className="footer-left6">
