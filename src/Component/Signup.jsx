@@ -50,6 +50,7 @@ function SignupPage() {
 
     console.log('NovaExam Signup Data:', formData);
 
+
     setFormData({
       name: '',
       email: '',
@@ -62,15 +63,18 @@ function SignupPage() {
 
   return (
     <div className="signup-container">
+      
       <div className="left-panel">
-        <h1 className="logo">NovaExam</h1>
-        <h6 className="title">Let's, <h6>Get Started ! 🚀</h6></h6>
-        <p className="subtitle">Create your account and put your knowledge to the test!</p>
+      
+        <h1 className="logo"><img className='logo1' src="https://dynamic.design.com/asset/logo/b777bb05-ef3a-40c1-81e5-c218a4b7311f/logo?logoTemplateVersion=1&v=638750126514600000&text=+NovaExam+online+exam+potel&layout=auto" alt="" />NovaExam</h1>
+        <h6 className="title">Let's, <h6>Get Started!✈️</h6></h6>
+        <p className="subtitle">Create your account and put your knowledge to the test!🗯️</p>
 
         <form className="signup-form" onSubmit={handleSubmit}>
           {/* Name Field */}
           <label>Name</label>
           <div className="input-group">
+            
             <svg
               fill="#000000"
               width="20px"
@@ -85,6 +89,7 @@ function SignupPage() {
               />
             </svg>
             <input
+            
               type="text"
               name="name"
               placeholder="Akash"
@@ -201,14 +206,16 @@ function SignupPage() {
               checked={formData.agree}
               onChange={handleChange}
             />
-            <span>I agree to the terms and conditions</span>
+            
+            <span>I agree to the terms and conditions </span>
+            <Link to="/forgot-password" className="forgot-password">Forgot Password?</Link>
           </label>
 
           {/* Error Message */}
           {formData.errorMessage && (
             <p className="error-message">{formData.errorMessage}</p>
           )}
-
+            
           {/* Submit Button */}
           <button
             type="submit"
@@ -221,10 +228,12 @@ function SignupPage() {
               !formData.agree
             }
           >
-            Create An Account 🚀
+            Get Started💭
           </button>
-
-          <Link to="/forgot-password" className="forgot-password">Forgot Password?</Link>
+            <div className="have">
+              <span>Already have an Account? <Link to="/login" className="log">Log-In</Link></span>
+            </div>
+          
         </form>
       </div>
 

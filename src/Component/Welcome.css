@@ -830,6 +830,12 @@ h2 {
 
 .lo{
   color: #f0fffa;
+  text-decoration: none;
+
+}
+.lo:hover{
+  color: #2b88f3;
+  text-decoration: underline;
 }
 
 .face{
