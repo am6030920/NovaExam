@@ -4,10 +4,11 @@ import Navbar from './Component/Navbar';
 import Welcome from './Component/Welcome';
 import Signup from './Component/Signup';
 import Login from './Component/Login'; 
+import Home from './Component/home';
 
 const AppContent = () => {
   const location = useLocation();
-  const hideNavbarPaths = ['/signup', '/login']; 
+  const hideNavbarPaths = ['/signup', '/login', '/home']; 
   
 
   return (
@@ -17,6 +18,7 @@ const AppContent = () => {
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
         <Route path="/" element={<Welcome />} />
+        <Route path="/home" element={<Home />} />
       </Routes>
     </>
   );

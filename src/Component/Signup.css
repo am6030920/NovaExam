@@ -202,3 +202,7 @@ body {
     opacity: 1;
   }
 }
+.start{
+  color: white;
+  text-decoration: none;
+}

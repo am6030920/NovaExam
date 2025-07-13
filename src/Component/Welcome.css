@@ -305,7 +305,7 @@ h2 {
   font-family: Cursive;
   background: linear-gradient(to right, #00b894, #6c5ce7, #ff7675, #00cec9, #ffeaa7);
   background-size: 300% 300%;
-  -webkit-background-clip: text;
+    -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   animation: rainbowSlide 5s ease-in-out infinite;
   font-weight: bold;
