@@ -47,7 +47,7 @@ function Home() {
                 <div className="type">
 
                     <select id="Exams" name="exams" defaultValue="" required className="exams">
-                        <option value="" disabled>Types Of Exam </option>
+                        <option value="" disabled>Choose a Type of Test</option>
                         <option value="programming">Programming Exams</option>
                         <option value="GK">General Knowledge</option>
                         <option value="quiz">Timed Quiz</option>

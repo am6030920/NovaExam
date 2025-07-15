@@ -13,7 +13,7 @@ const AppContent = () => {
 
   return (
     <>
-      {!hideNavbarPaths.includes(location.pathname) && <Navbar />}
+        
       <Routes>
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
