@@ -201,11 +201,11 @@ function SignupPage() {
             </Link>
           </label>
 
-          /* Error Message */          {formData.errorMessage && (
+                 {formData.errorMessage && (
             <p className="error-message">{formData.errorMessage}</p>
           )}
 
-          /* Submit Button */
+      
           <button
             type="submit"
             className="create-account"

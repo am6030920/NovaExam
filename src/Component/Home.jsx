@@ -33,9 +33,10 @@ function Home() {
                             width: '100px',
                             height: '75px',
                             marginLeft: '-19px',
-                            padding:'0',
-                            margin:'0',
+                            padding: '0',
+                            margin: '0',
                         }}
+
                     />
                     <h1 style={{ display: 'flex', color: '#00b386', marginLeft: '10px' }}>
                         Nova
@@ -44,7 +45,7 @@ function Home() {
                 </div>
 
                 <div className="type">
-                  
+
                     <select id="Exams" name="exams" defaultValue="" required className="exams">
                         <option value="" disabled>Types Of Exam </option>
                         <option value="programming">Programming Exams</option>
@@ -56,8 +57,8 @@ function Home() {
                         <option value="ml">Machine Learning</option>
 
                     </select>
-                        
-                 
+
+
                     <select id="Industry" name="industry" defaultValue="" required className="exams">
                         <option value="" disabled>Industry</option>
                         <option value="higher">Higher Education Sector</option>
@@ -76,8 +77,21 @@ function Home() {
                 </div>
             </div>
 
-            <div className='main-content'>NovaExam
-
+            <div className="main-content">
+                <div className="banner">
+                    <div className="text-content">
+                        <h1>
+                            Test your knowledge with<br /><span>NovaExam and grow smarter..!🤌</span>
+                        </h1>
+                        <p>
+                            Explore expertly crafted quizzes and practice tests designed for all<br />levels—from beginners to advanced learners....🫣
+                        </p>
+                        <a href="#" className="btn">Get Started</a>
+                    </div>
+                    <div className="image-content">
+                       <img src="home.png" alt="NovaExam" />
+                    </div>
+                </div>
             </div>
 
 
@@ -109,7 +123,7 @@ function Home() {
                         </ul>
                     </div>
 
-                    
+
 
                     <div className="footer-section">
                         <h4>AboutUs</h4>
