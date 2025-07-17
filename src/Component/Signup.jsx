@@ -44,18 +44,12 @@ function SignupPage() {
       setFormData({ ...formData, errorMessage: passwordError });
       return;
     }
-
     if (!formData.agree) {
       setFormData({ ...formData, errorMessage: 'You must agree to the terms.' });
       return;
     }
-
     console.log('NovaExam Signup Data:', formData);
-
-    // ✅ Redirect to home page after successful signup
     navigate('/home');
-
-    // Optional: Reset form
     setFormData({
       name: '',
       email: '',

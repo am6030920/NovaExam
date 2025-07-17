@@ -122,6 +122,12 @@ html, body, #root {
   margin-bottom: 10px;
   font-size: 14px;
 }
+.footer-section ul li:hover{
+  color: #2cdea3;
+  cursor: pointer;
+  text-decoration: underline;
+  font-size: 15px;
+}
 
 .contact p {
   font-size: 14px;
@@ -182,7 +188,7 @@ html, body, #root {
 .text-content h1 {
   font-size: 48px;
   margin: 0;
-  color: #000;
+  color: #2a2929;
   line-height: 1.2;
 }
 
@@ -196,11 +202,11 @@ html, body, #root {
   margin: 20px 0;
 }
 
-.btn {
+.btn  {
   display: inline-block;
-  background-color: #007bff;
-  color: #fff;
-  padding: 14px 28px;
+  background-color: #dadada;
+
+  padding: 14px 38px;
   border-radius: 8px;
   text-decoration: none;
   font-size: 16px;
@@ -208,10 +214,66 @@ html, body, #root {
 }
 
 .btn:hover {
-  background-color: #0056b3;
+  background-color: #98bde4;
+  
 }
 
 .image-content img {
   max-width: 500px;
   height: auto;
+}
+
+{/*it is a acircle design*/}
+
+.circle {
+  width: 170px;
+  height: 170px;
+  border-radius: 50%;
+  position: relative;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 20px;
+  box-sizing: border-box;
+  z-index: 1;
+}
+
+.circle::before{
+  content: '';
+  position: absolute;
+  inset: 0;
+  padding: 4px;
+  background: conic-gradient(#3b82f6, #facc15, #3b82f6);
+  border-radius: 50%;
+  animation: rotate 4s linear infinite;
+  mask: 
+    radial-gradient(farthest-side, transparent calc(100% - 4px), black calc(100% - 4px));
+  -webkit-mask: 
+    radial-gradient(farthest-side, transparent calc(100% - 4px), black calc(100% - 4px));
+}
+
+.circle p {
+  font-weight: bold;
+  color: #1b1a1a;
+  display: flex;
+  justify-items: center;
+  font-size: 14px;
+  margin: 0;
+  line-height: 1.6;
+  font-family:'Times New Roman', Times, serif;
+  font-weight: 600;
+}
+
+
+@keyframes rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.sales:hover {
+  font-weight: bold;
+text-decoration: underline;
+  font-weight: bold;
 }
