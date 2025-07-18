@@ -44,12 +44,15 @@ function SignupPage() {
       setFormData({ ...formData, errorMessage: passwordError });
       return;
     }
+
     if (!formData.agree) {
       setFormData({ ...formData, errorMessage: 'You must agree to the terms.' });
       return;
     }
+
     console.log('NovaExam Signup Data:', formData);
     navigate('/home');
+
     setFormData({
       name: '',
       email: '',
@@ -79,7 +82,6 @@ function SignupPage() {
         </p>
 
         <form className="signup-form" onSubmit={handleSubmit}>
-          {/* Name Field */}
           <label>Name</label>
           <div className="input-group">
             <svg fill="#000000" width="20px" height="20px" viewBox="0 0 24 24">
@@ -98,7 +100,6 @@ function SignupPage() {
             />
           </div>
 
-          {/* Email Field */}
           <label>Email</label>
           <div className="input-group">
             <svg width="20px" height="20px" viewBox="0 0 24 24">
@@ -143,7 +144,6 @@ function SignupPage() {
             />
           </div>
 
-          {/* Password Field */}
           <label>Password</label>
           <div className="input-group">
             <svg width="20px" height="20px" viewBox="0 0 15 15">
@@ -162,7 +162,6 @@ function SignupPage() {
             />
           </div>
 
-          {/* Confirm Password Field */}
           <label>Confirm Password</label>
           <div className="input-group">
             <svg width="20px" height="20px" viewBox="0 0 15 15">
@@ -181,7 +180,6 @@ function SignupPage() {
             />
           </div>
 
-          {/* Checkbox */}
           <label className="checkbox">
             <input
               type="checkbox"
@@ -195,11 +193,10 @@ function SignupPage() {
             </Link>
           </label>
 
-                 {formData.errorMessage && (
+          {formData.errorMessage && (
             <p className="error-message">{formData.errorMessage}</p>
           )}
 
-      
           <button
             type="submit"
             className="create-account"
@@ -210,6 +207,7 @@ function SignupPage() {
               !formData.confirmPassword ||
               !formData.agree
             }
+            onClick={() => navigate('/home')}
           >
             Get Started💭
           </button>

@@ -368,6 +368,11 @@ function Home() {
         <div className="footer-bottom">
           <p>©2025 NovaExam</p>
         </div>
+        <div className="chat-support">
+        <a href="javascript:void(0);" className="chat-button">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmOB60gV5qGtk_mKoCCPR36uhcA8jI_COmqOtovYLN1ef40fdp2d2jXTGz5al8TVcOoGM&usqp=CAU" alt="Chat Support" />
+        </a>
+      </div>
       </footer>
     </div>
   );
