@@ -1,7 +1,11 @@
 import React from 'react'
-
-export const Timed = () => {
+import './Timed.css'
+const Timed = () => {
   return (
-    <div>Timed</div>
+    <div className='jsx'>
+      HII
+    </div>
   )
 }
+
+export default Timed

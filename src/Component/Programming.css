@@ -1,0 +1,18 @@
+.programming-container {
+  padding-top: 200px;
+  text-align: center;
+  background-color: #f9f9f9;
+  min-height: 100vh;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.programming-title {
+  font-size: 2.5rem;
+  color: #2c3e50;
+  margin-bottom: 20px;
+}
+
+.programming-description {
+  font-size: 1.2rem;
+  color: #555;
+}

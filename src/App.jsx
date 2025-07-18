@@ -4,11 +4,11 @@ import Navbar from './Component/Navbar';
 import Welcome from './Component/Welcome';
 import Signup from './Component/Signup';
 import Login from './Component/Login'; 
-import Home from './Component/home';
+import Home from './Component/Home';
 import About from './Component/About'; 
 import Programming from './Component/Programming'; 
 import Gk from './Component/Gk'; 
-import { Timed } from './Component/Timed'; 
+import Timed from './Component/Timed'; 
 import Practice from './Component/Practice';
 import Technical from './Component/Technical';
 import Trivia from './Component/Trivia';
@@ -27,13 +27,13 @@ const AppContent = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/home" element={<Home />} />
         <Route path="/about" element={<About />} />
-        <Route path="/programming" element={<Programming />} />
+        <Route path="/programming" element={<Programming />} /> 
         <Route path="/gk" element={<Gk />} />
         <Route path="/timed" element={<Timed />} />
         <Route path="/practice" element={<Practice />} />
         <Route path="/technical" element={<Technical />} />
         <Route path="/trivia" element={<Trivia />} />
-        <Route path="/ml" element={<Ml />} />
+        <Route path="/ml" element={<Ml />} /> 
       </Routes>
     </>
   );

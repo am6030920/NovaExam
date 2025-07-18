@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import './home.css';
+import './Home.css';
 
 function Home() {
   const navigate = useNavigate();
@@ -288,15 +288,10 @@ function Home() {
               <li>General Knowledge & Current Affairs</li>
             </ul>
           </div>
-
           <div className="footer-section">
             <h4>About Us</h4>
             <ul>
-              <li>
-                <Link to="/About" style={{ color: 'white', textDecoration: 'none' }}>
-                  About Us
-                </Link>
-              </li>
+              <li>AboutUs</li>
               <li>Company</li>
               <li>Contact Us</li>
             </ul>

@@ -4,7 +4,10 @@ import './Signup.css';
 
 function SignupPage() {
   const navigate = useNavigate();
-
+  const onHome = () =>{
+    console.log("hello");
+  }
+ 
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -200,14 +203,14 @@ function SignupPage() {
           <button
             type="submit"
             className="create-account"
-            disabled={
-              !formData.name ||
-              !formData.email ||
-              !formData.password ||
-              !formData.confirmPassword ||
-              !formData.agree
-            }
-            onClick={() => navigate('/home')}
+            // disabled={
+            //   !formData.name ||
+            //   !formData.email ||
+            //   !formData.password ||
+            //   !formData.confirmPassword ||
+            //   !formData.agree
+            // }
+            onClick={() => navigate('/Home')}
           >
             Get Started💭
           </button>
