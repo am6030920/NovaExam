@@ -76,7 +76,7 @@ function Home() {
     }
 };
   return (
-    <div>
+    <div style={{ background: '#fff' }}>
       <div
         className="navbar"
         style={{
@@ -213,7 +213,7 @@ function Home() {
         }}
       >
         <span>
-          Still thinking about <strong>NovaExam?</strong> Let us show you why it's worth it....
+          Still thinking about <strong>NovaExam?</strong> Let us show you why it's worth it....💨
         </span>
       </div>
 

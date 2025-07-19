@@ -280,10 +280,10 @@ const Gk = () => {
 
         {showResult && (
           <div className="result-modal">
-            <h2>Test Completed!🎉♥️</h2>
+            <h2>Test Completed!🎉</h2>
             <p>Your Score: <strong>{score} / {questionsData.length}</strong>👌🏻</p>
             <p>Percentage: <strong>{((score / questionsData.length) * 100).toFixed(2)}%</strong>🔥</p>
-            <button className="ok-btn" onClick={handleResultClose}>OK🙂</button>
+            <button className="ok-btn" onClick={handleResultClose}>Go To Home</button>
           </div>
         )}
       </div>

@@ -13,10 +13,12 @@ import Practice from './Component/Practice';
 import Technical from './Component/Technical';
 import Trivia from './Component/Trivia';
 import Ml from './Component/Ml';
+import Contact from './Component/Contact';
+import Company from './Component/Company';
 
 const AppContent = () => {
   const location = useLocation();
-  const hideNavbarPaths = ['/login', '/signup','/home','/about','/programming','/gk','/timed','/practice','/technical','/trivia' ,'/ml'];
+  const hideNavbarPaths = ['/login', '/signup','/home','/about','/programming','/gk','/timed','/practice','/technical','/trivia' ,'/ml','/contact','/company'];
 
   return (
     <>
@@ -34,6 +36,8 @@ const AppContent = () => {
         <Route path="/technical" element={<Technical />} />
         <Route path="/trivia" element={<Trivia />} />
         <Route path="/ml" element={<Ml />} /> 
+        <Route path='/contact' element={<Contact />} />
+        <Route path='/Company' element={<Company/>} />
       </Routes>
     </>
   );

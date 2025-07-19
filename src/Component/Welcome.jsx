@@ -13,8 +13,8 @@ const features = [
 
 const Welcome = () => {
   return (
-    <div>
-      <div className='bal'>
+    <div className='welcome-container'>
+      <div className='bal' >
         <h1 className='main'>Smart Exam Platform with AI-Based</h1>
         <h1 className='main1'> Remote Monitoring!📌</h1>
         <div>

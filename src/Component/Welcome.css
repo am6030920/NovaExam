@@ -1,11 +1,13 @@
 .bal {
-  background-color: #f0fffa;
+  background-color: #fafafa;
   margin-top: 10px;
   padding-top: 100px;
   animation: backgroundGlow 12s ease-in-out infinite alternate;
   will-change: background-color, box-shadow;
 }
-
+.welcome-container{
+  background-color: #fff;
+}
 @keyframes backgroundGlow {
   0%, 100% {
     background-color: #f0fffa;
