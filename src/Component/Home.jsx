@@ -130,13 +130,13 @@ function Home() {
             <option value="" disabled>
               Choose a Type of Test
             </option>
-            <option value="/Programming">Programming Exams</option>
-            <option value="/Gk">General Knowledge</option>
-            <option value="/Timed">Timed Quiz</option>
-            <option value="/Practice">Practice Test</option>
+            <option value="/Programming">Programming Exam</option>
+            <option value="/Gk">General Knowledge Exam</option>
+            <option value="/Timed">Timed-Quiz Exam</option>
+            <option value="/Practice">Practice Mcq Exam</option>
             <option value="/Technical">Technical Quizzes</option>
-            <option value="/Trivia">Trivia Quizzes</option>
-            <option value="/Ml">Machine Learning</option>
+            <option value="/Trivia">Trivia Exam</option>
+            <option value="/Ml">Machine Learning Exam</option>
           </select>
 
           <label htmlFor="Industry" style={{ display: 'none' }}>
@@ -173,27 +173,27 @@ function Home() {
           </select>
         </div>
       </div>
-
+            <div className="okeyy">
       <div className="main-content">
         <div className="banner">
           <div className="text-content">
-            <h1>
+            <h1 style={{
+              fontFamily: 'Futura, sans-serif', color:'#373737ff',
+            }
+            }>
               Test your knowledge with
               <br />
-              <span>NovaExam and grow smarter..!🤌</span>
+              <span style={{
+              fontFamily: 'Futura, sans-serif', color:'#373737ff',
+            }
+            }>NovaExam and grow smarter..!💭</span>
             </h1>
-            <p>
+            <p style={{fontSize:'17px',fontFamily:'futura,sans-serif'}}>
               Explore expertly crafted quizzes and practice tests designed for all
               <br />
               levels—from beginners to advanced learners....🫣
             </p>
-            <button
-              className="btn"
-              style={{ color: '#0f6b54ff', fontWeight: 'bold', cursor: 'pointer' }}
-              onClick={() => navigate('/signup')}
-            >
-              Get Started
-            </button>
+           <h6 style={{fontFamily:'Future',fontSize:'20px',color:'#333' ,fontWeight:'200', background:'#aef2e5ff',width:'130px',height:'40px',display:'flex',justifyContent:'center',textAlign:'center',justifyItems:'center',borderRadius:'15px',paddingTop:'15px'}}>Get Started!</h6>
           </div>
           <div className="image-content">
             <img src="home.png" alt="NovaExam Illustration" />
@@ -261,6 +261,7 @@ function Home() {
             scores to challenge your friends
           </p>
         </div>
+      </div>
       </div>
 
       <footer className="footer">
