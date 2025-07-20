@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useAuth0 } from "@auth0/auth0-react";
 import './Signup.css';
 
 function SignupPage() {
   const navigate = useNavigate();
-  const onHome = () =>{
-    console.log("hello");
-  }
- 
+  const { loginWithRedirect } = useAuth0();
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -16,6 +15,9 @@ function SignupPage() {
     agree: false,
     errorMessage: '',
   });
+
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -26,25 +28,54 @@ function SignupPage() {
     });
   };
 
+  const validateName = (name) => {
+    const nameRegex = /^[A-Za-z\s]+$/;
+    if (!nameRegex.test(name) || name.trim() === '') {
+      return 'Name must contain only letters and spaces.';
+    }
+    return '';
+  };
+
+  const validateEmail = (email) => {
+    const emailRegex = /^[^\s@]+@gmail\.com$/;
+    if (!emailRegex.test(email)) {
+      return 'Email must be a valid @gmail.com address.';
+    }
+    return '';
+  };
+
   const validatePassword = (password) => {
-    const errors = [];
-    if (password.length < 8) errors.push('at least 8 characters');
-    if (!/[A-Z]/.test(password)) errors.push('one uppercase letter');
-    if (!/[0-9]/.test(password)) errors.push('one number');
-    return errors.length ? 'Password must contain ' + errors.join(', ') + '.' : '';
+    const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
+    if (!passwordRegex.test(password)) {
+      return 'Password must be at least 8 characters and include 1 uppercase letter, 1 number, and 1 special character.';
+    }
+    return '';
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (formData.password !== formData.confirmPassword) {
-      setFormData({ ...formData, errorMessage: 'Passwords do not match!' });
+    const nameError = validateName(formData.name);
+    const emailError = validateEmail(formData.email);
+    const passwordError = validatePassword(formData.password);
+
+    if (nameError) {
+      setFormData({ ...formData, errorMessage: nameError });
       return;
     }
 
-    const passwordError = validatePassword(formData.password);
+    if (emailError) {
+      setFormData({ ...formData, errorMessage: emailError });
+      return;
+    }
+
     if (passwordError) {
       setFormData({ ...formData, errorMessage: passwordError });
+      return;
+    }
+
+    if (formData.password !== formData.confirmPassword) {
+      setFormData({ ...formData, errorMessage: 'Passwords do not match!' });
       return;
     }
 
@@ -73,16 +104,12 @@ function SignupPage() {
           <img
             className="logo1"
             src="https://dynamic.design.com/asset/logo/b777bb05-ef3a-40c1-81e5-c218a4b7311f/logo?logoTemplateVersion=1&v=638750126514600000&text=+NovaExam+online+exam+potel&layout=auto"
-            alt=""
+            alt="NovaExam"
           />
           NovaExam
         </h1>
-        <h6 className="title">
-          Let's, <h6>Get Started!✈️</h6>
-        </h6>
-        <p className="subtitle">
-          Create your account and put your knowledge to the test!🗯️
-        </p>
+        <h6 className="title">Let's, <h6>Get Started!✈️</h6></h6>
+        <p className="subtitle">Create your account and put your knowledge to the test!🗯️</p>
 
         <form className="signup-form" onSubmit={handleSubmit}>
           <label>Name</label>
@@ -96,7 +123,7 @@ function SignupPage() {
             <input
               type="text"
               name="name"
-              placeholder="Akash"
+              placeholder="Nova Exam"
               value={formData.name}
               onChange={handleChange}
               required
@@ -105,7 +132,7 @@ function SignupPage() {
 
           <label>Email</label>
           <div className="input-group">
-            <svg width="20px" height="20px" viewBox="0 0 24 24">
+             <svg width="20px" height="20px" viewBox="0 0 24 24">
               <polygon
                 points="17 19 21 19 21 7.43 17 10.86 17 19"
                 style={{
@@ -140,7 +167,7 @@ function SignupPage() {
             <input
               type="email"
               name="email"
-              placeholder="am6030920@gmail.com"
+              placeholder="AM6030920@gmail.com"
               value={formData.email}
               onChange={handleChange}
               required
@@ -148,6 +175,7 @@ function SignupPage() {
           </div>
 
           <label>Password</label>
+
           <div className="input-group">
             <svg width="20px" height="20px" viewBox="0 0 15 15">
               <path
@@ -156,13 +184,19 @@ function SignupPage() {
               />
             </svg>
             <input
-              type="password"
+              type={showPassword ? "text" : "password"}
               name="password"
               placeholder="********"
               value={formData.password}
               onChange={handleChange}
               required
             />
+            <span
+              onClick={() => setShowPassword(!showPassword)}
+              style={{ cursor: 'pointer', marginLeft: '8px', color: 'white' }}
+            >
+              {showPassword ? '🙈' : '👁️'}
+            </span>
           </div>
 
           <label>Confirm Password</label>
@@ -174,13 +208,19 @@ function SignupPage() {
               />
             </svg>
             <input
-              type="password"
+              type={showConfirmPassword ? "text" : "password"}
               name="confirmPassword"
               placeholder="********"
               value={formData.confirmPassword}
               onChange={handleChange}
               required
             />
+            <span
+              onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+              style={{ cursor: 'pointer', marginLeft: '8px', color: 'white' }}
+            >
+              {showConfirmPassword ? '🙈' : '👁️'}
+            </span>
           </div>
 
           <label className="checkbox">
@@ -200,18 +240,7 @@ function SignupPage() {
             <p className="error-message">{formData.errorMessage}</p>
           )}
 
-          <button
-            type="submit"
-            className="create-account"
-            // disabled={
-            //   !formData.name ||
-            //   !formData.email ||
-            //   !formData.password ||
-            //   !formData.confirmPassword ||
-            //   !formData.agree
-            // }
-            onClick={() => navigate('/Home')}
-          >
+          <button type="submit" className="create-account">
             Get Started💭
           </button>
 

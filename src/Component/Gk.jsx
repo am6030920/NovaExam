@@ -33,11 +33,12 @@ const questionsData = [
     options: ["Fluorine", "Ferrous", "Iron", "Francium"],
     correctAnswer: "Iron",
   },
-  {
-    question: "What is the capital of Canada?",
-    options: ["Toronto", "Vancouver", "Ottawa", "Montreal"],
-    correctAnswer: "Ottawa",
-  },
+{
+  question: "Is love worth the time, or just an emotional Rollercoaster..?💔",
+  options: ["Hell yeah", "Yes Rollercoaster", "I agree", "All of the above"],
+  correctAnswer: ["Hell yeah", "Yes Rollercoaster", "I agree", "All of the above"]
+},
+
   {
     question: "Who was the founder of the Maurya Empire?",
     options: ["Ashoka", "Chandragupta Maurya", "Bindusara", "Harshavardhana"],

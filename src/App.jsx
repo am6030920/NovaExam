@@ -23,6 +23,7 @@ const AppContent = () => {
   return (
     <>
       {!hideNavbarPaths.includes(location.pathname.toLowerCase()) && <Navbar />}
+   
       <Routes>
         <Route path="/" element={<Welcome />} />
         <Route path="/signup" element={<Signup />} />
@@ -39,6 +40,7 @@ const AppContent = () => {
         <Route path='/contact' element={<Contact />} />
         <Route path='/Company' element={<Company/>} />
       </Routes>
+   
     </>
   );
 };

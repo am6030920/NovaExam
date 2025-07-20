@@ -5,7 +5,7 @@ import './Programming.css';
 const questionsData = [
   {
     question: "Which keyword is used to define a class in Java?",
-    options: ["class", "Class", "def", "structure"],
+    options: ["class", "Object", "def", "structure"],
     correctAnswer: "class",
   },
   {
