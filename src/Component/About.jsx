@@ -2,21 +2,39 @@ import React, { useState, useEffect } from 'react';
 import './About.css';
 
 const About = () => {
-  const translations = [
+  const headingTranslations = [
     "Meet The Team Behind NovaExam",
-    "Познакомьтесь с командой NovaExam",
-    "NovaExamのチームメンバー"
-
+    "नोवाएग्जाम के पीछे की टीम से मिलें",
+    "Познакомьтесь с командой NovaExam"
   ];
 
-  const [index, setIndex] = useState(0);
+  const thankYouTranslations = [
+    { text: "Thank you", font: "Poppins" },
+    { text: "धन्यवाद", font: "Noto Sans Devanagari" },
+    { text: "Gracias", font: "Roboto" },
+    { text: "ありがとうございます", font: "Noto Sans JP" }
+  ];
+
+  const [headingIndex, setHeadingIndex] = useState(0);
+  const [thankYouIndex, setThankYouIndex] = useState(0);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setIndex((prev) => (prev + 1) % translations.length);
+    const interval1 = setInterval(() => {
+      setHeadingIndex((prev) => (prev + 1) % headingTranslations.length);
     }, 3000);
-    return () => clearInterval(interval);
+    const interval2 = setInterval(() => {
+      setThankYouIndex((prev) => (prev + 1) % thankYouTranslations.length);
+    }, 2000);
+
+    return () => {
+      clearInterval(interval1);
+      clearInterval(interval2);
+    };
   }, []);
+
+   const currentThankYou = thankYouTranslations[thankYouIndex];
+  const firstPart = currentThankYou.text.split(" ")[0];
+  const secondPart = currentThankYou.text.split(" ")[1] || "";
 
   return (
     <div className='About' style={{ background: '#fff', margin: '0', padding: '0' }}>
@@ -25,7 +43,7 @@ const About = () => {
         fontFamily: 'futura,sans-serif', margin: '8px 30px', borderRadius: '20px', height: '550px'
 
       }}>
-        <h1 className='First-H1 animated-heading'>{translations[index]}</h1>
+        <h1 className='First-H1 animated-heading'>{headingTranslations[headingIndex]}</h1>
         <p className="First-p">To make exam preparation smart, simple, and accessible for every learner</p>
         <div class="container">
           <div class="cardd">
@@ -77,7 +95,61 @@ const About = () => {
         <div style={{ paddingTop: '10px', paddingBottom: '100px', marginLeft: '65px' }}>
           <button style={{ background: '#7ad1adff', width: '155px', height: '50px', color: '#fff', fontSize: '17px', border: 'none', borderRadius: '10px', }} >Learn More...</button>
         </div>
-        {/* <p style={{ fontSize: '100px', marginLeft: '35px', fontFamily: 'Monaco', color: '#00b386',textDecoration:'none'}}>
+
+        <p style={{ paddingTop: '25px', marginLeft: '115px', fontSize: '20px', color: '#5d5f5fff' }}>Credits</p>
+        <p style={{ paddingTop: '0px', marginLeft: '5px', fontSize: '55px', color: '#6da1a1ff', margin: '8px 160px' }}>Developed & Designed <span style={{ color: 'rgba(5, 65, 56, 0.73)' }}>by: Team <br />PrismNova all Members</span></p>
+        <div style={{ paddingLeft: '165px', marginTop: '-10px', paddingBottom: '100px',fontSize:'16px' }}>We proudly present NovaExam as a result of dedication, creativity, and teamwork. Every line of code and every design <br />element reflects our shared passion for learning and innovation.</div>
+
+      </div>
+
+
+      <div className="profile-container" >
+        <div className="thirdddd" style={{paddingTop:'240px',marginRight:'-70px'}}>
+      <span style={{fontSize:'70px',marginLeft:'100px',color:'#94f099ff',fontFamily: 'Poppins',}}>Leading with Vision,<br/><span style={{fontSize:'50px',marginLeft:'100px',color:'#24ac6bff'}}> Building with Code</span></span>
+      </div>
+        <div className="third" style={{ paddingBottom: '100px' }}>
+          <img src="Akash.png.jpg" alt="Akash Maity" />
+          <div className="details">Akash Maity....
+            <span>Project Head | Lead Developer....</span>
+          </div>
+        </div>
+      </div>
+             <div className="profile-containerr" >
+        <div className="thirdd" style={{ paddingBottom: '100px' }}>
+          <img src="Rohan.jpg" alt="Rohan Mishra" />
+          <div className="detailss">Rohan Mishra...
+            <span>Frontend Developer....</span>
+          </div>
+        </div>
+         <div className="thirdd" style={{ paddingBottom: '100px' }}>
+          <img src="Indranil.jpg" alt="Indranil Das" />
+          <div className="detailss">Indranil Das...
+            <span>Frontend Developer.....</span>
+          </div>
+          </div>
+          <div className="thirddd" style={{paddingleft:'100px'}}><p style={{fontSize:'50px',paddingTop:'250px',}}><span style={{color:'#94f099ff',fontSize:'65px'}}>Bringing Ideas </span><span style={{color:'#2c99f9ff'}}>to Life with Code </span><span style={{color:'#24ac6bff'}}>& Creativity..</span></p><p style={{fontFamily:'Poppins',color:'#2f2f30ff'}}>We turn imagination into interaction by crafting sleek, responsive, and user-focused interfaces with the perfect blend of design and code.</p></div>
+
+      </div>
+
+       <div className="profile-containerr5" style={{marginTop:'10px',}}>
+         <div className="thirddd" >
+         <p style={{fontSize:'50px',paddingTop:'100px',marginLeft:'25px'}}><span style={{color:'#94f099ff',fontSize:'65px'}}>Powering the Core </span><span style={{color:'#2c99f9ff'}}>of Every</span> <span style={{color:'#72bc98ff'}}>Experience</span> </p><p style={{fontFamily:'Poppins',color:'#2f2f30ff',marginLeft:'25px'}}>Our backend team ensures everything works fast, secure, and seamlessly — building the logic that powers every feature from behind the scenes.</p></div>
+        <div className="thirdd" style={{ paddingBottom: '100px' }}>
+          <img src="sourodeep.jpg" alt="Souradeep Sasmal" />
+          <div className="detailss" style={{marginLeft:'28px'}}>Souradeep Sasmal
+            <span style={{marginRight:'28px'}}>Backend Developer.....</span>
+          </div>
+          </div>
+           <div className="thirdd" style={{ paddingBottom: '100px' }}>
+          <img src="Pranshu .jpg" alt="Pranshu Dey" />
+          <div className="detailss" style={{marginLeft:'28px'}}>Pranshu Dey..........
+            <span style={{marginRight:'28px'}}>Backend Developer.....</span>
+          </div>
+          </div>
+            </div>
+
+            {/* /*team name*/ }
+             <p style={{ fontSize: '100px', marginLeft: '35px', fontFamily: 'Monaco', color: '#00b386',textDecoration:'none',paddingBottom:'65px'}}>
   Team <span style={{ color: 'rgba(5, 65, 56, 0.73)' }}>PrismNova</span>
   <svg
     width="60px"
@@ -96,20 +168,120 @@ const About = () => {
       </g>
     </g>
   </svg>
-</p> */}
-        <p style={{ paddingTop: '25px', marginLeft: '115px', fontSize: '20px', color: '#5d5f5fff' }}>Credits</p>
-        <p style={{ paddingTop: '0px', marginLeft: '5px', fontSize: '55px', color: '#6da1a1ff', margin: '8px 160px' }}>Developed & Designed <span style={{ color: 'rgba(5, 65, 56, 0.73)' }}>by: Team <br />PrismNova all Members</span></p>
-        <div style={{ paddingLeft: '165px', marginTop: '-10px', paddingBottom: '100px',fontSize:'16px' }}>We proudly present NovaExam as a result of dedication, creativity, and teamwork. Every line of code and every design <br />element reflects our shared passion for learning and innovation.</div>
-      </div>
-      <div className="profile-container" >
-        <div className="third" style={{ paddingBottom: '100px' }}>
-          <img src="Akash.png.jpg" alt="Akash Maity" />
-          <div className="details">Akash Maity....
-            <span>Project Head | Lead Developer....</span>
+</p>
+            <div className='first-card' style={{ display: 'flex', gap: '30px', flexWrap: 'wrap', justifyContent: 'center', paddingBottom: '100px' ,paddingTop:'45px'}}>
+        {/* First Card */}
+        <div className="boxxx" >
+          <div className="imgBoxxx">
+            <img src="Akash3.jpg" alt="Profile of Akash Maity" style={{width:'590px'}}/>
+          </div>
+          <div className="socialIconnn">
+            <ul>
+              <li><a href="https://www.facebook.com/profile.php?id=100087296771864"><i className="fa-brands fa-facebook"></i></a></li>
+              <li><a href="https://x.com/Akash3724"><i className="fa-brands fa-twitter"></i></a></li>
+              <li><a href="https://www.instagram.com/_phobicc.akash?igsh=NWoycWpmZTg2cHJv"><i className="fa-brands fa-instagram"></i></a></li>
+              <li><a href="https://github.com/am6030920"><i className="fa-brands fa-github"></i></a></li>
+              <li><a href="https://www.linkedin.com/in/akash-maity-7b0211372/"><i className="fa-brands fa-linkedin"></i></a></li>
+            </ul>
+          </div>
+          <div className="details-animated">
+
+            <p style={{color:'rgba(5, 65, 56, 0.73)',fontWeight:'bold',fontFamily:'Poppins'}}>Akash Maity<span style={{color:'blue',fontSize:'14px',fontWeight:'400'}}>Project head...</span></p>
+          </div>
+        </div>
+        { /* second person  */}
+         <div className="boxxx" >
+          <div className="imgBoxxx">
+            <img src="Rohan.jpg" alt="Profile of Rohan Mishra" style={{width:'590px'}}/>
+          </div>
+          <div className="socialIconnn">
+            <ul>
+              <li><a href="#"><i className="fa-brands fa-facebook"></i></a></li>
+              <li><a href="#"><i className="fa-brands fa-twitter"></i></a></li>
+              <li><a href="#"><i className="fa-brands fa-instagram"></i></a></li>
+              <li><a href="https://github.com/Rohan2004002"><i className="fa-brands fa-github"></i></a></li>
+              <li><a href="https://www.linkedin.com/in/rohan-mishra-400138376?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app"><i className="fa-brands fa-linkedin"></i></a></li>
+            </ul>
+          </div>
+          <div className="details-animated">
+            <p style={{color:'rgba(5, 65, 56, 0.73)',fontWeight:'bold',fontFamily:'Poppins'}}>Rohan Mishra</p>
+          </div>
+        </div>
+        {/* third person */}
+         <div className="boxxx" >
+          <div className="imgBoxxx">
+            <img src="Indranil.jpg" alt="Profile of Indranil Das" style={{width:'590px'}}/>
+          </div>
+          <div className="socialIconnn">
+            <ul>
+              <li><a href="https://www.facebook.com/share/1EzK94eZVJ/"><i className="fa-brands fa-facebook"></i></a></li>
+              <li><a href="#"><i className="fa-brands fa-twitter"></i></a></li>
+              <li><a href="https://www.instagram.com/_indranil12?igsh=MTRjNXp0N2FzcDV3Nw=="><i className="fa-brands fa-instagram"></i></a></li>
+              <li><a href="#"><i className="fa-brands fa-github"></i></a></li>
+              <li><a href="https://www.linkedin.com/in/indranil-das-686baa206?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_appp"><i className="fa-brands fa-linkedin"></i></a></li>
+            </ul>
+          </div>
+          <div className="details-animated">
+            <p style={{color:'rgba(5, 65, 56, 0.73)',fontWeight:'bold',fontFamily:'Poppins'}}>Indranil Das</p>
+          </div>
+        </div>
+
+    </div>
+   {/* 4th person */}
+    <div className='first-card' style={{ display: 'flex', gap: '30px', flexWrap: 'wrap', justifyContent: 'center', paddingBottom: '100px' ,paddingTop:'45px'}}>
+    <div className="boxxx" >
+          <div className="imgBoxxx">
+            <img src="sourodeep1.jpg" alt="Profile of Souradeep Sasmal" style={{width:'590px'}}/>
+          </div>
+          <div className="socialIconnn">
+            <ul>
+              <li><a href="https://www.facebook.com/share/1AHrSJLYkZ/"><i className="fa-brands fa-facebook"></i></a></li>
+              <li><a href="https://x.com/s87Souradeep?t=5Jrvd7duZPM2MyvqvoZmHQ&s=08"><i className="fa-brands fa-twitter"></i></a></li>
+              <li><a href="https://www.instagram.com/soura__d__s?igsh=dGhvd2hqdjFudXh3"><i className="fa-brands fa-instagram"></i></a></li>
+              <li><a href="https://github.com/sasmal877"><i className="fa-brands fa-github"></i></a></li>
+              <li><a href="https://www.linkedin.com/in/souradeep-sasmal-17337631b?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"><i className="fa-brands fa-linkedin"></i></a></li>
+            </ul>
+          </div>
+          <div className="details-animated">
+            <p style={{color:'rgba(5, 65, 56, 0.73)',fontWeight:'bold',fontFamily:'Poppins'}}>Souradeep Sasmal</p>
+          </div>
+        </div>
+        {/* 5th person */}
+        <div className="boxxx" >
+          <div className="imgBoxxx">
+            <img src="Pranshu1.jpg" alt="Profile of Pranshu Dey" style={{width:'590px'}}/>
+          </div>
+          <div className="socialIconnn">
+            <ul>
+              <li><a href="#"><i className="fa-brands fa-facebook"></i></a></li>
+              <li><a href="#"><i className="fa-brands fa-twitter"></i></a></li>
+              <li><a href="https://www.instagram.com/itz_pranshu_004?igsh=MXEzb24xMnYwOXoxeg=="><i className="fa-brands fa-instagram"></i></a></li>
+              <li><a href="#"><i className="fa-brands fa-github"></i></a></li>
+              <li><a href="#"><i className="fa-brands fa-linkedin"></i></a></li>
+            </ul>
+          </div>
+          <div className="details-animated">
+            <p style={{color:'rgba(5, 65, 56, 0.73)',fontWeight:'bold',fontFamily:'Poppins'}}>Pranshu Dey</p>
           </div>
         </div>
       </div>
-
+    <div
+        className="thakyou"
+        style={{
+          fontSize: '150px',
+          display: 'flex',
+          justifyContent: 'center',
+          fontFamily: currentThankYou.font,
+          color: '#00b386',
+          paddingTop: '100px',
+          paddingBottom: '100px',
+          transition: 'all 0.5s ease-in-out'
+        }}
+      >
+        {firstPart}
+        <span style={{ color: '#4d4f4eff', marginLeft: '10px' }}>{secondPart}</span>
+      </div>
+      <footer style={{background:'black',height:'35px',color:'#fff'}}><p style={{paddingTop:'8px',fontSize:'14px',marginLeft:'10px'}}>©2025 NovaExam</p></footer>
     </div>
   );
 };
