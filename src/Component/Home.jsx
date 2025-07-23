@@ -79,6 +79,7 @@ function Home() {
             <option value="/company">Company</option>
             <option value="/About">AboutUs</option>
             <option value="/contact">Contact Us</option>
+            <option value="/Profile">Your Profile</option>
           </select>
         </div>
       </div>

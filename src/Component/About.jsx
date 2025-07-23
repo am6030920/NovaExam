@@ -281,7 +281,7 @@ const About = () => {
         {firstPart}
         <span style={{ color: '#4d4f4eff', marginLeft: '10px' }}>{secondPart}</span>
       </div>
-      <footer style={{background:'black',height:'35px',color:'#fff'}}><p style={{paddingTop:'8px',fontSize:'14px',marginLeft:'10px'}}>©2025 NovaExam</p></footer>
+      <footer style={{background:'black',height:'35px',color:'#fff'}}><p style={{paddingTop:'8px',fontSize:'14px',marginLeft:'15px'}}>©2025 NovaExam</p></footer>
     </div>
   );
 };
