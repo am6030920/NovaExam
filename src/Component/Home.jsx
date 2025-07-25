@@ -106,7 +106,7 @@ function Home() {
               </h6>
             </div>
             <div className="image-content">
-              <img src="home.png" alt="NovaExam Illustration" />
+              <img src="/images/home.png" alt="NovaExam Illustration" />
             </div>
           </div>
         </div>

@@ -25,7 +25,7 @@ const Contact = () => {
             <button className='home-btn' style={{marginTop:'28px'}} onClick={() => navigate('/Home')}>Home</button>
           </div>
           <div className="contact-image">
-            <img src="Team.png" alt="Team Working" style={{ borderRadius: '10%' }} />
+            <img src="/images/Team.png" alt="Team Working" style={{ borderRadius: '10%' }} />
           </div>
         </div>
 

@@ -152,7 +152,7 @@ function LoginPage() {
       </div>
 
       <div className="right-panel">
-        <img className="logini" src="log1.png" alt="Login Illustration" />
+        <img className="logini" src="/images/log1.png" alt="Login Illustration" />
       </div>
     </div>
   );

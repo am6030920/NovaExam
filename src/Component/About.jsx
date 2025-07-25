@@ -103,12 +103,12 @@ const About = () => {
       </div>
 
 
-      <div className="profile-container" >
-        <div className="thirdddd" style={{paddingTop:'240px',marginRight:'-70px'}}>
+      <div className="profile-container"  style={{background:'transparent'}}>
+        <div className="thirdddd" style={{paddingTop:'280px',marginRight:'-80px'}}>
       <span style={{fontSize:'70px',marginLeft:'100px',color:'#94f099ff',fontFamily: 'Poppins',}}>Leading with Vision,<br/><span style={{fontSize:'50px',marginLeft:'100px',color:'#24ac6bff'}}> Building with Code</span></span>
       </div>
-        <div className="third" style={{ paddingBottom: '100px' }}>
-          <img src="Akash.png.jpg" alt="Akash Maity" />
+        <div className="third" style={{ paddingBottom: '100px', paddingTop:'100px'}}>
+          <img src="/images/Akash.png.jpg" alt="Akash Maity" />
           <div className="details">Akash Maity....
             <span>Project Head | Lead Developer....</span>
           </div>
@@ -116,13 +116,13 @@ const About = () => {
       </div>
              <div className="profile-containerr" >
         <div className="thirdd" style={{ paddingBottom: '100px' }}>
-          <img src="Rohan.jpg" alt="Rohan Mishra" />
+          <img src="/images/rohan.jpg" alt="Rohan Mishra" />
           <div className="detailss">Rohan Mishra...
             <span>Frontend Developer....</span>
           </div>
         </div>
          <div className="thirdd" style={{ paddingBottom: '100px' }}>
-          <img src="Indranil.jpg" alt="Indranil Das" />
+          <img src="/images/indranil.jpg" alt="Indranil Das" />
           <div className="detailss">Indranil Das...
             <span>Frontend Developer.....</span>
           </div>
@@ -135,13 +135,13 @@ const About = () => {
          <div className="thirddd" >
          <p style={{fontSize:'50px',paddingTop:'100px',marginLeft:'25px'}}><span style={{color:'#94f099ff',fontSize:'65px'}}>Powering the Core </span><span style={{color:'#2c99f9ff'}}>of Every</span> <span style={{color:'#72bc98ff'}}>Experience</span> </p><p style={{fontFamily:'Poppins',color:'#2f2f30ff',marginLeft:'25px'}}>Our backend team ensures everything works fast, secure, and seamlessly — building the logic that powers every feature from behind the scenes.</p></div>
         <div className="thirdd" style={{ paddingBottom: '100px' }}>
-          <img src="sourodeep.jpg" alt="Souradeep Sasmal" />
+          <img src="/images/sourodeep.jpg" alt="Souradeep Sasmal" />
           <div className="detailss" style={{marginLeft:'28px'}}>Souradeep Sasmal
             <span style={{marginRight:'28px'}}>Backend Developer.....</span>
           </div>
           </div>
            <div className="thirdd" style={{ paddingBottom: '100px' }}>
-          <img src="Pranshu .jpg" alt="Pranshu Dey" />
+          <img src="/images/Pranshu .jpg" alt="Pranshu Dey" />
           <div className="detailss" style={{marginLeft:'28px'}}>Pranshu Dey..........
             <span style={{marginRight:'28px'}}>Backend Developer.....</span>
           </div>
@@ -173,7 +173,7 @@ const About = () => {
         {/* First Card */}
         <div className="boxxx" >
           <div className="imgBoxxx">
-            <img src="Akash3.jpg" alt="Profile of Akash Maity" style={{width:'590px'}}/>
+            <img src="/images/Akash3.jpg" alt="Profile of Akash Maity" style={{width:'590px'}}/>
           </div>
           <div className="socialIconnn">
             <ul>
@@ -192,7 +192,7 @@ const About = () => {
         { /* second person  */}
          <div className="boxxx" >
           <div className="imgBoxxx">
-            <img src="Rohan.jpg" alt="Profile of Rohan Mishra" style={{width:'590px'}}/>
+            <img src="/images/rohan.jpg" alt="Profile of Rohan Mishra" style={{width:'590px'}}/>
           </div>
           <div className="socialIconnn">
             <ul>
@@ -210,7 +210,7 @@ const About = () => {
         {/* third person */}
          <div className="boxxx" >
           <div className="imgBoxxx">
-            <img src="Indranil.jpg" alt="Profile of Indranil Das" style={{width:'590px'}}/>
+            <img src="/images/indranil.jpg" alt="Profile of Indranil Das" style={{width:'590px'}}/>
           </div>
           <div className="socialIconnn">
             <ul>
@@ -231,7 +231,7 @@ const About = () => {
     <div className='first-card' style={{ display: 'flex', gap: '30px', flexWrap: 'wrap', justifyContent: 'center', paddingBottom: '100px' ,paddingTop:'45px'}}>
     <div className="boxxx" >
           <div className="imgBoxxx">
-            <img src="sourodeep1.jpg" alt="Profile of Souradeep Sasmal" style={{width:'590px'}}/>
+            <img src="/images/sourodeep1.jpg" alt="Profile of Souradeep Sasmal" style={{width:'590px'}}/>
           </div>
           <div className="socialIconnn">
             <ul>
@@ -249,7 +249,7 @@ const About = () => {
         {/* 5th person */}
         <div className="boxxx" >
           <div className="imgBoxxx">
-            <img src="Pranshu1.jpg" alt="Profile of Pranshu Dey" style={{width:'590px'}}/>
+            <img src="/images/Pranshu1.jpg" alt="Profile of Pranshu Dey" style={{width:'590px'}}/>
           </div>
           <div className="socialIconnn">
             <ul>

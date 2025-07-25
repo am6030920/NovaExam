@@ -253,7 +253,7 @@ function SignupPage() {
       </div>
 
       <div className="right-panel">
-        <img className="logini" src="log1.png" alt="Signup Illustration" />
+        <img className="/images/logini" src="log1.png" alt="Signup Illustration" />
       </div>
     </div>
   );
