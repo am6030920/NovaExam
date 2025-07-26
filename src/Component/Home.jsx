@@ -27,62 +27,68 @@ function Home() {
 
   return (
     <div style={{ background: 'white' }}>
-      <div className="navbar" style={{
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        right: 0,
-        zIndex: 9999,
-        padding: '0 20px',
+    <div className="nova-navbar" style={{ fontFamily: "Poppins" }}>
+  <div className="logo-section">
+    <img
+      src="https://dynamic.design.com/asset/logo/b777bb05-ef3a-40c1-81e5-c218a4b7311f/logo?logoTemplateVersion=1&v=638750126514600000&text=+NovaExam+online+exam+potel&layout=auto"
+      alt="NovaExam Logo"
+      className="logo"
+    />
+    <h1 className="site-title">
+      Nova<span className="light-title">Exam</span>
+    </h1>
+  </div>
+
+  <div className="dropdown-section" style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
+    <select defaultValue="" required className="custom-select" onChange={handleExamNavigation}>
+      <option value="" disabled>Type of Test</option>
+      <option value="/Programming"> Programming</option>
+      <option value="/Gk">GK</option>
+      <option value="/Timed">Timed Quiz</option>
+      <option value="/Practice">Practice MCQ</option>
+      <option value="/Technical">Technical</option>
+      <option value="/Trivia">Trivia</option>
+      <option value="/Ml">Machine Learning</option>
+    </select>
+      <select defaultValue="" required className="custom-select">
+      <option value="" disabled>Industry</option>
+      <option value="higher">Higher Education</option>
+      <option value="school">College-Level</option>
+      <option value="edtech">Competitive Prep</option>
+      <option value="training">IT Training</option>
+      <option value="testprep">GK & Current Affairs</option>
+    </select>
+    <select defaultValue="" required className="custom-select" onChange={handleAboutChange}>
+      <option value="" disabled>About Us</option>
+      <option value="/company">Company</option>
+      <option value="/About">Our Team</option>
+      <option value="/contact">Contact</option>
+    </select>
+
+
+    <div
+      className="profile-icon"
+      onClick={() => navigate('/Profile')}
+      style={{
+        cursor: 'pointer',
+        fontSize: '24px',
+        padding: '8px',
+        borderRadius: '50%',
+        backgroundColor: '#e4f8f1',
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'space-between',
-        background: 'linear-gradient(270deg, rgb(255, 245, 202), rgb(84, 209, 101), rgb(255, 245, 202))',
-        backgroundSize: '400% 400%',
-        height: '10vh',
-        boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
-      }}>
-        <div style={{ display: 'flex', alignItems: 'center' }}>
-          <img
-            src="https://dynamic.design.com/asset/logo/b777bb05-ef3a-40c1-81e5-c218a4b7311f/logo?logoTemplateVersion=1&v=638750126514600000&text=+NovaExam+online+exam+potel&layout=auto"
-            alt="NovaExam Logo"
-            style={{ width: '100px', height: '75px', marginLeft: '-19px' }}
-          />
-          <h1 style={{ display: 'flex', color: '#00b386', marginLeft: '10px' }}>
-            Nova<span style={{ fontWeight: '150', color: 'rgba(2, 113, 97, 0.732)' }}>Exam</span>
-          </h1>
-        </div>
+        justifyContent: 'center',
+      }}
+      title="Your Profile"
+    >
+      👤
+    </div>
+  </div>
+</div>
 
-        <div className="type">
-          <select defaultValue="" required className="exams" onChange={handleExamNavigation}>
-            <option value="" disabled>Choose a Type of Test</option>
-            <option value="/Programming">Programming Exam</option>
-            <option value="/Gk">General Knowledge Exam</option>
-            <option value="/Timed">Timed-Quiz Exam</option>
-            <option value="/Practice">Practice Mcq Exam</option>
-            <option value="/Technical">Technical Quizzes</option>
-            <option value="/Trivia">Trivia Exam</option>
-            <option value="/Ml">Machine Learning Exam</option>
-          </select>
 
-          <select defaultValue="" required className="exams">
-            <option value="" disabled>Industry</option>
-            <option value="higher">Higher Education Sector</option>
-            <option value="school">College-Level</option>
-            <option value="edtech">Competitive Exam Preparation</option>
-            <option value="training">IT & Coding Training</option>
-            <option value="testprep">General Knowledge & Current Affairs</option>
-          </select>
 
-          <select defaultValue="" required className="exams" onChange={handleAboutChange}>
-            <option value="" disabled>About Us</option>
-            <option value="/company">Company</option>
-            <option value="/About">AboutUs</option>
-            <option value="/contact">Contact Us</option>
-            <option value="/Profile">Your Profile</option>
-          </select>
-        </div>
-      </div>
+
 
       <div className="okeyy">
         <div className="main-content">
@@ -96,14 +102,7 @@ function Home() {
                 Explore expertly crafted quizzes and practice tests designed for all<br />
                 levels—from beginners to advanced learners....🫣
               </p>
-              <h6 style={{
-                fontFamily: 'Futura', fontSize: '20px', color: '#333', fontWeight: '200',
-                background: '#aef2e5ff', width: '130px', height: '40px',
-                display: 'flex', justifyContent: 'center', textAlign: 'center',
-                borderRadius: '15px', paddingTop: '15px'
-              }}>
-                Get Started!
-              </h6>
+              
             </div>
             <div className="image-content">
               <img src="/images/home.png" alt="NovaExam Illustration" />
@@ -138,6 +137,80 @@ function Home() {
           </div>
         </div>
       </div>
+     <div className="featured-exams" style={{ padding: '60px 20px', backgroundColor: '#fffefeff' }}>
+  <h1 style={{ textAlign: 'center', color: '#027161', fontFamily: 'Futura' }}>Featured Exams 📌</h1>
+  <div style={{ display: 'flex', justifyContent: 'center', gap: '30px', flexWrap: 'wrap', marginTop: '30px' }}>
+    {[
+      { name: "Java Programming", icon: "💻" },
+      { name: "Aptitude Test", icon: "🧠" },
+      { name: "AI Basics", icon: "🤖" }
+    ].map((exam, idx) => (
+      <div
+        key={idx}
+        onClick={() => alert(`${exam.name} is coming soon!`)} // Replace with navigate(exam.route) if needed
+        style={{
+          background: 'linear-gradient(to right, #ffffff, #f9f9f9)',
+          border: '1px solid #d4f1ec',
+          borderRadius: '20px',
+          padding: '30px 25px',
+          width: '280px',
+          height: '210px',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
+          cursor: 'pointer',
+          boxShadow: '0 8px 20px rgba(0, 0, 0, 0.07)',
+          transition: 'transform 0.3s ease, box-shadow 0.3s ease'
+        }}
+        onMouseEnter={e => {
+          e.currentTarget.style.transform = "translateY(-10px)";
+          e.currentTarget.style.boxShadow = "0 15px 30px rgba(0,0,0,0.15)";
+        }}
+        onMouseLeave={e => {
+          e.currentTarget.style.transform = "translateY(0)";
+          e.currentTarget.style.boxShadow = "0 8px 20px rgba(0, 0, 0, 0.07)";
+        }}
+      >
+        <div style={{
+          fontSize: '40px',
+          marginBottom: '10px'
+        }}>{exam.icon}</div>
+        <h3 style={{ color: '#027161', fontWeight: '700', fontSize: '20px', marginBottom: '8px', textAlign: 'center' }}>{exam.name}</h3>
+        <p style={{ fontSize: '14px', color: '#444', textAlign: 'center' }}>Wait... this exam is coming soon!</p>
+      </div>
+    ))}
+  </div>
+</div>
+
+<div style={{ backgroundColor: '#f5fef9ff', padding: '60px 20px' }}>
+  <h1 style={{ textAlign: 'center', fontFamily: 'Futura', color: '#00594c' }}>What Our Users Say 💭</h1>
+  <div style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap', gap: '30px', marginTop: '40px' }}>
+    {[
+      { name: "Ankit Sharma", feedback: "NovaExam helped me prepare for my BCA semester—timed exams are amazing!" },
+      { name: "Riya Das", feedback: "Very helpful for mock tests and the leaderboard motivates me a lot!" },
+      { name: "Kunal Roy", feedback: "Clean interface and lots of variety in questions. Loved it!" },
+      { name: "Akash Maity", feedback: "It feels just like a real exam. Loved the timer, navigation, and the overall vibe!" }
+    ].map((user, i) => (
+      <div key={i} style={{
+        background: '#fff',
+        padding: '25px 20px',
+        borderRadius: '16px',
+        width: '300px',
+        height: '180px',
+        boxShadow: '0 10px 25px rgba(0, 0, 0, 0.06)',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+        transition: 'all 0.3s ease-in-out'
+      }}>
+        <p style={{ fontSize: '16px', fontStyle: 'italic', color: '#333' }}>"{user.feedback}"</p>
+        <p style={{ fontWeight: 'bold', marginTop: '10px', color: '#027161' }}>— {user.name}</p>
+      </div>
+    ))}
+  </div>
+</div>
+
 
       <footer className="footer">
         <div className="footer-container">
@@ -170,7 +243,7 @@ function Home() {
             <ul>
               <li>AboutUs</li>
               <li>Company</li>
-              <li>Contact Us</li>
+              <li>Our Team</li>
             </ul>
           </div>
 
@@ -198,11 +271,7 @@ function Home() {
         <div className="footer-bottom">
           <p>©2025 NovaExam</p>
         </div>
-        <div className="chat-support">
-          <a href="javascript:void(0);" className="chat-button">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmOB60gV5qGtk_mKoCCPR36uhcA8jI_COmqOtovYLN1ef40fdp2d2jXTGz5al8TVcOoGM&usqp=CAU" alt="Chat Support" />
-          </a>
-        </div>
+       
       </footer>
     </div>
   );

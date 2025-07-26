@@ -12,108 +12,27 @@
 @keyframes navGlowBackground {
   0% {
     background-position: 0% 50%;
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.905);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.9);
   }
   50% {
     background-position: 100% 50%;
-    box-shadow: 0 0 20px rgba(166, 214, 228, 0.827);
+    box-shadow: 0 0 20px rgba(166, 214, 228, 0.8);
   }
   100% {
     background-position: 0% 50%;
-    box-shadow: 0 0 10px rgba(113, 189, 204, 0.866);
+    box-shadow: 0 0 10px rgba(113, 189, 204, 0.8);
   }
 }
 
-.Nav {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 9999;
-  margin: 0;
-  padding: 0 20px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: linear-gradient(270deg, rgb(255, 245, 202), rgb(84, 209, 101), rgb(255, 245, 202));
-  background-size: 400% 400%;
-  height: 10vh;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
- 
-    navGlowBackground 8s ease-in-out infinite;
-}
-
-.name {
-  height: 70px;
-  padding-bottom: 12px;
-  padding-left: 20px;
-}
-
-.nova, .exam {
-  color: #00b386;
-  font-family: ADORN serif;
-  font-size: 22px;
-  font-weight: bold;
-}
-
-.signup,
-.Log {
-  position: relative;
-  background: linear-gradient(135deg, #a6c8a7, #78d6b3);
-  color: white;
-  border: 2px solid rgba(24, 132, 83, 0.3);
-  padding: 12px 24px;
-  font-size: 15px;
-  font-family: ADORN serif;
-  font-weight: 600;
-  border-radius: 30px;
-  cursor: pointer;
-  display: inline-block;
-  text-decoration: none;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-  background-size: 200% auto;
-  animation: buttonShine 3s linear infinite;
-  overflow: hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  margin: 10px;
-}
-
-
-.signup:hover,
-.Log:hover {
-  background: linear-gradient(135deg, #e5e9e8, #eef0ef);
-  color: #055881;
-  transform: scale(1.05) translateY(-3px);
-  box-shadow: 0 10px 18px rgba(0, 0, 0, 0.2);
-}
-
-.signup:hover::before,
-.Log:hover::before {
-  content: "";
-  position: absolute;
-  inset: -2px;
-  border-radius: inherit;
-  border: 2px solid rgba(91, 240, 212, 0.7);
-  animation: glowBorder 1.5s infinite alternate;
-  pointer-events: none;
-}
-
-.signup:focus,
-.Log:focus {
-  outline: none;
-  box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
-}
-
-@keyframes buttonShine {
+@keyframes shineEffect {
   0% {
-    background-position: -100% 0;
+    background-position: left center;
   }
   100% {
-    background-position: 200% 0;
+    background-position: right center;
   }
 }
 
-/* Glow Border Animation */
 @keyframes glowBorder {
   0% {
     opacity: 0.4;
@@ -125,32 +44,166 @@
   }
 }
 
-/* Responsive */
+/* =================== NAVBAR =================== */
+
+.Nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  padding: 10px 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(270deg, rgb(255, 245, 202), rgb(84, 209, 101), rgb(255, 245, 202));
+  background-size: 400% 400%;
+  height: 10vh;
+  animation: navGlowBackground 8s ease-in-out infinite;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+.branding {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.name {
+  height: 60px;
+}
+
+.nova, .exam {
+  color: #353737;
+  font-family: "ADORN serif", serif;
+  font-size: 32px;
+  font-weight: bold;
+}
+
+
+.signup,
+.Log {
+  position: relative;
+  display: inline-block;
+  padding: 12px 28px;
+  font-size: 16px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  color: #fff;
+  background: linear-gradient(120deg, #5bd28b, #20b4a8);
+  border: none;
+  border-radius: 50px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  background-size: 200% auto;
+  box-shadow: 0 0 15px rgba(56, 239, 125, 0.4), 0 0 30px rgba(17, 153, 142, 0.4);
+  animation: pulseGlow 4s ease-in-out infinite;
+  overflow: hidden;
+  margin: 10px 10px;
+  z-index: 1;
+}
+
+.signup::before,
+.Log::before {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, #38ef7d, #11998e, #38ef7d);
+  background-size: 400%;
+  z-index: -1;
+  filter: blur(20px);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  border-radius: 50px;
+  animation: borderGlow 6s linear infinite;
+}
+
+.signup:hover::before,
+.Log:hover::before {
+  opacity: 1;
+}
+
+.signup:hover,
+.Log:hover {
+  background-position: right center;
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 0 12px 24px rgba(56, 239, 125, 0.3), 0 0 40px rgba(17, 153, 142, 0.5);
+  color: #051937;
+}
+
+.signup::after,
+.Log::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0.2),
+    rgba(255, 255, 255, 0.6),
+    rgba(255, 255, 255, 0.2)
+  );
+  transform: skewX(-25deg);
+  transition: all 0.5s;
+}
+
+.signup:hover::after,
+.Log:hover::after {
+  left: 120%;
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 15px rgba(56, 239, 125, 0.4), 0 0 30px rgba(17, 153, 142, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(56, 239, 125, 0.7), 0 0 60px rgba(17, 153, 142, 0.7);
+  }
+}
+
+@keyframes borderGlow {
+  0% {
+    background-position: 0%;
+  }
+  100% {
+    background-position: 400%;
+  }
+}
+
+
 @media (max-width: 1024px) {
   .Nav {
     flex-direction: column;
     align-items: flex-start;
-    height: auto;
     padding: 15px 20px;
+    height: auto;
     gap: 10px;
   }
 
+  .branding {
+    flex-direction: row;
+    gap: 8px;
+  }
+
   .name {
-    padding-left: 0;
-    height: auto;
+    height: 50px;
   }
 
   .nova, .exam {
     font-size: 20px;
-    text-align: left;
   }
 
   .signup, .Log {
     width: 100%;
-    font-size: 16px;
-    padding: 10px 20px;
-    margin: 5px 0;
     text-align: center;
+    margin: 5px 0;
+    font-size: 16px;
   }
 }
 
@@ -161,20 +214,23 @@
     padding: 10px;
   }
 
+  .branding {
+    flex-direction: column;
+    align-items: center;
+  }
+
   .name {
-    text-align: center;
-    padding-left: 0;
+    height: 45px;
   }
 
   .nova, .exam {
     font-size: 18px;
-    text-align: center;
   }
 
   .signup,
   .Log {
     width: 90%;
-    font-size: 14px;
-    padding: 10px 16px;
+    font-size: 15px;
+    padding: 10px 20px;
   }
 }

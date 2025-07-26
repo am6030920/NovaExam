@@ -84,6 +84,9 @@ function SignupPage() {
       return;
     }
 
+    // ✅ Show alert before navigating
+    alert('🎉 Signup Successful! Welcome to NovaExam.');
+
     console.log('NovaExam Signup Data:', formData);
     navigate('/home');
 
@@ -132,7 +135,7 @@ function SignupPage() {
 
           <label>Email</label>
           <div className="input-group">
-             <svg width="20px" height="20px" viewBox="0 0 24 24">
+            <svg width="20px" height="20px" viewBox="0 0 24 24">
               <polygon
                 points="17 19 21 19 21 7.43 17 10.86 17 19"
                 style={{
@@ -175,7 +178,6 @@ function SignupPage() {
           </div>
 
           <label>Password</label>
-
           <div className="input-group">
             <svg width="20px" height="20px" viewBox="0 0 15 15">
               <path
@@ -253,7 +255,7 @@ function SignupPage() {
       </div>
 
       <div className="right-panel">
-        <img className="/images/logini" src="log1.png" alt="Signup Illustration" />
+        <img className="logini" src="/images/log1.png" alt="Signup Illustration" />
       </div>
     </div>
   );

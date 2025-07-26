@@ -1,10 +1,3 @@
-/* body {
-  padding: 0;
-  margin: 0;
-  font-family: 'Futura', sans-serif;
-  color: rgba(2, 113, 97, 0.85);
-  background: #f0fff4; 
-} */
 html, body, #root {
   height: 100%;
   margin: 0;
@@ -19,9 +12,6 @@ html, body, #root {
   min-height: 100vh;
 }
 
-
-
-
 .type {
   background-color: transparent;
   border: none;
@@ -29,7 +19,6 @@ html, body, #root {
   align-items: center;
   justify-content: flex-end;
   padding: 10px;
-  margin: none;
   margin-right: 30px;
   gap: 10px;
 }
@@ -42,18 +31,16 @@ html, body, #root {
   padding: 0 12px;
   font-size: 16px;
   font-weight: 500;
-  background-color:transparent;
-  color:rgba(0, 0, 0, 0.732);
+  background-color: transparent;
+  color: rgba(0, 0, 0, 0.732);
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.08);
   cursor: pointer;
   transition: all 0.3s ease-in-out;
-  appearance: none; 
+  appearance: none;
   background-repeat: no-repeat;
   background-position: right 12px center;
   background-size: 14px;
-  font-weight: 500;
 }
-
 
 .exams:hover,
 .exams:focus {
@@ -61,13 +48,11 @@ html, body, #root {
   box-shadow: 0px 4px 14px rgba(2, 113, 97, 0.3);
   transform: scale(1.04);
   outline: none;
- 
-  
-}
-.akash{
-    color: black;
 }
 
+.akash {
+  color: black;
+}
 
 @keyframes popIn {
   0% {
@@ -79,7 +64,6 @@ html, body, #root {
     opacity: 1;
   }
 }
-
 
 .footer {
   background-color: #2e2e2e;
@@ -96,10 +80,11 @@ html, body, #root {
   margin: auto;
 }
 
-.li{
+.li {
   color: #fff;
 }
-.li:hover{
+
+.li:hover {
   color: aquamarine;
 }
 
@@ -122,7 +107,8 @@ html, body, #root {
   margin-bottom: 10px;
   font-size: 14px;
 }
-.footer-section ul li:hover{
+
+.footer-section ul li:hover {
   color: #2cdea3;
   cursor: pointer;
   text-decoration: underline;
@@ -138,7 +124,6 @@ html, body, #root {
   display: flex;
   gap: 10px;
   margin-top: 10px;
-
 }
 
 .social-icons a {
@@ -147,7 +132,6 @@ html, body, #root {
   height: 30px;
   background-color: transparent;
   color: white;
-  
   text-align: center;
   line-height: 30px;
   border-radius: 3px;
@@ -165,10 +149,9 @@ html, body, #root {
 }
 
 .main-content {
-    padding-bottom: 100px;
-    padding-top: 100px;
+  padding-bottom: 100px;
+  padding-top: 100px;
 }
-
 
 .banner {
   display: flex;
@@ -178,7 +161,7 @@ html, body, #root {
   max-width: 1400px;
   margin: auto;
   box-sizing: border-box;
-  font-family: futura ,serif;
+  font-family: futura, serif;
 }
 
 .text-content {
@@ -202,7 +185,7 @@ html, body, #root {
   margin: 20px 0;
 }
 
-.btn  {
+.btn {
   display: inline-block;
   background-color: #dadada;
   border: none;
@@ -215,15 +198,12 @@ html, body, #root {
 
 .btn:hover {
   background-color: #98bde4;
-  
 }
 
 .image-content img {
   max-width: 500px;
   height: auto;
 }
-
-
 
 .circle {
   width: 170px;
@@ -240,7 +220,7 @@ html, body, #root {
   z-index: 1;
 }
 
-.circle::before{
+.circle::before {
   content: '';
   position: absolute;
   inset: 0;
@@ -248,35 +228,214 @@ html, body, #root {
   background: conic-gradient(#3b82f6, #facc15, #3b82f6);
   border-radius: 50%;
   animation: rotate 4s linear infinite;
-  mask: 
-    radial-gradient(farthest-side, transparent calc(100% - 4px), black calc(100% - 4px));
-  -webkit-mask: 
-    radial-gradient(farthest-side, transparent calc(100% - 4px), black calc(100% - 4px));
+  mask: radial-gradient(farthest-side, transparent calc(100% - 4px), black calc(100% - 4px));
+  -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 4px), black calc(100% - 4px));
 }
 
 .circle p {
   font-weight: bold;
   color: #1b1a1a;
-  display: flex;
-  justify-items: center;
   font-size: 14px;
   margin: 0;
   line-height: 1.6;
-  font-family:'Times New Roman', Times, serif;
+  font-family: 'Times New Roman', Times, serif;
   font-weight: 600;
 }
-
 
 @keyframes rotate {
   100% {
     transform: rotate(360deg);
   }
 }
+
 .sales:hover {
   font-weight: bold;
-text-decoration: underline;
+  text-decoration: underline;
+}
+
+.okeyy {
+  background-color: #fff;
+}
+
+/* 💡 NEW: Featured Exams */
+.featured-exams h2 {
+  font-size: 30px;
+  margin-bottom: 30px;
+}
+
+/* 💡 NEW: Testimonials */
+.testimonial-section {
+  background-color: #eafdf8;
+  padding: 50px 20px;
+}
+
+.testimonial-box {
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  width: 280px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.05);
+  font-size: 15px;
+}
+
+/* 💡 NEW: How it Works */
+.how-it-works h2 {
+  font-size: 28px;
+  color: #027161;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+/* 💬 Floating Chat Button Fix */
+.chat-support {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 9999;
+}
+
+.chat-support .chat-button img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  transition: transform 0.3s ease-in-out;
+}
+
+.chat-support .chat-button img:hover {
+  transform: scale(1.1);
+}
+
+
+/* types */
+/* Navbar */
+.nova-navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 40px;
+  height: 10vh;
+  background: linear-gradient(270deg, #fff5ca, #54d165, #fff5ca);
+  background-size: 400% 400%;
+  animation: gradientMove 10s ease infinite;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Logo + Title */
+.logo-section {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  width: 90px;
+  height: 70px;
+  object-fit: contain;
+  margin-right: 10px;
+}
+
+.site-title {
+  font-size: 1.8rem;
+  font-family: 'Poppins', sans-serif;
+  color: #00b386;
   font-weight: bold;
 }
-.okeyy{
-  background-color: #fff;
+
+.light-title {
+  font-weight: 300;
+  color: rgba(2, 113, 97, 0.8);
+}
+
+/* Dropdowns */
+.dropdown-section {
+  display: flex;
+  gap: 16px;
+}
+
+.custom-select {
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 1rem;
+  border: 2px solid #00b894;
+  background-color: #ffffff;
+  color: #2d3436;
+  transition: 0.3s ease;
+  font-family: 'Poppins', sans-serif;
+}
+
+.custom-select:hover {
+  border-color: #0984e3;
+  box-shadow: 0 0 8px rgba(9, 132, 227, 0.2);
+}
+
+/* Banner Section */
+
+
+.text-area {
+  flex: 1;
+  max-width: 600px;
+}
+
+.text-area h1 {
+  font-size: 2.5rem;
+  color: #2d3436;
+  font-family: 'Futura', sans-serif;
+}
+
+.text-area span {
+  color: #00b894;
+  font-weight: bold;
+}
+
+.text-area p {
+  font-size: 17px;
+  font-family: 'Futura', sans-serif;
+  margin-top: 20px;
+}
+
+.image-area img {
+  width: 100%;
+  max-width: 400px;
+  animation: float 3s ease-in-out infinite;
+}
+
+.custom-select {
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 1rem;
+  border: 1px solid #066d56;
+  background-color: transparent; 
+  color: #2d3436;
+  transition: 0.3s ease;
+  font-family: 'Poppins', sans-serif;
+  backdrop-filter: blur(4px); 
+  -webkit-backdrop-filter: blur(4px);
+}
+
+.custom-select:hover {
+  border-color: #0984e3;
+  box-shadow: 0 0 8px rgba(9, 132, 227, 0.2);
+}
+
+.custom-select option {
+  color: #2d3436;
+  background-color: #ffffff; /* Keeps dropdown items visible */
+}
+
+
+/* Navbar gradient movement */
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+
+.profile-icon:hover {
+  background-color: #d2f2e2;
+  transition: 0.3s;
 }

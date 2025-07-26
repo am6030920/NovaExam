@@ -64,14 +64,7 @@ const Contact = () => {
         {/* Footer */}
         <footer className="footer-blackbox">
           <p style={{textDecoration:'underline'}}>©2025 NovaExam</p>
-          <div className="chat-support">
-            <a href="javascript:void(0);" className="chat-button">
-              <img 
-                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmOB60gV5qGtk_mKoCCPR36uhcA8jI_COmqOtovYLN1ef40fdp2d2jXTGz5al8TVcOoGM&usqp=CAU" 
-                alt="Chat Support" 
-              />
-            </a>
-          </div>
+         
           <p style={{paddingTop:'20px'}}>Empowering your exam journey with NovaExam!</p>
         </footer>
 
