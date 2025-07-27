@@ -54,7 +54,7 @@ const About = () => {
           </div>
 
           <div class="image-card">
-            <img src="https://assets.techrepublic.com/uploads/2023/06/tr6823-project-management-linux.jpeg" alt="Team Meeting" />
+            <img src="/images/gr.jpeg" alt="Team Meeting" />
           </div>
 
           <div class="card-support">
@@ -103,11 +103,11 @@ const About = () => {
       </div>
 
 
-      <div className="profile-container"  style={{background:'transparent'}}>
-        <div className="thirdddd" style={{paddingTop:'280px',marginRight:'-80px'}}>
+      <div className="profile-container"  style={{background:'transparent',marginTop:'-100px'}}>
+        <div className="thirdddd" style={{marginRight:'-80px',paddingTop:'180px'}}>
       <span style={{fontSize:'70px',marginLeft:'100px',color:'#94f099ff',fontFamily: 'Poppins',}}>Leading with Vision,<br/><span style={{fontSize:'50px',marginLeft:'100px',color:'#24ac6bff'}}> Building with Code</span></span>
       </div>
-        <div className="third" style={{ paddingBottom: '100px', paddingTop:'100px'}}>
+        <div className="third" style={{ paddingBottom: '100px'}}>
           <img src="/images/Akash.png.jpg" alt="Akash Maity" />
           <div className="details">Akash Maity....
             <span>Project Head | Lead Developer....</span>
@@ -173,7 +173,7 @@ const About = () => {
         {/* First Card */}
         <div className="boxxx" >
           <div className="imgBoxxx">
-            <img src="/images/Akash3.jpg" alt="Profile of Akash Maity" style={{width:'590px'}}/>
+            <img src="hi.jpg" alt="Profile of Akash Maity" style={{width:'590px'}}/>
           </div>
           <div className="socialIconnn">
             <ul>

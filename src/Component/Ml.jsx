@@ -2,6 +2,16 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Ml.css';
 
+const saveResultToLocal = (examName, score, total) => {
+  const existing = JSON.parse(localStorage.getItem("examHistory")) || [];
+  const now = new Date().toLocaleString();
+  const updated = [
+    ...existing,
+    { examName, score, total, completedAt: now }
+  ];
+  localStorage.setItem("examHistory", JSON.stringify(updated));
+};
+
 const questionsData = [
   {
     question: "Which of the following statements best describes the 'bias-variance trade-off'?",
@@ -203,7 +213,7 @@ const questionsData = [
 const Ml = () => {
   const [currentQ, setCurrentQ] = useState(0);
   const [selectedOptions, setSelectedOptions] = useState(Array(questionsData.length).fill(null));
-  const [timeLeft, setTimeLeft] = useState(900); 
+  const [timeLeft, setTimeLeft] = useState(900); // 15 minutes in seconds
   const [showResult, setShowResult] = useState(false);
   const [score, setScore] = useState(0);
   const navigate = useNavigate();
@@ -256,6 +266,7 @@ const Ml = () => {
       (acc, ans, i) => (ans === questionsData[i].correctAnswer ? acc + 1 : acc),
       0
     );
+    saveResultToLocal("Machine Learning Test", finalScore, questionsData.length);
     setScore(finalScore);
     setShowResult(true);
   };
@@ -294,7 +305,7 @@ const Ml = () => {
               })}
             </div>
 
-            {/* Progress Bar added here */}
+            {/* Progress Bar */}
             <div className="progress-bar" aria-label="Question progress">
               <div
                 className="progress-bar-fill"

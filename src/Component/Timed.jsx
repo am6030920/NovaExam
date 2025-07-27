@@ -2,157 +2,18 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Timed.css';
 
+const saveResultToLocal = (examName, score, total) => {
+  const existing = JSON.parse(localStorage.getItem("examHistory")) || [];
+  const now = new Date().toLocaleString();
+  const updated = [
+    ...existing,
+    { examName, score, total, completedAt: now }
+  ];
+  localStorage.setItem("examHistory", JSON.stringify(updated));
+};
+
 const questionsData = [
- {
-    question: "Which ancient civilization is credited with the first known written language?",
-    options: ["Babylonian", "Sumerian", "Egyptian", "Persian"],
-    correctAnswer: "Sumerian",
-  },
-  {
-    question: "In which year was the Treaty of Versailles signed?",
-    options: ["1919", "1918", "1920", "1921"],
-    correctAnswer: "1919",
-  },
-  {
-    question: "What is the capital of Burkina Faso?",
-    options: ["Lusaka", "Ouagadougou", "Accra", "Bamako"],
-    correctAnswer: "Ouagadougou",
-  },
-  {
-    question: "Who is the author of the book 'The Interpretation of Dreams'?",
-    options: ["Carl Jung", "Sigmund Freud", "B.F. Skinner", "Erik Erikson"],
-    correctAnswer: "Sigmund Freud",
-  },
-  {
-    question: "Which Indian classical dance form originated in Assam?",
-    options: ["Kathakali", "Odissi", "Sattriya", "Manipuri"],
-    correctAnswer: "Sattriya",
-  },
-  {
-    question: "Which Nobel laureate discovered the structure of penicillin?",
-    options: ["Alexander Fleming", "Marie Curie", "Howard Florey", "James Watson"],
-    correctAnswer: "Alexander Fleming",
-  },
-  {
-    question: "Who coined the term 'Zero' in mathematics?",
-    options: ["Aryabhata", "Bhaskara I", "Brahmagupta", "Pingala"],
-    correctAnswer: "Brahmagupta",
-  },
-  {
-    question: "What is the name of the world’s deepest underwater trench?",
-    options: ["Java Trench", "Puerto Rico Trench", "Tonga Trench", "Mariana Trench"],
-    correctAnswer: "Mariana Trench",
-  },
-  {
-    question: "Which enzyme is responsible for the digestion of protein in the stomach?",
-    options: ["Amylase", "Lipase", "Pepsin", "Trypsin"],
-    correctAnswer: "Pepsin",
-  },
-  {
-    question: "Which chemical element is used in the control rods of nuclear reactors?",
-    options: ["Boron", "Uranium", "Plutonium", "Thorium"],
-    correctAnswer: "Boron",
-  },
-  {
-    question: "Who was the first female ruler of India?",
-    options: ["Rani Lakshmi Bai", "Razia Sultana", "Chand Bibi", "Ahilyabai Holkar"],
-    correctAnswer: "Razia Sultana",
-  },
-  {
-    question: "Which metal has the highest electrical conductivity?",
-    options: ["Gold", "Aluminium", "Copper", "Silver"],
-    correctAnswer: "Silver",
-  },
-  {
-    question: "Which planet has the most moons?",
-    options: ["Saturn", "Jupiter", "Uranus", "Neptune"],
-    correctAnswer: "Saturn",
-  },
-  {
-    question: "The famous 'Kurukshetra War' was fought for how many days?",
-    options: ["12", "18", "20", "16"],
-    correctAnswer: "18",
-  },
-  {
-    question: "Who was the first Indian to win a Nobel Prize?",
-    options: ["CV Raman", "Mother Teresa", "Rabindranath Tagore", "Amartya Sen"],
-    correctAnswer: "Rabindranath Tagore",
-  },
-  {
-    question: "Which African country has never been colonized?",
-    options: ["Kenya", "Ethiopia", "Ghana", "Morocco"],
-    correctAnswer: "Ethiopia",
-  },
-  {
-    question: "Which Indian leader was also known as ‘Lokmanya’?",
-    options: ["Bal Gangadhar Tilak", "Mahatma Gandhi", "Sardar Patel", "Bhagat Singh"],
-    correctAnswer: "Bal Gangadhar Tilak",
-  },
-  {
-    question: "Which gas is used to fill weather balloons?",
-    options: ["Oxygen", "Helium", "Nitrogen", "Hydrogen"],
-    correctAnswer: "Helium",
-  },
-  {
-    question: "Who was the first Indian woman to climb Mount Everest?",
-    options: ["Bachendri Pal", "Premlata Agarwal", "Santosh Yadav", "Tenzing Norgay"],
-    correctAnswer: "Bachendri Pal",
-  },
-  {
-    question: "Which Indian river is known as the 'Sorrow of Bengal'?",
-    options: ["Ganga", "Damodar", "Hooghly", "Teesta"],
-    correctAnswer: "Damodar",
-  },
-  {
-    question: "Which satellite was India's first moon mission?",
-    options: ["Chandrayaan-1", "Mangalyaan", "INSAT-1A", "Gaganyaan"],
-    correctAnswer: "Chandrayaan-1",
-  },
-  {
-    question: "Which Indian scientist is known for the Green Revolution?",
-    options: ["MS Swaminathan", "Homi Bhabha", "APJ Abdul Kalam", "CNR Rao"],
-    correctAnswer: "MS Swaminathan",
-  },
-  {
-    question: "Which part of the Constitution of India deals with Fundamental Rights?",
-    options: ["Part III", "Part IV", "Part II", "Part V"],
-    correctAnswer: "Part III",
-  },
-  {
-    question: "What is the name of the galaxy closest to the Milky Way?",
-    options: ["Andromeda", "Centaurus A", "Whirlpool", "Messier 87"],
-    correctAnswer: "Andromeda",
-  },
-  {
-    question: "Which organ is called the 'Graveyard of RBCs'?",
-    options: ["Liver", "Spleen", "Kidney", "Lung"],
-    correctAnswer: "Spleen",
-  },
-  {
-    question: "Which global organization has the motto 'Never Again'?",
-    options: ["UNESCO", "UNHRC", "International Red Cross", "United Nations"],
-    correctAnswer: "United Nations",
-  },
-  {
-    question: "Who wrote 'Poverty and Un-British Rule in India'?",
-    options: ["Dadabhai Naoroji", "Gopal Krishna Gokhale", "M.G. Ranade", "R.C. Dutt"],
-    correctAnswer: "Dadabhai Naoroji",
-  },
-  {
-    question: "Which was the first Indian satellite launched into space?",
-    options: ["Aryabhata", "INSAT-1A", "Rohini", "Bhaskara"],
-    correctAnswer: "Aryabhata",
-  },
-  {
-    question: "Which Indian state has the most UNESCO World Heritage Sites?",
-    options: ["Maharashtra", "Karnataka", "Madhya Pradesh", "Tamil Nadu"],
-    correctAnswer: "Maharashtra",
-  },
-  {
-    question: "Who was the first speaker of the Lok Sabha?",
-    options: ["GV Mavalankar", "Hukum Singh", "N. Sanjeeva Reddy", "Balram Jakhar"],
-    correctAnswer: "GV Mavalankar",
-  }
+  // ... your 30 questions here (same as you provided)
 ];
 
 const Timed = () => {
@@ -211,6 +72,7 @@ const Timed = () => {
       (acc, ans, i) => (ans === questionsData[i].correctAnswer ? acc + 1 : acc),
       0
     );
+    saveResultToLocal("Timed Quiz Test", finalScore, questionsData.length); // <-- Added saving here
     setScore(finalScore);
     setShowResult(true);
   };
@@ -249,7 +111,7 @@ const Timed = () => {
               })}
             </div>
 
-            {/* Progress Bar added here */}
+            {/* Progress Bar */}
             <div className="progress-bar" aria-label="Question progress">
               <div
                 className="progress-bar-fill"

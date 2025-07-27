@@ -2,6 +2,16 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Programming.css';
 
+const saveResultToLocal = (examName, score, total) => {
+  const existing = JSON.parse(localStorage.getItem("examHistory")) || [];
+  const now = new Date().toLocaleString();
+  const updated = [
+    ...existing,
+    { examName, score, total, completedAt: now }
+  ];
+  localStorage.setItem("examHistory", JSON.stringify(updated));
+};
+
 const questionsData = [
   {
     question: "Which keyword is used to define a class in Java?",
@@ -56,7 +66,7 @@ int main() {
     options: ["int", "float", "char", "bool"],
     correctAnswer: "float",
   },
- {
+  {
     question: `#include <stdio.h>
 int main() {
   int a = 10;
@@ -99,7 +109,7 @@ int main() {
     options: [".", "::", ":", "#"],
     correctAnswer: ".",
   },
-   {
+  {
     question: `public class Test {
   public static void main(String[] args) {
     try {
@@ -112,7 +122,7 @@ int main() {
     options: ["Exception", "Error", "RuntimeException", "Nothing"],
     correctAnswer: "Exception"
   },
- {
+  {
     question: `for i in range(3):
     print(i)
 else:
@@ -145,7 +155,7 @@ else:
     options: ["C", "C++", "Java", "Python"],
     correctAnswer: "Python",
   },
- {
+  {
     question: `public class Test {
   public static void main(String[] args) {
     System.out.println(10 + 20 + "Hello" + 10 + 20);
@@ -260,6 +270,9 @@ const Programming = () => {
     );
     setScore(finalScore);
     setShowResult(true);
+
+    // Save to localStorage
+    saveResultToLocal("Programming Test", finalScore, questionsData.length);
   };
 
   const handleResultClose = () => {
@@ -270,10 +283,10 @@ const Programming = () => {
     <div className='keyboard'>
       <div className="quiz-container">
         <span className="quiz-title">
-          Programming<p className="quiz-subtitle">Test💁</p>
+          Programming <p className="quiz-subtitle">Test 💁</p>
         </span>
         <div className="underline3" style={{ width: '405px' }}></div>
-        <p className="timer">⏳Time Left: {formatTime(timeLeft)}⏰</p>
+        <p className="timer">⏳Time Left: {formatTime(timeLeft)} ⏰</p>
 
         {!showResult && (
           <>
@@ -296,22 +309,15 @@ const Programming = () => {
               })}
             </div>
 
-            {/* Progress Bar added here */}
-            <div className="progress-bar" aria-label="Question progress">
+            <div className="progress-bar">
               <div
                 className="progress-bar-fill"
-                style={{
-                  width: `${((currentQ + 1) / questionsData.length) * 100}%`
-                }}
+                style={{ width: `${((currentQ + 1) / questionsData.length) * 100}%` }}
               />
             </div>
 
             <div className="button-group">
-              <button
-                className="btn prev-btn"
-                onClick={handlePrevious}
-                disabled={currentQ === 0}
-              >
+              <button className="btn prev-btn" onClick={handlePrevious} disabled={currentQ === 0}>
                 Previous
               </button>
               <button
@@ -327,9 +333,9 @@ const Programming = () => {
 
         {showResult && (
           <div className="result-modal">
-            <h2>Test Completed!🎉</h2>
-            <p>Your Score: <strong>{score} / {questionsData.length}</strong>👌🏻</p>
-            <p>Percentage: <strong>{((score / questionsData.length) * 100).toFixed(2)}%</strong>🔥</p>
+            <h2>Test Completed! 🎉</h2>
+            <p>Your Score: <strong>{score} / {questionsData.length}</strong> 👌🏻</p>
+            <p>Percentage: <strong>{((score / questionsData.length) * 100).toFixed(2)}%</strong> 🔥</p>
             <button className="ok-btn" onClick={handleResultClose}>Go To Home</button>
           </div>
         )}

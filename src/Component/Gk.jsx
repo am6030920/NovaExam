@@ -2,8 +2,18 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Gk.css';
 
+const saveResultToLocal = (examName, score, total) => {
+  const existing = JSON.parse(localStorage.getItem("examHistory")) || [];
+  const now = new Date().toLocaleString();
+  const updated = [
+    ...existing,
+    { examName, score, total, completedAt: now }
+  ];
+  localStorage.setItem("examHistory", JSON.stringify(updated));
+};
+
 const questionsData = [
- {
+  {
     question: "Who is the current President of India (2025)?",
     options: ["Ram Nath Kovind", "Droupadi Murmu", "Narendra Modi", "Venkaiah Naidu"],
     correctAnswer: "Droupadi Murmu",
@@ -33,12 +43,11 @@ const questionsData = [
     options: ["Fluorine", "Ferrous", "Iron", "Francium"],
     correctAnswer: "Iron",
   },
-{
-  question: "Is love worth the time, or just an emotional Rollercoaster..?💔",
-  options: ["Hell yeah", "Yes Rollercoaster", "I agree", "All of the above"],
-  correctAnswer: ["Hell yeah", "Yes Rollercoaster", "I agree", "All of the above"]
-},
-
+  {
+    question: "Is love worth the time, or just an emotional Rollercoaster..?💔",
+    options: ["Hell yeah", "Yes Rollercoaster", "I agree", "All of the above"],
+    correctAnswer: ["Hell yeah", "Yes Rollercoaster", "I agree", "All of the above"],
+  },
   {
     question: "Who was the founder of the Maurya Empire?",
     options: ["Ashoka", "Chandragupta Maurya", "Bindusara", "Harshavardhana"],
@@ -159,7 +168,7 @@ const questionsData = [
 const Gk = () => {
   const [currentQ, setCurrentQ] = useState(0);
   const [selectedOptions, setSelectedOptions] = useState(Array(questionsData.length).fill(null));
-  const [timeLeft, setTimeLeft] = useState(900); 
+  const [timeLeft, setTimeLeft] = useState(900);
   const [showResult, setShowResult] = useState(false);
   const [score, setScore] = useState(0);
   const navigate = useNavigate();
@@ -207,12 +216,19 @@ const Gk = () => {
     }
   };
 
+  // Handle multiple or single correct answers
+  const isCorrect = (ans, correct) => {
+    if (Array.isArray(correct)) return correct.includes(ans);
+    return ans === correct;
+  };
+
   const calculateResult = () => {
     const finalScore = selectedOptions.reduce(
-      (acc, ans, i) => (ans === questionsData[i].correctAnswer ? acc + 1 : acc),
+      (acc, ans, i) => (isCorrect(ans, questionsData[i].correctAnswer) ? acc + 1 : acc),
       0
     );
     setScore(finalScore);
+    saveResultToLocal("General Knowledge Test", finalScore, questionsData.length);
     setShowResult(true);
   };
 
@@ -224,15 +240,15 @@ const Gk = () => {
     <div className='keyboard'>
       <div className="quiz-container">
         <span className="quiz-title">
-         General knowledge<p className="quiz-subtitle">Test🌍</p>
+          General knowledge<p className="quiz-subtitle">Test🌍</p>
         </span>
         <div className="underline3" style={{ width: '405px' }}></div>
         <p className="timer">⏳Time Left: {formatTime(timeLeft)}⏰</p>
 
         {!showResult && (
           <>
-            <div className="question-block">
-              <h3>Q{currentQ + 1}. {questionsData[currentQ].question}</h3>
+            <div className="question-block" role="group" aria-labelledby={`question-${currentQ}`}>
+              <h3 id={`question-${currentQ}`}>Q{currentQ + 1}. {questionsData[currentQ].question}</h3>
               {questionsData[currentQ].options.map((opt, i) => {
                 const inputId = `q${currentQ}_opt${i}`;
                 return (
@@ -243,6 +259,7 @@ const Gk = () => {
                       name={`q${currentQ}`}
                       checked={selectedOptions[currentQ] === opt}
                       onChange={() => handleOptionSelect(opt)}
+                      aria-checked={selectedOptions[currentQ] === opt}
                     />
                     <label htmlFor={inputId}>{opt}</label>
                   </div>
@@ -250,7 +267,7 @@ const Gk = () => {
               })}
             </div>
 
-            {/* Progress Bar added here */}
+            {/* Progress Bar */}
             <div className="progress-bar" aria-label="Question progress">
               <div
                 className="progress-bar-fill"
@@ -280,8 +297,8 @@ const Gk = () => {
         )}
 
         {showResult && (
-          <div className="result-modal">
-            <h2>Test Completed!🎉</h2>
+          <div className="result-modal" role="alertdialog" aria-modal="true" aria-labelledby="result-title">
+            <h2 id="result-title">Test Completed!🎉</h2>
             <p>Your Score: <strong>{score} / {questionsData.length}</strong>👌🏻</p>
             <p>Percentage: <strong>{((score / questionsData.length) * 100).toFixed(2)}%</strong>🔥</p>
             <button className="ok-btn" onClick={handleResultClose}>Go To Home</button>
@@ -291,4 +308,5 @@ const Gk = () => {
     </div>
   );
 };
+
 export default Gk;

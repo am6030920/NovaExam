@@ -1,63 +1,307 @@
-.profile-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  .profile-container {
+    padding: 40px;
+    font-family: Futura, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 40px;
+    margin-top: 80px; 
+    flex-wrap: wrap;
+  
+  }
+  .bg {
+  background-image: url("https://miro.medium.com/v2/resize:fit:1358/1*jIYfVyW4mXqCsfnckZTOww.jpeg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
   min-height: 100vh;
-  background: linear-gradient(135deg, #dbeafe, #e9d5ff);
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  width: 100%;
 }
 
-.profile-card {
-  background: #ffffff;
-  padding: 40px;
-  border-radius: 20px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-  text-align: center;
-  width: 90%;
-  max-width: 400px;
-}
 
-.profile-image {
-  width: 130px;
-  height: 130px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 4px solid #a855f7;
-  box-shadow: 0 0 10px rgba(168, 85, 247, 0.5);
+  .profile-card {
+    text-align: center;
+   
+    background-color: white;
+    height: auto;
+    width: 300px;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  }
+  .profile-image {
+  position: relative;
+  /* width: 140px;
+  height: 140px; */
+  border: none;
+  
+  overflow: hidden;
   margin: 0 auto;
 }
 
-.profile-name {
-  font-size: 24px;
-  font-weight: bold;
-  color: #333333;
-  margin-top: 20px;
-}
+.profile-image img {
 
-.profile-role {
+  display: block;
+}
+.edit-btn {
+  position: absolute;
+  bottom: 10px;
+  right: 6px;
+  background-color: #007bff;
+  color: white;
   font-size: 14px;
-  color: #777777;
-  margin-top: 5px;
+  padding: 5px;
+  border-radius: 50%;
+  border: 2px solid white;
+  cursor: pointer;
+  z-index: 5;
 }
 
-.profile-email {
-  margin-top: 25px;
-  font-size: 16px;
-  color: #555555;
+
+
+  .buttons {
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+  }
+
+  .history-btn, .logout-btn ,.home{
+    padding: 8px 16px;
+    font-size: 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    border: none;
+  }
+
+  .history-btn {
+    background-color: #007bff;
+    color: white;
+  }
+
+  .logout-btn {
+    background-color: #dc3545;
+    color: white;
+  }
+
+  .profile-details {
+    background: #f8f9fa;
+    padding: 20px;
+    width: 100%;
+    max-width: 600px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  }
+
+  .detail-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .detail-row input {
+    width: 60%;
+    padding: 6px;
+    font-size: 14px;
+  }
+
+  .edit-button {
+    margin-top: 15px;
+    padding: 8px 16px;
+    background-color: teal;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+  }
+
+  .exam-history {
+    background: #e7f1ff;
+    padding: 15px;
+    margin-top: 15px;
+    border-radius: 8px;
+    text-align: left;
+  }
+
+  .exam-history h3 {
+    margin-bottom: 10px;
+  }
+
+  .exam-history ul {
+    padding-left: 20px;
+  }
+  .home{
+    background-color: #007bff;
+    color: white;
+  }
+
+  .editable-input {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 4px 6px;
+  width: 45%;
+  font-size: 14px;
+  color: #333;
+}
+
+.edit-btn-container {
+  text-align: right;
+  margin-top: 10px;
 }
 
 .edit-button {
-  margin-top: 30px;
-  padding: 10px 24px;
-  background-color: #7c3aed;
-  color: white;
+  padding: 6px 14px;
+  background-color: #007bff;
   border: none;
-  border-radius: 50px;
-  font-size: 16px;
+  color: white;
+  font-weight: bold;
+  border-radius: 4px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
 }
 
 .edit-button:hover {
-  background-color: #5b21b6;
+  background-color: #0056b3;
+}
+
+.exam-history {
+  background: #ffffff;
+  padding: 30px;
+  margin-top: 30px;
+  border-radius: 20px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  font-family: 'Poppins', sans-serif;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  overflow-x: auto;
+}
+
+.exam-history h3 {
+  text-align: center;
+  font-size: 26px;
+  color: #027161;
+  margin-bottom: 20px;
+}
+
+.no-exams {
+  text-align: center;
+  color: #999;
+  font-style: italic;
+}
+
+.exam-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 16px;
+}
+
+.exam-table th,
+.exam-table td {
+  padding: 14px 20px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+.exam-table th {
+  background-color: #f5f5f5;
+  color: #027161;
+  font-weight: 600;
+}
+
+.exam-table tr:hover {
+  background-color: #f0fdfb;
+  transition: background-color 0.3s ease;
+}
+
+.exam-table td {
+  color: #333;
+}
+
+
+
+
+.bg {
+  background-image: url("https://miro.medium.com/v2/resize:fit:1358/1*jIYfVyW4mXqCsfnckZTOww.jpeg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.profile-title {
+  font-size: 64px;
+  font-family: "Times New Roman", serif;
+  text-align: center;
+  padding-top: 4px;
+  color: rgba(45, 47, 47, 0.98);
+}
+
+.profile-highlight {
+  font-size: 54px;
+  color: rgba(37, 38, 37, 0.98);
+  font-family: Georgia, serif;
+}
+
+.profile-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 40px;
+  margin-top: 20px;
+}
+
+
+
+.edit-btn {
+  cursor: pointer;
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 16px;
+}
+
+.profile-basic-info h1 {
+  color: rgba(2, 113, 106, 0.98);
+  margin: 10px 0;
+}
+
+.profile-basic-info h4 {
+  color: rgba(12, 158, 148, 0.98);
+  margin: 0;
+}
+
+.buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.history-btn, .logout-btn, .home-btn, .edit-button {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 8px;
+  background: #027161;
+  color: white;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.exam-history {
+  margin-top: 20px;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.exam-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.exam-table th, .exam-table td {
+  padding: 8px;
+  border: 1px solid #ccc;
+  text-align: center;
 }

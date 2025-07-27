@@ -62,10 +62,10 @@ const Contact = () => {
         </div>
 
         {/* Footer */}
-        <footer className="footer-blackbox">
-          <p style={{textDecoration:'underline'}}>©2025 NovaExam</p>
+        <footer className="footer-blackbox" style={{textAlign:"center"}}>
+          <p style={{paddingBottom:"8px"}}>©2025 NovaExam</p>
          
-          <p style={{paddingTop:'20px'}}>Empowering your exam journey with NovaExam!</p>
+          <p >Empowering your exam journey with NovaExam!</p>
         </footer>
 
       </div>

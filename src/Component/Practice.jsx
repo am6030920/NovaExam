@@ -2,8 +2,19 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Practice.css';
 
+// ✅ Save result to localStorage
+const saveResultToLocal = (examName, score, total) => {
+  const existing = JSON.parse(localStorage.getItem("examHistory")) || [];
+  const now = new Date().toLocaleString();
+  const updated = [
+    ...existing,
+    { examName, score, total, completedAt: now }
+  ];
+  localStorage.setItem("examHistory", JSON.stringify(updated));
+};
+
 const questionsData = [
-  {
+{
     question: "In Java, which keyword best describes the mechanism to derive a new class from an existing class, enabling reuse of code and polymorphism?",
     options: ["implement", "inherits", "extends", "interface"],
     correctAnswer: "extends",
@@ -158,10 +169,11 @@ const questionsData = [
 const Practice = () => {
   const [currentQ, setCurrentQ] = useState(0);
   const [selectedOptions, setSelectedOptions] = useState(Array(questionsData.length).fill(null));
-  const [timeLeft, setTimeLeft] = useState(900); 
+  const [timeLeft, setTimeLeft] = useState(900); // 15 minutes
   const [showResult, setShowResult] = useState(false);
   const [score, setScore] = useState(0);
   const navigate = useNavigate();
+
 
   useEffect(() => {
     if (showResult) return;
@@ -178,6 +190,7 @@ const Practice = () => {
     return () => clearInterval(timer);
   }, [showResult]);
 
+  // ⏳ Format time MM:SS
   const formatTime = (seconds) => {
     const mins = Math.floor(seconds / 60);
     const secs = seconds % 60;
@@ -213,6 +226,7 @@ const Practice = () => {
     );
     setScore(finalScore);
     setShowResult(true);
+    saveResultToLocal("Practice Test", finalScore, questionsData.length);
   };
 
   const handleResultClose = () => {
@@ -249,7 +263,7 @@ const Practice = () => {
               })}
             </div>
 
-            {/* Progress Bar added here */}
+            {/* Progress Bar */}
             <div className="progress-bar" aria-label="Question progress">
               <div
                 className="progress-bar-fill"

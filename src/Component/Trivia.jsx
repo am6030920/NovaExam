@@ -2,8 +2,18 @@ import React, {useState, useEffect} from 'react';
 import {useNavigate} from 'react-router-dom';
 import './Trivia.css';
 
+const saveResultToLocal = (examName, score, total) => {
+  const existing = JSON.parse(localStorage.getItem("examHistory")) || [];
+  const now = new Date().toLocaleString();
+  const updated = [
+    ...existing,
+    { examName, score, total, completedAt: now }
+  ];
+  localStorage.setItem("examHistory", JSON.stringify(updated));
+};
+
 const questionsData = [
-  {
+ {
     question: "Who was the first emperor of the Maurya Dynasty in India?",
     options: ["Ashoka", "Bindusara", "Chandragupta Maurya", "Harsha"],
     correctAnswer: "Chandragupta Maurya",
@@ -214,6 +224,7 @@ const Trivia = () => {
       0
     );
     setScore(finalScore);
+    saveResultToLocal("Trivia Test", finalScore, questionsData.length);
     setShowResult(true);
   };
 
@@ -251,13 +262,10 @@ const Trivia = () => {
               })}
             </div>
 
-            {/* Progress Bar added here */}
             <div className="progress-bar" aria-label="Question progress">
               <div
                 className="progress-bar-fill"
-                style={{
-                  width: `${((currentQ + 1) / questionsData.length) * 100}%`
-                }}
+                style={{width: `${((currentQ + 1) / questionsData.length) * 100}%`}}
               />
             </div>
 

@@ -2,8 +2,18 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Technical.css';
 
+const saveResultToLocal = (examName, score, total) => {
+  const existing = JSON.parse(localStorage.getItem("examHistory")) || [];
+  const now = new Date().toLocaleString();
+  const updated = [
+    ...existing,
+    { examName, score, total, completedAt: now }
+  ];
+  localStorage.setItem("examHistory", JSON.stringify(updated));
+};
+
 const questionsData = [
-{
+  {
     question: "Which data structure provides O(1) time complexity for insertion, deletion, and search in the average case?",
     options: ["Binary Search Tree", "Hash Table", "Linked List", "Stack"],
     correctAnswer: "Hash Table",
@@ -60,7 +70,12 @@ const questionsData = [
   },
   {
     question: "Which of the following represents the order of execution in the OS boot process?",
-    options: ["Kernel → BIOS → Bootloader → OS", "BIOS → Bootloader → Kernel → OS", "Bootloader → BIOS → Kernel → OS", "BIOS → Kernel → Bootloader → OS"],
+    options: [
+      "Kernel → BIOS → Bootloader → OS",
+      "BIOS → Bootloader → Kernel → OS",
+      "Bootloader → BIOS → Kernel → OS",
+      "BIOS → Kernel → Bootloader → OS"
+    ],
     correctAnswer: "BIOS → Bootloader → Kernel → OS",
   },
   {
@@ -75,7 +90,12 @@ const questionsData = [
   },
   {
     question: "Which of the following is true about the TCP protocol?",
-    options: ["It is connectionless", "It does not guarantee delivery", "It ensures ordered delivery", "It is faster than UDP"],
+    options: [
+      "It is connectionless",
+      "It does not guarantee delivery",
+      "It ensures ordered delivery",
+      "It is faster than UDP"
+    ],
     correctAnswer: "It ensures ordered delivery",
   },
   {
@@ -115,7 +135,12 @@ const questionsData = [
   },
   {
     question: "What does the ACID property in databases stand for?",
-    options: ["Atomicity, Consistency, Isolation, Durability", "Access, Control, Integrity, Durability", "Atomicity, Concurrency, Integration, Durability", "Access, Consistency, Isolation, Deployment"],
+    options: [
+      "Atomicity, Consistency, Isolation, Durability",
+      "Access, Control, Integrity, Durability",
+      "Atomicity, Concurrency, Integration, Durability",
+      "Access, Consistency, Isolation, Deployment"
+    ],
     correctAnswer: "Atomicity, Consistency, Isolation, Durability",
   },
   {
@@ -158,7 +183,7 @@ const questionsData = [
 const Technical = () => {
   const [currentQ, setCurrentQ] = useState(0);
   const [selectedOptions, setSelectedOptions] = useState(Array(questionsData.length).fill(null));
-  const [timeLeft, setTimeLeft] = useState(900); 
+  const [timeLeft, setTimeLeft] = useState(900); // 15 minutes in seconds
   const [showResult, setShowResult] = useState(false);
   const [score, setScore] = useState(0);
   const navigate = useNavigate();
@@ -211,6 +236,7 @@ const Technical = () => {
       (acc, ans, i) => (ans === questionsData[i].correctAnswer ? acc + 1 : acc),
       0
     );
+    saveResultToLocal("Technical Test", finalScore, questionsData.length);
     setScore(finalScore);
     setShowResult(true);
   };
@@ -249,13 +275,11 @@ const Technical = () => {
               })}
             </div>
 
-            {/* Progress Bar added here */}
+            {/* Progress Bar */}
             <div className="progress-bar" aria-label="Question progress">
               <div
                 className="progress-bar-fill"
-                style={{
-                  width: `${((currentQ + 1) / questionsData.length) * 100}%`
-                }}
+                style={{ width: `${((currentQ + 1) / questionsData.length) * 100}%` }}
               />
             </div>
 
