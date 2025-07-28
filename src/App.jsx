@@ -16,9 +16,10 @@ import Ml from './Component/Ml';
 import Contact from './Component/Contact';
 import Company from './Component/Company';
 import Profile from './Component/Profile';
+import Career from './Component/Career';
 const AppContent = () => {
   const location = useLocation();
-  const hideNavbarPaths = ['/login', '/signup','/home','/about','/programming','/gk','/timed','/practice','/technical','/trivia' ,'/ml','/contact','/company','/profile'];
+  const hideNavbarPaths = ['/login', '/signup','/home','/about','/programming','/gk','/timed','/practice','/technical','/trivia' ,'/ml','/contact','/company','/profile','/career'];
 
   return (
     <>
@@ -40,6 +41,7 @@ const AppContent = () => {
         <Route path='/contact' element={<Contact />} />
         <Route path='/Company' element={<Company/>} />
         <Route path='/Profile' element={<Profile/>} />
+        <Route path='/career' element={<Career/>}/>
       </Routes>
    
     </>

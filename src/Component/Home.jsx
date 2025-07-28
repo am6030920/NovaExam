@@ -42,13 +42,13 @@ function Home() {
   <div className="dropdown-section" style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
     <select defaultValue="" required className="custom-select" onChange={handleExamNavigation}>
       <option value="" disabled>Type of Test</option>
-      <option value="/Programming"> Programming</option>
-      <option value="/Gk">GK</option>
+      <option value="/Programming"> Programming Test</option>
+      <option value="/Gk">GK Test</option>
       <option value="/Timed">Timed Quiz</option>
       <option value="/Practice">Practice MCQ</option>
-      <option value="/Technical">Technical</option>
-      <option value="/Trivia">Trivia</option>
-      <option value="/Ml">Machine Learning</option>
+      <option value="/Technical">Technicaly Test</option>
+      <option value="/Trivia">Trivia Exam</option>
+      <option value="/Ml">Machine Learning Test</option>
     </select>
       <select defaultValue="" required className="custom-select">
       <option value="" disabled>Industry</option>
@@ -63,6 +63,7 @@ function Home() {
       <option value="/company">Company</option>
       <option value="/About">Our Team</option>
       <option value="/contact">Contact</option>
+      <option value="/career">Career</option>
     </select>
 
 
@@ -94,9 +95,9 @@ function Home() {
         <div className="main-content">
           <div className="banner">
             <div className="text-content">
-              <h1 style={{ fontFamily: 'Futura, sans-serif', color: '#373737ff' }}>
+              <h1 style={{ fontFamily: 'Futura, sans-serif', color: '#343333ff' ,fontSize:"48px",textShadow: '1px 1px 4px rgba(0,0,0,0.2)'}}>
                 Test your knowledge with<br />
-                <span>NovaExam and grow smarter..!💭</span>
+                <span style={{fontSize:"44px"}}>NovaExam and grow smarter..!💭</span>
               </h1>
               <p style={{ fontSize: '17px', fontFamily: 'futura, sans-serif' }}>
                 Explore expertly crafted quizzes and practice tests designed for all<br />
@@ -143,7 +144,8 @@ function Home() {
     {[
       { name: "Java Programming", icon: "💻" },
       { name: "Aptitude Test", icon: "🧠" },
-      { name: "AI Basics", icon: "🤖" }
+      { name: "AI Basics", icon: "🤖" },
+      {name: "Web 3.0 & Blockchain Fundamentals",icon: "💻"}
     ].map((exam, idx) => (
       <div
         key={idx}
@@ -184,7 +186,23 @@ function Home() {
 </div>
 
 <div style={{ backgroundColor: '#f5fef9ff', padding: '60px 20px' }}>
-  <h1 style={{ textAlign: 'center', fontFamily: 'Futura', color: '#00594c' }}>What Our Users Say 💭</h1>
+  <h1
+  style={{
+    textAlign: 'center',
+    fontFamily: 'Futura, sans-serif',
+    color: '#00594c',
+    fontSize: '2.8rem',
+    letterSpacing: '1px',
+    marginTop: '40px',
+    marginBottom: '20px',
+    textShadow: '1px 1px 4px rgba(0,0,0,0.2)',
+    animation: 'fadeIn 1s ease-out',
+    opacity: 0,
+    animationFillMode: 'forwards'
+  }}
+>
+  What Our <span style={{ color: "#7497e8ff", textShadow: '1px 1px 4px rgba(0,0,0,0.2)' }}>Users</span> Say 💭
+</h1>
   <div style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap', gap: '30px', marginTop: '40px' }}>
     {[
       { name: "Ankit Sharma", feedback: "NovaExam helped me prepare for my BCA semester—timed exams are amazing!" },
