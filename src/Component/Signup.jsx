@@ -84,7 +84,9 @@ function SignupPage() {
       return;
     }
 
-    // ✅ Show alert before navigating
+    // Save username to localStorage for certificate use
+    localStorage.setItem("userName", formData.name);
+
     alert('🎉 Signup Successful! Welcome to NovaExam.');
 
     console.log('NovaExam Signup Data:', formData);

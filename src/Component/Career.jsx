@@ -5,15 +5,15 @@ const Career = () => {
   return (
     <div style={{ padding: "0", margin: "0", background: "white" }}>
 
-      <div className="career" style={{ background: '#cff0eaff' }}>
+      <div className="career" style={{ background: '#d8f6f0ff' }}>
         <div className="career-banner">
           <div className="banner-text">
             <h1>
-              <strong>ExamOnline</strong> is growing quickly.<br />
+              NovaExam is growing quickly.<br />
               Finding the right career for<br />
               everyone starts here....
             </h1>
-            <p style={{ marginTop: "2vh" }}>At ExamOnline, we believe in unlocking potential through the power of knowledge and opportunity. As we continue to grow, we’re opening doors for passionate individuals who want to make a real impact in the world of online education. Whether you're a developer, educator, designer, or strategist — there's a place for you here. Join us on this exciting journey and shape the future of learning, together.</p>
+            <p style={{ marginTop: "2vh" }}>At NovaExam, we believe in unlocking potential through the power of knowledge and opportunity. As we continue to grow, we’re opening doors for passionate individuals who want to make a real impact in the world of online education. Whether you're a developer, educator, designer, or strategist — there's a place for you here. Join us on this exciting journey and shape the future of learning, together.</p>
           </div>
           <div className="banner-image">
             <img src="https://examonline.in/wp-content/uploads/2023/03/Secure-and-Convenient.svg" alt="Career Illustration" />
@@ -51,7 +51,7 @@ const Career = () => {
         </div>
       </div>
       {/* second box */}
-      <div style={{paddingTop:"15vh",background:"#cff0eaff"}}>
+      <div style={{paddingTop:"15vh"}}>
       <h3 style={{
           display: "flex", justifyContent: "center",
           paddingTop: "2vh", fontSize: "26px", paddingBottom: "2vh"
@@ -78,8 +78,51 @@ const Career = () => {
         </div>
       </div>
       </div>
+      {/* third box */}
+      <div style={{paddingTop:"15vh"}}>
+      <h3 style={{
+          display: "flex", justifyContent: "center",
+          paddingTop: "2vh", fontSize: "26px", paddingBottom: "2vh"
+        }}>Benefits that work for you</h3>
+        <div className="underline" style={{ width: "45vh" }} ></div>
+      <div className="what-we-do-section">
+        <div className="info-card">
+          <h3>Flexible Learning</h3>
+         <ul>
+          <li>Access tests 24/7—no time restrictions or deadlines.</li>
+          <li>Practice at your own speed, pause and resume when you’re ready.</li>
+          <li>Prepare from anywhere—home, library, or on the go.</li>
+         </ul>
+        </div>
+        <div className="info-card">
+          <h3>User-Friendly Design</h3>
+         <ul>
+          <li>imple layout that keeps you focused on learning, not navigating.</li>
+          <li>No ads or pop-ups—just pure exam practice</li>
+          <li>Effortlessly switch between questions and sections</li>
+         </ul>
+        </div>
+        <div className="info-card">
+          <h3>Detailed Result Summary</h3>
+         <ul><li>
+          View your score immediately after submitting the test.</li>
+          <li>Understand the logic behind each correct answer (if provided).</li>
+          <li>Analyze your strengths and weaknesses by category.</li>
+          </ul>
+        </div>
+      </div>
+      </div>
+      <div className =  "last">
+        <div className="last-one">
+          <h3 style={{display:'flex',justifyContent:"center",color:"black",marginTop:"15vh",marginBottom:"2vh",fontSize:"40px"}}>Current Opening</h3>
+          <div className="underline" style={{ width: "55vh" }} ></div>
+            </div>
+      </div>
+
     </div>
   );
 };
 
 export default Career;
+
+

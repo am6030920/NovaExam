@@ -1,17 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Programming.css';
+import html2pdf from 'html2pdf.js';
 
-const saveResultToLocal = (examName, score, total) => {
-  const existing = JSON.parse(localStorage.getItem("examHistory")) || [];
-  const now = new Date().toLocaleString();
-  const updated = [
-    ...existing,
-    { examName, score, total, completedAt: now }
-  ];
-  localStorage.setItem("examHistory", JSON.stringify(updated));
-};
-
+// ✅ Questions data moved to top
 const questionsData = [
   {
     question: "Which keyword is used to define a class in Java?",
@@ -32,7 +24,7 @@ int main() {
   return 0;
 }`,
     options: ["15", "510", "5 + 10", "Error"],
-    correctAnswer: "15"
+    correctAnswer: "15",
   },
   {
     question: "Which method is used to start a thread in Java?",
@@ -49,10 +41,10 @@ int main() {
   return 0;
 }`,
     options: ["5", "2", "7", "Garbage value"],
-    correctAnswer: "7"
+    correctAnswer: "7",
   },
   {
-    question: "What is the output of printf(\"%d\", 10+20);?",
+    question: `What is the output of printf("%d", 10+20);?`,
     options: ["10", "20", "30", "Error"],
     correctAnswer: "30",
   },
@@ -77,7 +69,7 @@ int main() {
   return 0;
 }`,
     options: ["Zero", "Non-zero", "Error", "Nothing"],
-    correctAnswer: "Non-zero"
+    correctAnswer: "Non-zero",
   },
   {
     question: "Which header file is used for input/output in C?",
@@ -102,7 +94,7 @@ int main() {
   }
 }`,
     options: ["11", "12", "10", "Error"],
-    correctAnswer: "12"
+    correctAnswer: "12",
   },
   {
     question: "Which operator is used to access class members in C++?",
@@ -120,7 +112,7 @@ int main() {
   }
 }`,
     options: ["Exception", "Error", "RuntimeException", "Nothing"],
-    correctAnswer: "Exception"
+    correctAnswer: "Exception",
   },
   {
     question: `for i in range(3):
@@ -128,7 +120,7 @@ int main() {
 else:
     print("Done")`,
     options: ["0 1 2", "0 1 2 Done", "Done", "Error"],
-    correctAnswer: "0\n1\n2\nDone"
+    correctAnswer: "0\n1\n2\nDone",
   },
   {
     question: "How do you start a comment in Python?",
@@ -141,7 +133,7 @@ else:
     correctAnswer: "int",
   },
   {
-    question: "What will `print(type([]))` output?",
+    question: "What will print(type([])) output?",
     options: ["<class 'list'>", "<type 'list'>", "list", "<class>"],
     correctAnswer: "<class 'list'>",
   },
@@ -162,7 +154,7 @@ else:
   }
 }`,
     options: ["30Hello30", "30Hello1020", "Hello1020", "Error"],
-    correctAnswer: "30Hello1020"
+    correctAnswer: "30Hello1020",
   },
   {
     question: "Which of the following is used to take input in C++?",
@@ -191,7 +183,7 @@ int main() {
   return 0;
 }`,
     options: ["Hello, World!", "hello world", "Error", "Nothing"],
-    correctAnswer: "Hello, World!"
+    correctAnswer: "Hello, World!",
   },
   {
     question: "Which concept hides internal details in OOP?",
@@ -203,7 +195,7 @@ int main() {
 y = 20
 print(x + y)`,
     options: ["30", "1020", "Error", "0"],
-    correctAnswer: "30"
+    correctAnswer: "30",
   },
   {
     question: "Which language does not support pointers directly?",
@@ -212,6 +204,23 @@ print(x + y)`,
   }
 ];
 
+// Helper functions
+const saveResultToLocal = (examName, score, total) => {
+  const existing = JSON.parse(localStorage.getItem("examHistory")) || [];
+  const now = new Date().toLocaleString();
+  const updated = [...existing, { examName, score, total, completedAt: now }];
+  localStorage.setItem("examHistory", JSON.stringify(updated));
+};
+
+const getGrade = (score) => {
+  if (score >= 27) return "A+";
+  if (score >= 24) return "A";
+  if (score >= 21) return "B+";
+  if (score >= 18) return "B";
+  if (score >= 15) return "C";
+  return "F";
+};
+
 const Programming = () => {
   const [currentQ, setCurrentQ] = useState(0);
   const [selectedOptions, setSelectedOptions] = useState(Array(questionsData.length).fill(null));
@@ -219,6 +228,8 @@ const Programming = () => {
   const [showResult, setShowResult] = useState(false);
   const [score, setScore] = useState(0);
   const navigate = useNavigate();
+  const userName = localStorage.getItem("userName") || "Student";
+  const examName = "Programming Test";
 
   useEffect(() => {
     if (showResult) return;
@@ -270,13 +281,20 @@ const Programming = () => {
     );
     setScore(finalScore);
     setShowResult(true);
-
-    // Save to localStorage
-    saveResultToLocal("Programming Test", finalScore, questionsData.length);
+    saveResultToLocal(examName, finalScore, questionsData.length);
   };
 
   const handleResultClose = () => {
     navigate('/home');
+  };
+
+  const downloadCertificate = () => {
+    const cert = document.getElementById("certificate");
+    cert.style.display = "block";
+    html2pdf().from(cert).save(`${examName}-Certificate.pdf`);
+    setTimeout(() => {
+      cert.style.display = "none";
+    }, 1000);
   };
 
   return (
@@ -336,9 +354,54 @@ const Programming = () => {
             <h2>Test Completed! 🎉</h2>
             <p>Your Score: <strong>{score} / {questionsData.length}</strong> 👌🏻</p>
             <p>Percentage: <strong>{((score / questionsData.length) * 100).toFixed(2)}%</strong> 🔥</p>
-            <button className="ok-btn" onClick={handleResultClose}>Go To Home</button>
+            <p>Grade: <strong>{getGrade(score)}</strong> 🏅</p>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginTop: '20px', alignItems: 'center' }}>
+              <button className="ok-btn" onClick={handleResultClose} style={{ width: '200px', padding: '10px', fontWeight: '600', borderRadius: '8px', cursor: 'pointer' }}>
+                Go To Home
+              </button>
+              <button
+                className="ok-btn"
+                onClick={downloadCertificate}
+                style={{
+                  width: '200px',
+                  padding: '10px',
+                  backgroundColor: '#00594c',
+                  color: 'white',
+                  fontWeight: '600',
+                  borderRadius: '8px',
+                  cursor: 'pointer'
+                }}
+              >
+                🎓 Download Your Certificate
+              </button>
+            </div>
+
           </div>
         )}
+
+        <div id="certificate" style={{
+          width: '800px',
+          padding: '40px',
+          border: '10px solid #00594c',
+          textAlign: 'center',
+          fontFamily: 'Georgia, serif',
+          backgroundColor: 'white',
+          margin: 'auto',
+          display: 'none'
+        }}>
+          <h1 style={{ fontSize: '32px', color: '#00594c', }}>🎓 Certificate of Completion</h1>
+          <p>This certifies that</p>
+          <h2>{userName}</h2>
+          <p>has successfully completed the <strong>{examName}</strong> with a score of</p>
+          <h3>{score} / {questionsData.length}</h3>
+          <p>Grade: <strong>{getGrade(score)}</strong></p>
+          <p>Date: {new Date().toLocaleDateString()}</p>
+          <div style={{ marginTop: '40px' }}>
+            <p style={{ fontWeight: 'bold' }}>Akash Maity</p>
+            <p>Leader, NovaExam</p>
+          </div>
+        </div>
+        {/* end */}
       </div>
     </div>
   );
