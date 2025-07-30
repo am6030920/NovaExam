@@ -1,410 +1,517 @@
-// import React, { useState, useEffect } from 'react';
-// import { useNavigate } from 'react-router-dom';
-// import './Programming.css';
-// import html2pdf from 'html2pdf.js';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import './Programming.css';
+import html2pdf from 'html2pdf.js';
 
-// // ✅ Questions data moved to top
-// const questionsData = [
-//   {
-//     question: "Which keyword is used to define a class in Java?",
-//     options: ["class", "Object", "def", "structure"],
-//     correctAnswer: "class",
-//   },
-//   {
-//     question: "Which of the following is not a Java primitive type?",
-//     options: ["int", "float", "String", "char"],
-//     correctAnswer: "String",
-//   },
-//   {
-//     question: `#include <iostream>
-// using namespace std;
-// int main() {
-//   int a = 5, b = 10;
-//   cout << a + b;
-//   return 0;
-// }`,
-//     options: ["15", "510", "5 + 10", "Error"],
-//     correctAnswer: "15",
-//   },
-//   {
-//     question: "Which method is used to start a thread in Java?",
-//     options: ["start()", "run()", "init()", "main()"],
-//     correctAnswer: "start()",
-//   },
-//   {
-//     question: `#include <stdio.h>
-// int main() {
-//   int a = 5;
-//   int *p = &a;
-//   *p += 2;
-//   printf("%d", a);
-//   return 0;
-// }`,
-//     options: ["5", "2", "7", "Garbage value"],
-//     correctAnswer: "7",
-//   },
-//   {
-//     question: `What is the output of printf("%d", 10+20);?`,
-//     options: ["10", "20", "30", "Error"],
-//     correctAnswer: "30",
-//   },
-//   {
-//     question: "Which of the following is used to comment a single line in C?",
-//     options: ["//", "#", "/* */", "--"],
-//     correctAnswer: "//",
-//   },
-//   {
-//     question: "Which data type is used to store decimal numbers in C?",
-//     options: ["int", "float", "char", "bool"],
-//     correctAnswer: "float",
-//   },
-//   {
-//     question: `#include <stdio.h>
-// int main() {
-//   int a = 10;
-//   if (a = 0)
-//     printf("Zero");
-//   else
-//     printf("Non-zero");
-//   return 0;
-// }`,
-//     options: ["Zero", "Non-zero", "Error", "Nothing"],
-//     correctAnswer: "Non-zero",
-//   },
-//   {
-//     question: "Which header file is used for input/output in C?",
-//     options: ["conio.h", "stdlib.h", "stdio.h", "io.h"],
-//     correctAnswer: "stdio.h",
-//   },
-//   {
-//     question: "C++ is an extension of which language?",
-//     options: ["C", "Java", "Python", "HTML"],
-//     correctAnswer: "C",
-//   },
-//   {
-//     question: "Which concept allows the use of the same function name with different parameters?",
-//     options: ["Inheritance", "Polymorphism", "Encapsulation", "Overloading"],
-//     correctAnswer: "Overloading",
-//   },
-//   {
-//     question: `public class Test {
-//   public static void main(String[] args) {
-//     int a = 5;
-//     System.out.println(a++ + ++a);
-//   }
-// }`,
-//     options: ["11", "12", "10", "Error"],
-//     correctAnswer: "12",
-//   },
-//   {
-//     question: "Which operator is used to access class members in C++?",
-//     options: [".", "::", ":", "#"],
-//     correctAnswer: ".",
-//   },
-//   {
-//     question: `public class Test {
-//   public static void main(String[] args) {
-//     try {
-//       int a = 5 / 0;
-//     } catch (ArithmeticException e) {
-//       System.out.println("Exception");
-//     }
-//   }
-// }`,
-//     options: ["Exception", "Error", "RuntimeException", "Nothing"],
-//     correctAnswer: "Exception",
-//   },
-//   {
-//     question: `for i in range(3):
-//     print(i)
-// else:
-//     print("Done")`,
-//     options: ["0 1 2", "0 1 2 Done", "Done", "Error"],
-//     correctAnswer: "0\n1\n2\nDone",
-//   },
-//   {
-//     question: "How do you start a comment in Python?",
-//     options: ["//", "#", "<!--", "/*"],
-//     correctAnswer: "#",
-//   },
-//   {
-//     question: "Which of these is a valid Python data type?",
-//     options: ["number", "integer", "int", "decimal"],
-//     correctAnswer: "int",
-//   },
-//   {
-//     question: "What will print(type([])) output?",
-//     options: ["<class 'list'>", "<type 'list'>", "list", "<class>"],
-//     correctAnswer: "<class 'list'>",
-//   },
-//   {
-//     question: "How do you define a variable in Python?",
-//     options: ["int x = 5", "x = 5", "var x = 5", "define x = 5"],
-//     correctAnswer: "x = 5",
-//   },
-//   {
-//     question: "Which language is known for its simplicity and indentation rules?",
-//     options: ["C", "C++", "Java", "Python"],
-//     correctAnswer: "Python",
-//   },
-//   {
-//     question: `public class Test {
-//   public static void main(String[] args) {
-//     System.out.println(10 + 20 + "Hello" + 10 + 20);
-//   }
-// }`,
-//     options: ["30Hello30", "30Hello1020", "Hello1020", "Error"],
-//     correctAnswer: "30Hello1020",
-//   },
-//   {
-//     question: "Which of the following is used to take input in C++?",
-//     options: ["cin", "cout", "input()", "scanf"],
-//     correctAnswer: "cin",
-//   },
-//   {
-//     question: "What is the extension of Java compiled bytecode files?",
-//     options: [".java", ".class", ".exe", ".obj"],
-//     correctAnswer: ".class",
-//   },
-//   {
-//     question: "Which function is used to get input from user in C?",
-//     options: ["input()", "gets()", "scanf()", "cin"],
-//     correctAnswer: "scanf()",
-//   },
-//   {
-//     question: "Which keyword is used to stop a loop in Python?",
-//     options: ["stop", "exit", "break", "return"],
-//     correctAnswer: "break",
-//   },
-//   {
-//     question: `#include <stdio.h>
-// int main() {
-//   printf("Hello, World!");
-//   return 0;
-// }`,
-//     options: ["Hello, World!", "hello world", "Error", "Nothing"],
-//     correctAnswer: "Hello, World!",
-//   },
-//   {
-//     question: "Which concept hides internal details in OOP?",
-//     options: ["Polymorphism", "Abstraction", "Encapsulation", "Inheritance"],
-//     correctAnswer: "Abstraction",
-//   },
-//   {
-//     question: `x = 10
-// y = 20
-// print(x + y)`,
-//     options: ["30", "1020", "Error", "0"],
-//     correctAnswer: "30",
-//   },
-//   {
-//     question: "Which language does not support pointers directly?",
-//     options: ["C", "C++", "Java", "Python"],
-//     correctAnswer: "Java",
-//   }
-// ];
+// ✅ Questions data moved to top
+const questionsData = [
+  {
+    question: "Which keyword is used to define a class in Java?",
+    options: ["class", "Object", "def", "structure"],
+    correctAnswer: "class",
+  },
+  {
+    question: "Which of the following is not a Java primitive type?",
+    options: ["int", "float", "String", "char"],
+    correctAnswer: "String",
+  },
+  {
+    question: `#include <iostream>
+using namespace std;
+int main() {
+  int a = 5, b = 10;
+  cout << a + b;
+  return 0;
+}`,
+    options: ["15", "510", "5 + 10", "Error"],
+    correctAnswer: "15",
+  },
+  {
+    question: "Which method is used to start a thread in Java?",
+    options: ["start()", "run()", "init()", "main()"],
+    correctAnswer: "start()",
+  },
+  {
+    question: `#include <stdio.h>
+int main() {
+  int a = 5;
+  int *p = &a;
+  *p += 2;
+  printf("%d", a);
+  return 0;
+}`,
+    options: ["5", "2", "7", "Garbage value"],
+    correctAnswer: "7",
+  },
+  {
+    question: `What is the output of printf("%d", 10+20);?`,
+    options: ["10", "20", "30", "Error"],
+    correctAnswer: "30",
+  },
+  {
+    question: "Which of the following is used to comment a single line in C?",
+    options: ["//", "#", "/* */", "--"],
+    correctAnswer: "//",
+  },
+  {
+    question: "Which data type is used to store decimal numbers in C?",
+    options: ["int", "float", "char", "bool"],
+    correctAnswer: "float",
+  },
+  {
+    question: `#include <stdio.h>
+int main() {
+  int a = 10;
+  if (a = 0)
+    printf("Zero");
+  else
+    printf("Non-zero");
+  return 0;
+}`,
+    options: ["Zero", "Non-zero", "Error", "Nothing"],
+    correctAnswer: "Non-zero",
+  },
+  {
+    question: "Which header file is used for input/output in C?",
+    options: ["conio.h", "stdlib.h", "stdio.h", "io.h"],
+    correctAnswer: "stdio.h",
+  },
+  {
+    question: "C++ is an extension of which language?",
+    options: ["C", "Java", "Python", "HTML"],
+    correctAnswer: "C",
+  },
+  {
+    question: "Which concept allows the use of the same function name with different parameters?",
+    options: ["Inheritance", "Polymorphism", "Encapsulation", "Overloading"],
+    correctAnswer: "Overloading",
+  },
+  {
+    question: `public class Test {
+  public static void main(String[] args) {
+    int a = 5;
+    System.out.println(a++ + ++a);
+  }
+}`,
+    options: ["11", "12", "10", "Error"],
+    correctAnswer: "12",
+  },
+  {
+    question: "Which operator is used to access class members in C++?",
+    options: [".", "::", ":", "#"],
+    correctAnswer: ".",
+  },
+  {
+    question: `public class Test {
+  public static void main(String[] args) {
+    try {
+      int a = 5 / 0;
+    } catch (ArithmeticException e) {
+      System.out.println("Exception");
+    }
+  }
+}`,
+    options: ["Exception", "Error", "RuntimeException", "Nothing"],
+    correctAnswer: "Exception",
+  },
+  {
+    question: `for i in range(3):
+    print(i)
+else:
+    print("Done")`,
+    options: ["0 1 2", "0 1 2 Done", "Done", "Error"],
+    correctAnswer: "0\n1\n2\nDone",
+  },
+  {
+    question: "How do you start a comment in Python?",
+    options: ["//", "#", "<!--", "/*"],
+    correctAnswer: "#",
+  },
+  {
+    question: "Which of these is a valid Python data type?",
+    options: ["number", "integer", "int", "decimal"],
+    correctAnswer: "int",
+  },
+  {
+    question: "What will print(type([])) output?",
+    options: ["<class 'list'>", "<type 'list'>", "list", "<class>"],
+    correctAnswer: "<class 'list'>",
+  },
+  {
+    question: "How do you define a variable in Python?",
+    options: ["int x = 5", "x = 5", "var x = 5", "define x = 5"],
+    correctAnswer: "x = 5",
+  },
+  {
+    question: "Which language is known for its simplicity and indentation rules?",
+    options: ["C", "C++", "Java", "Python"],
+    correctAnswer: "Python",
+  },
+  {
+    question: `public class Test {
+  public static void main(String[] args) {
+    System.out.println(10 + 20 + "Hello" + 10 + 20);
+  }
+}`,
+    options: ["30Hello30", "30Hello1020", "Hello1020", "Error"],
+    correctAnswer: "30Hello1020",
+  },
+  {
+    question: "Which of the following is used to take input in C++?",
+    options: ["cin", "cout", "input()", "scanf"],
+    correctAnswer: "cin",
+  },
+  {
+    question: "What is the extension of Java compiled bytecode files?",
+    options: [".java", ".class", ".exe", ".obj"],
+    correctAnswer: ".class",
+  },
+  {
+    question: "Which function is used to get input from user in C?",
+    options: ["input()", "gets()", "scanf()", "cin"],
+    correctAnswer: "scanf()",
+  },
+  {
+    question: "Which keyword is used to stop a loop in Python?",
+    options: ["stop", "exit", "break", "return"],
+    correctAnswer: "break",
+  },
+  {
+    question: `#include <stdio.h>
+int main() {
+  printf("Hello, World!");
+  return 0;
+}`,
+    options: ["Hello, World!", "hello world", "Error", "Nothing"],
+    correctAnswer: "Hello, World!",
+  },
+  {
+    question: "Which concept hides internal details in OOP?",
+    options: ["Polymorphism", "Abstraction", "Encapsulation", "Inheritance"],
+    correctAnswer: "Abstraction",
+  },
+  {
+    question: `x = 10
+y = 20
+print(x + y)`,
+    options: ["30", "1020", "Error", "0"],
+    correctAnswer: "30",
+  },
+  {
+    question: "Which language does not support pointers directly?",
+    options: ["C", "C++", "Java", "Python"],
+    correctAnswer: "Java",
+  }
+];
 
-// // Helper functions
-// const saveResultToLocal = (examName, score, total) => {
-//   const existing = JSON.parse(localStorage.getItem("examHistory")) || [];
-//   const now = new Date().toLocaleString();
-//   const updated = [...existing, { examName, score, total, completedAt: now }];
-//   localStorage.setItem("examHistory", JSON.stringify(updated));
-// };
+const downloadCertificate = () => {
+  const cert = document.getElementById("certificate");
+  
+  cert.style.display = "block"; // temporarily show it for PDF
 
-// const getGrade = (score) => {
-//   if (score >= 27) return "A+";
-//   if (score >= 24) return "A";
-//   if (score >= 21) return "B+";
-//   if (score >= 18) return "B";
-//   if (score >= 15) return "C";
-//   return "F";
-// };
+  const opt = {
+    margin: 0,
+    filename: 'NovaExam_Certificate.pdf',
+    image: { type: 'jpeg', quality: 1 },
+    html2canvas: {
+      scale: 2,
+      useCORS: true,
+      backgroundColor: null
+    },
+    jsPDF: {
+      unit: 'pt',
+      format: 'a4',
+      orientation: 'landscape'
+    }
+  };
 
-// const Programming = () => {
-//   const [currentQ, setCurrentQ] = useState(0);
-//   const [selectedOptions, setSelectedOptions] = useState(Array(questionsData.length).fill(null));
-//   const [timeLeft, setTimeLeft] = useState(900);
-//   const [showResult, setShowResult] = useState(false);
-//   const [score, setScore] = useState(0);
-//   const navigate = useNavigate();
-//   const userName = localStorage.getItem("userName") || "Student";
-//   const examName = "Programming Test";
+  html2pdf().set(opt).from(cert).save().then(() => {
+    cert.style.display = "none"; // hide again after download
+  });
+};
 
-//   useEffect(() => {
-//     if (showResult) return;
-//     const timer = setInterval(() => {
-//       setTimeLeft((prev) => {
-//         if (prev <= 1) {
-//           clearInterval(timer);
-//           calculateResult();
-//           return 0;
-//         }
-//         return prev - 1;
-//       });
-//     }, 1000);
-//     return () => clearInterval(timer);
-//   }, [showResult]);
 
-//   const formatTime = (seconds) => {
-//     const mins = Math.floor(seconds / 60);
-//     const secs = seconds % 60;
-//     return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
-//   };
 
-//   const handleOptionSelect = (option) => {
-//     const updated = [...selectedOptions];
-//     updated[currentQ] = option;
-//     setSelectedOptions(updated);
-//   };
+// Helper functions
+const saveResultToLocal = (examName, score, total) => {
+  const existing = JSON.parse(localStorage.getItem("examHistory")) || [];
+  const now = new Date().toLocaleString();
+  const updated = [...existing, { examName, score, total, completedAt: now }];
+  localStorage.setItem("examHistory", JSON.stringify(updated));
+};
 
-//   const handleNext = () => {
-//     if (currentQ < questionsData.length - 1) {
-//       setCurrentQ(currentQ + 1);
-//       window.scrollTo({ top: 0, behavior: 'smooth' });
-//     } else {
-//       calculateResult();
-//     }
-//   };
+const getGrade = (score) => {
+  if (score >= 27) return "Ex";
+  if (score >= 24) return "A+";
+  if (score >= 21) return "A";
+   if (score >= 18) return "B";
+  if (score >= 15) return "c";
+  if (score >= 10) return "D";
+  return "F";
+};
 
-//   const handlePrevious = () => {
-//     if (currentQ > 0) {
-//       setCurrentQ(currentQ - 1);
-//       window.scrollTo({ top: 0, behavior: 'smooth' });
-//     }
-//   };
+const Programming = () => {
+  const [currentQ, setCurrentQ] = useState(0);
+  const [selectedOptions, setSelectedOptions] = useState(Array(questionsData.length).fill(null));
+  const [timeLeft, setTimeLeft] = useState(900);
+  const [showResult, setShowResult] = useState(false);
+  const [score, setScore] = useState(0);
+  const navigate = useNavigate();
+  const userName = localStorage.getItem("userName") || "Student";
+  const examName = "Programming Test";
 
-//   const calculateResult = () => {
-//     const finalScore = selectedOptions.reduce(
-//       (acc, ans, i) => (ans === questionsData[i].correctAnswer ? acc + 1 : acc),
-//       0
-//     );
-//     setScore(finalScore);
-//     setShowResult(true);
-//     saveResultToLocal(examName, finalScore, questionsData.length);
-//   };
+  useEffect(() => {
+    if (showResult) return;
+    const timer = setInterval(() => {
+      setTimeLeft((prev) => {
+        if (prev <= 1) {
+          clearInterval(timer);
+          calculateResult();
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+    return () => clearInterval(timer);
+  }, [showResult]);
 
-//   const handleResultClose = () => {
-//     navigate('/home');
-//   };
+  const formatTime = (seconds) => {
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+  };
 
-//   const downloadCertificate = () => {
-//     const cert = document.getElementById("certificate");
-//     cert.style.display = "block";
-//     html2pdf().from(cert).save(`${examName}-Certificate.pdf`);
-//     setTimeout(() => {
-//       cert.style.display = "none";
-//     }, 1000);
-//   };
+  const handleOptionSelect = (option) => {
+    const updated = [...selectedOptions];
+    updated[currentQ] = option;
+    setSelectedOptions(updated);
+  };
 
-//   return (
-//     <div className='keyboard'>
-//       <div className="quiz-container">
-//         <span className="quiz-title">
-//           Programming <p className="quiz-subtitle">Test 💁</p>
-//         </span>
-//         <div className="underline3" style={{ width: '405px' }}></div>
-//         <p className="timer">⏳Time Left: {formatTime(timeLeft)} ⏰</p>
+  const handleNext = () => {
+    if (currentQ < questionsData.length - 1) {
+      setCurrentQ(currentQ + 1);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      calculateResult();
+    }
+  };
 
-//         {!showResult && (
-//           <>
-//             <div className="question-block">
-//               <h3>Q{currentQ + 1}. {questionsData[currentQ].question}</h3>
-//               {questionsData[currentQ].options.map((opt, i) => {
-//                 const inputId = `q${currentQ}_opt${i}`;
-//                 return (
-//                   <div key={i} className="option">
-//                     <input
-//                       type="radio"
-//                       id={inputId}
-//                       name={`q${currentQ}`}
-//                       checked={selectedOptions[currentQ] === opt}
-//                       onChange={() => handleOptionSelect(opt)}
-//                     />
-//                     <label htmlFor={inputId}>{opt}</label>
-//                   </div>
-//                 );
-//               })}
-//             </div>
+  const handlePrevious = () => {
+    if (currentQ > 0) {
+      setCurrentQ(currentQ - 1);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
 
-//             <div className="progress-bar">
-//               <div
-//                 className="progress-bar-fill"
-//                 style={{ width: `${((currentQ + 1) / questionsData.length) * 100}%` }}
-//               />
-//             </div>
+  const calculateResult = () => {
+    const finalScore = selectedOptions.reduce(
+      (acc, ans, i) => (ans === questionsData[i].correctAnswer ? acc + 1 : acc),
+      0
+    );
+    setScore(finalScore);
+    setShowResult(true);
+    saveResultToLocal(examName, finalScore, questionsData.length);
+  };
 
-//             <div className="button-group">
-//               <button className="btn prev-btn" onClick={handlePrevious} disabled={currentQ === 0}>
-//                 Previous
-//               </button>
-//               <button
-//                 className="btn next-btn"
-//                 onClick={handleNext}
-//                 disabled={selectedOptions[currentQ] === null}
-//               >
-//                 {currentQ === questionsData.length - 1 ? "Finish" : "Next"}
-//               </button>
-//             </div>
-//           </>
-//         )}
+  const handleResultClose = () => {
+    navigate('/home');
+  };
 
-//         {showResult && (
-//           <div className="result-modal">
-//             <h2>Test Completed! 🎉</h2>
-//             <p>Your Score: <strong>{score} / {questionsData.length}</strong> 👌🏻</p>
-//             <p>Percentage: <strong>{((score / questionsData.length) * 100).toFixed(2)}%</strong> 🔥</p>
-//             <p>Grade: <strong>{getGrade(score)}</strong> 🏅</p>
-//             <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginTop: '20px', alignItems: 'center' }}>
-//               <button className="ok-btn" onClick={handleResultClose} style={{ width: '200px', padding: '10px', fontWeight: '600', borderRadius: '8px', cursor: 'pointer' }}>
-//                 Go To Home
-//               </button>
-//               <button
-//                 className="ok-btn"
-//                 onClick={downloadCertificate}
-//                 style={{
-//                   width: '200px',
-//                   padding: '10px',
-//                   backgroundColor: '#00594c',
-//                   color: 'white',
-//                   fontWeight: '600',
-//                   borderRadius: '8px',
-//                   cursor: 'pointer'
-//                 }}
-//               >
-//                 🎓 Download Your Certificate
-//               </button>
-//             </div>
+  const downloadCertificate = () => {
+    const cert = document.getElementById("certificate");
+    cert.style.display = "block";
+    html2pdf().from(cert).save(`${examName}-Certificate.pdf`);
+    setTimeout(() => {
+      cert.style.display = "none";
+    }, 1000);
+  };
 
-//           </div>
-//         )}
+  return (
+    <div className='keyboard'>
+      <div className="quiz-container">
+        <span className="quiz-title">
+          Programming <p className="quiz-subtitle">Test 💁</p>
+        </span>
+        <div className="underline3" style={{ width: '405px' }}></div>
+        <p className="timer">⏳Time Left: {formatTime(timeLeft)} ⏰</p>
 
-//         <div id="certificate" style={{
-//           width: '800px',
-//           padding: '40px',
-//           border: '10px solid #00594c',
-//           textAlign: 'center',
-//           fontFamily: 'Georgia, serif',
-//           backgroundColor: 'white',
-//           margin: 'auto',
-//           display: 'none'
-//         }}>
-//           <h1 style={{ fontSize: '32px', color: '#00594c', }}>🎓 Certificate of Completion</h1>
-//           <p>This certifies that</p>
-//           <h2>{userName}</h2>
-//           <p>has successfully completed the <strong>{examName}</strong> with a score of</p>
-//           <h3>{score} / {questionsData.length}</h3>
-//           <p>Grade: <strong>{getGrade(score)}</strong></p>
-//           <p>Date: {new Date().toLocaleDateString()}</p>
-//           <div style={{ marginTop: '40px' }}>
-//             <p style={{ fontWeight: 'bold' }}>Akash Maity</p>
-//             <p>Leader, NovaExam</p>
-//           </div>
-//         </div>
-//         {/* end */}
-//       </div>
-//     </div>
-//   );
-// };
+        {!showResult && (
+          <>
+            <div className="question-block">
+              <h3>Q{currentQ + 1}. {questionsData[currentQ].question}</h3>
+              {questionsData[currentQ].options.map((opt, i) => {
+                const inputId = `q${currentQ}_opt${i}`;
+                return (
+                  <div key={i} className="option">
+                    <input
+                      type="radio"
+                      id={inputId}
+                      name={`q${currentQ}`}
+                      checked={selectedOptions[currentQ] === opt}
+                      onChange={() => handleOptionSelect(opt)}
+                    />
+                    <label htmlFor={inputId}>{opt}</label>
+                  </div>
+                );
+              })}
+            </div>
 
-// export default Programming;
+            <div className="progress-bar">
+              <div
+                className="progress-bar-fill"
+                style={{ width: `${((currentQ + 1) / questionsData.length) * 100}%` }}
+              />
+            </div>
+
+            <div className="button-group">
+              <button className="btn prev-btn" onClick={handlePrevious} disabled={currentQ === 0}>
+                Previous
+              </button>
+              <button
+                className="btn next-btn"
+                onClick={handleNext}
+                disabled={selectedOptions[currentQ] === null}
+              >
+                {currentQ === questionsData.length - 1 ? "Finish" : "Next"}
+              </button>
+            </div>
+          </>
+        )}
+
+        {showResult && (
+          <div className="result-modal">
+            <h2>Test Completed! 🎉</h2>
+            <p>Your Score: <strong>{score} / {questionsData.length}</strong> 👌🏻</p>
+            <p>Percentage: <strong>{((score / questionsData.length) * 100).toFixed(2)}%</strong> 🔥</p>
+            <p>Grade: <strong>{getGrade(score)}</strong> 🏅</p>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginTop: '20px', alignItems: 'center' }}>
+              <button className="ok-btn" onClick={handleResultClose} style={{ width: '200px', padding: '10px', fontWeight: '600', borderRadius: '8px', cursor: 'pointer' }}>
+                Go To Home
+              </button>
+              <button
+                className="ok-btn"
+                onClick={downloadCertificate}
+                style={{
+                  width: '200px',
+                  padding: '10px',
+                  backgroundColor: '#00594c',
+                  color: 'white',
+                  fontWeight: '600',
+                  borderRadius: '8px',
+                  cursor: 'pointer'
+                }}
+              >
+                🎓 Download Your Certificate
+              </button>
+            </div>
+
+          </div>
+        )}
+
+
+        {/* start */}
+<div id="certificate" style={{
+display: 'none',
+    width: '660px',
+    height: '440px',
+    margin: '30px auto',
+    border: '8px double #00594c',
+    padding: '40px',
+    textAlign: 'center',
+    fontFamily: 'Georgia, serif',
+    position: 'relative',
+    backgroundColor: '#f9fdfc'  
+}}>
+
+  {/* NovaExam Title */}
+ <div style={{
+  display: 'flex',
+  justifyContent: 'space-between',
+  alignItems: 'center',
+  padding: '10px 40px 0',
+  borderBottom: '2px solid #ccc',
+}}>
+  {/* Left: NovaExam with subtitle */}
+  <div>
+    <h1 style={{
+      margin: '0',
+      fontSize: '36px',
+      fontFamily: 'Poppins, sans-serif',
+      fontWeight: 'bold'
+    }}>
+      <span style={{ color: '#00b386' }}>Nova</span>
+      <span style={{ color: 'rgba(2, 113, 97, 0.9)' }}>Exam</span>
+    </h1>
+    <p style={{
+      margin: '0',
+      fontSize: '16px',
+      color: '#333',
+      fontFamily: 'Georgia, serif'
+    }}>
+      Certificate of Achievement
+    </p>
+  </div>
+
+  {/* Logo image */}
+  <img
+    src="/images/main.png"
+    alt="NovaExam Seal"
+    style={{
+      width: '80px',
+      height: '80px',
+      objectFit: 'contain'
+    }}
+  />
+</div>
+
+  <p style={{ fontSize: '16px',paddingTop:'4vh'}}>This is proudly presented to</p>
+   <h1 style={{
+    fontSize: '32px',
+    color: '#00594c',
+    margin: '10px 0 30px',
+    fontWeight: 'bold',
+    textTransform: 'uppercase'
+  }}>
+    {userName}
+  </h1>
+
+  <p style={{ fontSize: '17px', margin: '10px 0' }}>
+    For successfully completing the <strong>{examName}</strong> exam
+  </p>
+
+  <p style={{ fontSize: '16px' }}>Grade: <strong>{getGrade(score)}</strong></p>
+
+  {/* Signature + Date Row */}
+  <div style={{
+    position: 'absolute',
+    bottom: '40px',
+    left: '50px',
+    right: '50px',
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center'
+  }}>
+    <div style={{ textAlign: 'left' }}>
+      <p style={{  fontSize: '32px', marginBottom: '1px',fontFamily:'Brush Script MT',marginLeft:'40px' }}>Akash Maity</p>
+      <p style={{color:"black",marginTop:'-2vh'}}>_____________________</p>
+      <p style={{ fontSize: '13px' }}>Founder & Project Head, NovaExam</p>
+    </div>
+    <div style={{marginLeft:'-14vh'}}>
+        <img src="/images/QR.png" alt="" srcset="" />
+    </div>
+    <div style={{ textAlign: 'right', fontSize: '13px' }}>
+      Date: {new Date().toLocaleDateString()}
+    </div>
+  </div>
+</div>
+
+
+
+
+        {/* end */}
+      </div>
+    </div>
+  );
+};
+
+export default Programming;

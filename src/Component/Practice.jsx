@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Practice.css';
+// mongodb for vsCode
 
-// ✅ Save result to localStorage
 const saveResultToLocal = (examName, score, total) => {
   const existing = JSON.parse(localStorage.getItem("examHistory")) || [];
   const now = new Date().toLocaleString();
