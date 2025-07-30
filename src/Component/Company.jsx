@@ -1,4 +1,3 @@
-
 import { useNavigate } from 'react-router-dom';
 import './Company.css';
 
@@ -16,7 +15,9 @@ const Company = () => {
             Welcome to NOVA EXAM, the innovative remote proctoring solution that’s transforming the way online exams are conducted. <br />
             Our mission is to provide the most secure, efficient, and cost-effective solution to educational institutions and corporations across the world.
           </p>
-          <button className="btn">OUR MISSION</button>
+          <div style={{paddingTop:"15px",marginLeft:"15px"}}>
+          <button style={{width:"20vh",height:"5vh",background:"#4078f1ff",color:"#fff",border:"none",fontWeight:"bold",}}>OUR MISSION</button>
+          </div>
         </div>
       </section>
 
@@ -46,7 +47,9 @@ const Company = () => {
             Our mission is to empower educational institutions and corporations with advanced technology to conduct online exams with confidence. <br />
             We are committed to security, reliability, and accessibility — delivering custom solutions tailored to our clients' unique needs.
           </p>
-          <button className="btn">OUR MISSION</button>
+          <div style={{paddingTop:"15px",marginLeft:"15px"}}>
+          <button style={{width:"20vh",height:"5vh",background:"#4078f1ff",color:"#fff",border:"none",fontWeight:"bold",}}>OUR MISSION</button>
+          </div>
         </div>
       </section>
 
@@ -59,7 +62,9 @@ const Company = () => {
             We blend expertise in software development, security, and education to build an innovative and effective platform. <br />
             We collaborate closely with clients to understand their needs and deliver customized solutions — always striving to stay ahead in technology and security.
           </p>
-          <button className="btn">TEAM</button>
+            <div style={{paddingTop:"15px",marginLeft:"15px"}}>
+          <button style={{width:"20vh",height:"5vh",background:"#4078f1ff",color:"#fff",border:"none",fontWeight:"bold",}}>TEAM</button>
+        </div>
         </div>
         <div className="image">
           <img src="/images/our team.jpg" alt="Our Team" />
@@ -75,7 +80,9 @@ const Company = () => {
             We use advanced AI algorithms to detect and prevent cheating and train proctors to monitor suspicious behavior. <br />
             Our platform incorporates features like two-factor authentication and data encryption to ensure security and protect client data.
           </p>
-          <button className="btn">COMMITMENT</button>
+            <div style={{paddingTop:"15px",marginLeft:"15px"}}>
+          <button style={{width:"20vh",height:"5vh",background:"#4078f1ff",color:"#fff",border:"none",fontWeight:"bold",}}>COMMITMENT</button>
+          </div>
         </div>
         <div className="image">
           <img src="/images/security.jpg" alt="Security" />
@@ -93,5 +100,4 @@ const Company = () => {
   );
 };
 
-
-export default Company
+export default Company;

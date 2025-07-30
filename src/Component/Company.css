@@ -1,136 +1,70 @@
-.contact-page {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
-.body{
-    background-color: white;
-}
-.contact-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 60px 80px;
-  background-color: #e4f8f1;
-}
-
-.contact-text {
-  flex: 1;
+/* General layout */
+.company-page {
+  font-family: 'Futura', sans-serif;
+  background-color: #fff;
   padding: 0;
   margin: 0;
-  margin-top: -200px;
 }
 
-.contact-text h1 {
-  font-size: 52px;
-  margin-bottom: 15px;
-  color: #3258d2;
-  font-family: futura,sans-serif;
-  
-} 
-
-.contact-text p {
-    font-family: futura, sans-serif;
-  font-size: 16px;
-  color: #1b1b1b;
-}
-
-.contact-image {
-  flex: 1;
+.section {
   display: flex;
-  justify-content: center;
-}
-
-.contact-image img {
-  max-width: 100%;
-  height: auto;
-  border-radius: 10px;
-}
-
-.contact-cards {
-  display: flex;
-  justify-content: center;
-  padding: 40px 80px;
-  gap: 40px;
   flex-wrap: wrap;
-  background-color: #ffffff;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 80px;
+  gap: 40px;
 }
 
-.contact-card {
-  background: #f9f9f9;
-  padding: 30px;
-  width: 320px;
-  border-radius: 10px;
-  text-align: center;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+.section:nth-child(even) {
+  background-color: #f4f8fb;
 }
 
-.icon {
-  font-size: 30px;
-  margin-bottom: 15px;
+/* Image styles */
+.section .image {
+  flex: 1;
+  max-width: 500px;
 }
 
-.email-link {
-  display: inline-block;
-  margin-top: 10px;
-  color: #4198ef;
-  text-decoration: none;
-  font-weight: bold;
-  text-decoration: none;
-}
-.email-link:hover {
-  text-decoration: underline;
-  color: blue;
-}
-
-.support-btn {
-  display: inline-block;
-  margin-top: 15px;
-  padding: 10px 20px;
-  background-color: #e3dcd9;
-  color: rgb(137, 161, 242);
-  border-radius: 6px;
-  text-decoration: none;
-  font-weight: 600;
-  border: 2px solid gray;
-  transition: background-color 0.3s ease;
-}
-
-
-
-.footer-blackbox {
-  background-color: #1a1a1a;
-  padding: 20px 0;
-  
-  color: white;
-  font-size: 14px;
-  margin-top: auto;
-  position: relative;
-  bottom: 0;
+.section .image img {
   width: 100%;
+  border-radius: 10px;
+ 
 }
 
-/* button design*/
-.home-btn {
-  background: linear-gradient(135deg, #4c6baf, #2d3fa9);
-  border: none;
-  color: white;
-  padding: 12px 28px;
-  font-size: 18px;
-  font-weight: 600;
-  border-radius: 8px;
-  cursor: pointer;
-  box-shadow: 0 6px 12px rgba(72, 157, 58, 0.5);
-  transition: background 0.3s ease, transform 0.2s ease;
+/* Text styles */
+.section .content {
+  flex: 1;
+  max-width: 600px;
 }
 
-.home-btn:hover {
+.section .content h1 {
+  font-size: 36px;
+  color: #2a9974;
+  margin-bottom: 20px;
+  font-family: "poppins";
+}
+
+.section .content p {
+  font-size: 16px;
+  line-height: 1.8;
+  color: #333;
+}
+
+
+
+.btn:hover {
   background: linear-gradient(135deg, #17039a, #064fbe);
   transform: translateY(-2px);
-  box-shadow: 0 8px 16px rgba(72, 157, 58, 0.7);
+  box-shadow: 0 8px 16px rgba(72, 157, 58, 0.4);
 }
 
-.home-btn:active {
-  transform: translateY(1px);
-  box-shadow: 0 4px 8px rgba(72, 157, 58, 0.4);
+/* Thank you footer */
+.thankyou {
+  text-align: center;
+  padding: 60px 30px;
+  background-color: #e6efff;
+  color: #002b64;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.6;
 }
