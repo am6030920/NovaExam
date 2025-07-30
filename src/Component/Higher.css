@@ -1,0 +1,100 @@
+.higher-education {
+  font-family: Poppins;
+  color: #333;
+  line-height: 1.6;
+  background-color: #fff;
+}
+
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.hero {
+  background-color: #b2e7a2;
+  color: #fff;
+  padding: 4rem 1rem;
+  text-align: center;
+}
+
+.hero h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.hero p {
+  font-size: 1.25rem;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+/* Section Base */
+.section {
+  padding: 3rem 1rem;
+}
+
+.section h2 {
+  font-size: 2rem;
+  color: #b7f8aa;
+  margin-bottom: 1rem;
+}
+
+.section ul {
+  padding-left: 1.5rem;
+  list-style-type: disc;
+  margin-top: 1rem;
+}
+
+.section li {
+  margin-bottom: 0.5rem;
+}
+
+/* CTA Section */
+.cta {
+  background-color: #baf08d;
+  color: #363434;
+  text-align: center;
+  padding: 4rem 1rem;
+}
+
+.cta h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.cta-button {
+  background-color: #fff;
+  color: #003366;
+  border: none;
+  padding: 0.75rem 2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.cta-button:hover {
+  background-color: #2c2b2b;
+}
+
+/* Responsive Adjustments */
+@media (min-width: 768px) {
+  .hero h1 {
+    font-size: 3rem;
+  }
+
+  .hero p {
+    font-size: 1.5rem;
+  }
+
+  .section h2 {
+    font-size: 2.25rem;
+  }
+
+  .cta h2 {
+    font-size: 2.5rem;
+  }
+}
