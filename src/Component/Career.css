@@ -52,7 +52,8 @@
   box-shadow: 0 4px 12px rgba(0, 89, 76, 0.3);
 }
 
-.what-we-do-section {
+.what-we-do-section
+ {
   display: flex;
   justify-content: center;
   align-items: stretch;
