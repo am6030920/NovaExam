@@ -1,33 +1,51 @@
-import { useNavigate } from "react-router-dom";
+// import React from 'react';
+// import './Certificate.css';
 
-const Certificate = () => {
-  const navigate = useNavigate(); 
+// const Certificate = ({ name, score, date }) => {
+//   // Handle fallback/defaults
+//   const finalName = name || "Student Name";
+//   const finalScore = score !== undefined ? score : 0;
+//   const finalDate = date || new Date().toLocaleDateString("en-IN", {
+//     day: "numeric",
+//     month: "long",
+//     year: "numeric",
+//   });
 
-  return (
-  <div id="certificate" style={{
-          width: '800px',
-          padding: '40px',
-          border: '10px solid #00594c',
-          textAlign: 'center',
-          fontFamily: 'Georgia, serif',
-          backgroundColor: 'white',
-          margin: 'auto',
-          display: 'none'
-        }}>
-          <h1 style={{ fontSize: '32px', color: '#00594c', }}>🎓 Certificate of Completion</h1>
-          <p>This certifies that</p>
-          <h2>{userName}</h2>
-          <p>has successfully completed the <strong>{examName}</strong> with a score of</p>
-          <h3>{score} / {questionsData.length}</h3>
-          <p>Grade: <strong>{getGrade(score)}</strong></p>
-          <p>Date: {new Date().toLocaleDateString()}</p>
-          <div style={{ marginTop: '40px' }}>
-            <p style={{ fontWeight: 'bold' }}>Akash Maity</p>
-            <p>Founder & Project Head, NovaExam</p>
-            {/* https://www.camonk.com/s/courses/646b3eaee4b0e1d9e7733f52/images/3a6ZYsamplecertificate.jpg */}
-          </div>
-        </div>
-  );
-};
+//   // Grade logic based on score
+//   const grade =
+//     finalScore >= 27
+//       ? "A+"
+//       : finalScore >= 21
+//       ? "A"
+//       : finalScore >= 15
+//       ? "B"
+//       : "C";
 
-export default Certificate;
+//   return (
+//     <div className="certificate-container">
+//       <div className="certificate">
+//         <img className="logo" src="/images/novaexam-logo.png" alt="NovaExam Logo" />
+//         <h1 className="certificate-title">Certificate of Completion</h1>
+//         <p className="description">This is to certify that</p>
+//         <h2 className="student-name">{finalName}</h2>
+//         <p className="description">
+//           has successfully completed the <strong>Online Assessment</strong> on NovaExam
+//         </p>
+//         <p className="details">
+//           Score: <strong>{finalScore}/30</strong> &nbsp; | &nbsp; Grade: <strong>{grade}</strong>
+//         </p>
+//         <p className="date">Date: {finalDate}</p>
+
+//         <div className="signature-section">
+//           <div className="sign-box">
+//             <p className="sign-line">__________________</p>
+//             <p className="sign-name">Akash Maity</p>
+//             <p className="sign-role">Founder & Project Head,<br />NovaExam</p>
+//           </div>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default Certificate;

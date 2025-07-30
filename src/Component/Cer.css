@@ -1,0 +1,84 @@
+    /* .certificate-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #e4eaf5;
+  padding: 50px;
+  min-height: 100vh;
+}
+
+.certificate {
+  width: 1000px;
+  padding: 60px;
+  border: 12px solid #2c3e50;
+  background-color: #fff;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  font-family: 'Georgia', serif;
+  position: relative;
+}
+
+.logo {
+  width: 120px;
+  margin-bottom: 20px;
+}
+
+.certificate-title {
+  font-size: 42px;
+  font-weight: bold;
+  color: #2c3e50;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+}
+
+.description {
+  font-size: 20px;
+  color: #444;
+  margin: 10px 0;
+}
+
+.student-name {
+  font-size: 32px;
+  font-weight: bold;
+  color: #000;
+  margin: 15px 0;
+}
+
+.details {
+  font-size: 18px;
+  margin: 25px 0;
+  color: #333;
+}
+
+.date {
+  font-size: 16px;
+  margin: 15px 0;
+  color: #222;
+}
+
+.signature-section {
+  margin-top: 50px;
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 80px;
+}
+
+.sign-box {
+  text-align: center;
+}
+
+.sign-line {
+  font-size: 16px;
+}
+
+.sign-name {
+  font-weight: bold;
+  font-size: 18px;
+  margin-top: 5px;
+}
+
+.sign-role {
+  font-size: 14px;
+  color: #444;
+  margin-top: 2px;
+} */

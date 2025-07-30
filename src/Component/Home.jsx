@@ -50,13 +50,13 @@ function Home() {
       <option value="/Trivia">Trivia Exam</option>
       <option value="/Ml">Machine Learning Test</option>
     </select>
-      <select defaultValue="" required className="custom-select">
+     <select defaultValue="" required className="custom-select" onChange={handleExamNavigation}>
       <option value="" disabled>Industry</option>
-      <option value="higher">Higher Education</option>
-      <option value="school">College-Level</option>
-      <option value="edtech">Competitive Prep</option>
-      <option value="training">IT Training</option>
-      <option value="testprep">GK & Current Affairs</option>
+      <option value="/Higher">Higher Education</option>
+      <option value="/College">College-Level</option>
+      <option value="/Competitive">Competitive Prep</option>
+      <option value="/It">IT Training</option>
+      <option value="/Genaral">GK & Current Affairs</option>
     </select>
     <select defaultValue="" required className="custom-select" onChange={handleAboutChange}>
       <option value="" disabled>About Us</option>
