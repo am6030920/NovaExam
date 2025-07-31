@@ -3,206 +3,159 @@ import { useNavigate } from 'react-router-dom';
 import './Programming.css';
 import html2pdf from 'html2pdf.js';
 
-// ✅ Questions data moved to top
 const questionsData = [
   {
-    question: "Which keyword is used to define a class in Java?",
-    options: ["class", "Object", "def", "structure"],
-    correctAnswer: "class",
+    question: "What will be the output of the following C code?\n\nint x = 10;\nprintf(\"%d\", x++ + ++x);",
+    options: ["21", "22", "20", "Undefined Behavior"],
+    correct: "Undefined Behavior"
   },
   {
-    question: "Which of the following is not a Java primitive type?",
-    options: ["int", "float", "String", "char"],
-    correctAnswer: "String",
+    question: "In Python, what does this code return?\n\nprint([i for i in range(3)] == list(map(lambda x: x, range(3))))",
+    options: ["True", "False", "Error", "None"],
+    correct: "True"
   },
   {
-    question: `#include <iostream>
-using namespace std;
-int main() {
-  int a = 5, b = 10;
-  cout << a + b;
-  return 0;
-}`,
-    options: ["15", "510", "5 + 10", "Error"],
-    correctAnswer: "15",
+    question: "Which data structure is best for implementing recursion internally?",
+    options: ["Queue", "Stack", "Linked List", "Heap"],
+    correct: "Stack"
   },
   {
-    question: "Which method is used to start a thread in Java?",
-    options: ["start()", "run()", "init()", "main()"],
-    correctAnswer: "start()",
+    question: "What does this Java code print?\n\nSystem.out.println(3 + 4 + \"Java\" + 5 + 6);",
+    options: ["7Java56", "Java3456", "Java7", "34Java56"],
+    correct: "7Java56"
   },
   {
-    question: `#include <stdio.h>
-int main() {
-  int a = 5;
-  int *p = &a;
-  *p += 2;
-  printf("%d", a);
-  return 0;
-}`,
-    options: ["5", "2", "7", "Garbage value"],
-    correctAnswer: "7",
+    question: "In C++, what does `delete[]` operator do?",
+    options: ["Deletes a single object", "Deletes an array", "Deletes pointer only", "None"],
+    correct: "Deletes an array"
   },
   {
-    question: `What is the output of printf("%d", 10+20);?`,
-    options: ["10", "20", "30", "Error"],
-    correctAnswer: "30",
+    question: "What does the following Python code output?\n\na = [1, 2, 3]\nb = a\nb.append(4)\nprint(a)",
+    options: ["[1, 2, 3]", "[1, 2, 3, 4]", "[4]", "Error"],
+    correct: "[1, 2, 3, 4]"
   },
   {
-    question: "Which of the following is used to comment a single line in C?",
-    options: ["//", "#", "/* */", "--"],
-    correctAnswer: "//",
+    question: "Which sorting algorithm has the best average-case complexity?",
+    options: ["Bubble Sort", "Merge Sort", "Selection Sort", "Insertion Sort"],
+    correct: "Merge Sort"
   },
   {
-    question: "Which data type is used to store decimal numbers in C?",
-    options: ["int", "float", "char", "bool"],
-    correctAnswer: "float",
+    question: "What does the following C++ code print?\n\nint a = 5;\ncout << (++a) * (a++);",
+    options: ["36", "30", "35", "Undefined Behavior"],
+    correct: "36"
   },
   {
-    question: `#include <stdio.h>
-int main() {
-  int a = 10;
-  if (a = 0)
-    printf("Zero");
-  else
-    printf("Non-zero");
-  return 0;
-}`,
-    options: ["Zero", "Non-zero", "Error", "Nothing"],
-    correctAnswer: "Non-zero",
+    question: "What is the output of this JavaScript code?\n\nconsole.log(typeof null);",
+    options: ["null", "object", "undefined", "number"],
+    correct: "object"
   },
   {
-    question: "Which header file is used for input/output in C?",
-    options: ["conio.h", "stdlib.h", "stdio.h", "io.h"],
-    correctAnswer: "stdio.h",
+    question: "Which language uses indentation as part of its syntax?",
+    options: ["C", "Java", "Python", "JavaScript"],
+    correct: "Python"
   },
   {
-    question: "C++ is an extension of which language?",
-    options: ["C", "Java", "Python", "HTML"],
-    correctAnswer: "C",
+    question: "Which one is used to prevent race condition in a multithreading environment?",
+    options: ["Mutex", "Semaphore", "Lock", "All of the above"],
+    correct: "All of the above"
   },
   {
-    question: "Which concept allows the use of the same function name with different parameters?",
-    options: ["Inheritance", "Polymorphism", "Encapsulation", "Overloading"],
-    correctAnswer: "Overloading",
+    question: "What is tail recursion?",
+    options: ["Recursion with return", "Function calls itself at the end", "Function ends early", "Infinite recursion"],
+    correct: "Function calls itself at the end"
   },
   {
-    question: `public class Test {
-  public static void main(String[] args) {
-    int a = 5;
-    System.out.println(a++ + ++a);
-  }
-}`,
-    options: ["11", "12", "10", "Error"],
-    correctAnswer: "12",
+    question: "What will be the result of:\n\nx = lambda a: a + 10\nprint(x(5))",
+    options: ["15", "5", "10", "Error"],
+    correct: "15"
   },
   {
-    question: "Which operator is used to access class members in C++?",
-    options: [".", "::", ":", "#"],
-    correctAnswer: ".",
+    question: "Which of the following is true about linked lists?",
+    options: ["Random access is possible", "More memory efficient than arrays", "Insertion is costly", "Fixed size"],
+    correct: "More memory efficient than arrays"
   },
   {
-    question: `public class Test {
-  public static void main(String[] args) {
-    try {
-      int a = 5 / 0;
-    } catch (ArithmeticException e) {
-      System.out.println("Exception");
-    }
-  }
-}`,
-    options: ["Exception", "Error", "RuntimeException", "Nothing"],
-    correctAnswer: "Exception",
+    question: "Which of these is NOT a valid OOP principle?",
+    options: ["Abstraction", "Polymorphism", "Encapsulation", "Iteration"],
+    correct: "Iteration"
   },
   {
-    question: `for i in range(3):
-    print(i)
-else:
-    print("Done")`,
-    options: ["0 1 2", "0 1 2 Done", "Done", "Error"],
-    correctAnswer: "0\n1\n2\nDone",
+    question: "Which of the following will execute first in JavaScript?",
+    options: ["setTimeout(..., 0)", "Promise.resolve(...).then(...)", "console.log()", "async/await"],
+    correct: "console.log()"
   },
   {
-    question: "How do you start a comment in Python?",
-    options: ["//", "#", "<!--", "/*"],
-    correctAnswer: "#",
+    question: "Which of these is a disadvantage of recursion?",
+    options: ["Easy to debug", "Uses stack memory", "Faster than iteration", "Memory efficient"],
+    correct: "Uses stack memory"
   },
   {
-    question: "Which of these is a valid Python data type?",
-    options: ["number", "integer", "int", "decimal"],
-    correctAnswer: "int",
+    question: "Which function checks if a string contains only digits in Python?",
+    options: ["isdigit()", "isnumeric()", "isalnum()", "isint()"],
+    correct: "isdigit()"
   },
   {
-    question: "What will print(type([])) output?",
-    options: ["<class 'list'>", "<type 'list'>", "list", "<class>"],
-    correctAnswer: "<class 'list'>",
+    question: "What will be the output?\n\narr = [1, 2, 3]\nprint(arr * 2)",
+    options: ["[1, 2, 3, 1, 2, 3]", "[2, 4, 6]", "[1, 4, 9]", "Error"],
+    correct: "[1, 2, 3, 1, 2, 3]"
   },
   {
-    question: "How do you define a variable in Python?",
-    options: ["int x = 5", "x = 5", "var x = 5", "define x = 5"],
-    correctAnswer: "x = 5",
+    question: "In C, what is the size of 'int' on a 64-bit system usually?",
+    options: ["4 bytes", "2 bytes", "8 bytes", "Depends on compiler"],
+    correct: "4 bytes"
   },
   {
-    question: "Which language is known for its simplicity and indentation rules?",
-    options: ["C", "C++", "Java", "Python"],
-    correctAnswer: "Python",
+    question: "Which of the following is NOT a feature of Java?",
+    options: ["Object-Oriented", "Platform Independent", "Pointer Support", "Garbage Collection"],
+    correct: "Pointer Support"
   },
   {
-    question: `public class Test {
-  public static void main(String[] args) {
-    System.out.println(10 + 20 + "Hello" + 10 + 20);
-  }
-}`,
-    options: ["30Hello30", "30Hello1020", "Hello1020", "Error"],
-    correctAnswer: "30Hello1020",
+    question: "Which one is an immutable data type in Python?",
+    options: ["List", "Dictionary", "Tuple", "Set"],
+    correct: "Tuple"
   },
   {
-    question: "Which of the following is used to take input in C++?",
-    options: ["cin", "cout", "input()", "scanf"],
-    correctAnswer: "cin",
+    question: "What does the following code return?\n\nlist1 = [1, 2, 3]\nlist2 = list1\nlist1[0] = 100\nprint(list2[0])",
+    options: ["100", "1", "Error", "None"],
+    correct: "100"
   },
   {
-    question: "What is the extension of Java compiled bytecode files?",
-    options: [".java", ".class", ".exe", ".obj"],
-    correctAnswer: ".class",
+    question: "Which loop is best when the number of iterations is unknown?",
+    options: ["for", "while", "do-while", "switch"],
+    correct: "while"
   },
   {
-    question: "Which function is used to get input from user in C?",
-    options: ["input()", "gets()", "scanf()", "cin"],
-    correctAnswer: "scanf()",
+    question: "Which of the following best describes a hash table?",
+    options: ["Sequential storage", "Key-value store", "LIFO", "FIFO"],
+    correct: "Key-value store"
   },
   {
-    question: "Which keyword is used to stop a loop in Python?",
-    options: ["stop", "exit", "break", "return"],
-    correctAnswer: "break",
+    question: "Which keyword is used to inherit a class in C++?",
+    options: ["extends", "implements", "inherits", "public"],
+    correct: "public"
   },
   {
-    question: `#include <stdio.h>
-int main() {
-  printf("Hello, World!");
-  return 0;
-}`,
-    options: ["Hello, World!", "hello world", "Error", "Nothing"],
-    correctAnswer: "Hello, World!",
+    question: "What is the output?\n\ns = set([1, 2, 3, 2, 1])\nprint(len(s))",
+    options: ["5", "3", "4", "2"],
+    correct: "3"
   },
   {
-    question: "Which concept hides internal details in OOP?",
-    options: ["Polymorphism", "Abstraction", "Encapsulation", "Inheritance"],
-    correctAnswer: "Abstraction",
+    question: "Which of these sorting algorithms is not stable?",
+    options: ["Merge Sort", "Bubble Sort", "Selection Sort", "Insertion Sort"],
+    correct: "Selection Sort"
   },
   {
-    question: `x = 10
-y = 20
-print(x + y)`,
-    options: ["30", "1020", "Error", "0"],
-    correctAnswer: "30",
+    question: "Which data structure is used for implementing BFS?",
+    options: ["Stack", "Queue", "Heap", "Array"],
+    correct: "Queue"
   },
   {
-    question: "Which language does not support pointers directly?",
-    options: ["C", "C++", "Java", "Python"],
-    correctAnswer: "Java",
+    question: "Which of the following is used to handle exceptions in Python?",
+    options: ["try-catch", "try-finally", "try-except", "catch-finally"],
+    correct: "try-except"
   }
 ];
+
 
 const downloadCertificate = () => {
   const cert = document.getElementById("certificate");

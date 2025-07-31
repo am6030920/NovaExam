@@ -11,6 +11,7 @@ const features = [
   { src: 'https://cdn-icons-png.flaticon.com/512/3214/3214744.png', alt: 'Secure Browser', title: ['Secure', 'Browser'] },
 ];
 
+
 const Welcome = () => {
   return (
     <div className='welcome-container'>
@@ -62,11 +63,11 @@ const Welcome = () => {
 
       <section className="section">
         <h2>Complete Online Exam Management Lifecycle Built-in a Single Software🧑‍💻</h2>
-        <div className="underline"></div>
+        <div className="underline" style={{width:'130vh'}}></div>
 
-        <div className="cards1">
-          <div className="card1">
-            <img className='image' src="https://c8.alamy.com/comp/2AXT9E6/exam-test-knowledge-icon-vector-isolated-contour-symbol-illustration-2AXT9E6.jpg" alt="Pre Exams Icon" />
+        <div className="cards12">
+          <div className="card12">
+            <img  src="https://c8.alamy.com/comp/2AXT9E6/exam-test-knowledge-icon-vector-isolated-contour-symbol-illustration-2AXT9E6.jpg" alt="Pre Exams Icon" />
             <h3>Pre-Exams</h3>
             <ul>
               <li>Create And Schedule Exams</li>
@@ -74,8 +75,8 @@ const Welcome = () => {
               <li>Setup Evaluation Rules</li>
             </ul>
           </div>
-          <div className="card1">
-            <img className='image' src="https://c8.alamy.com/comp/2AKEJJN/student-stress-exam-preparation-icon-cartoon-of-student-stress-exam-preparation-vector-icon-for-web-design-isolated-on-white-background-2AKEJJN.jpg" alt="During Exams Icon" />
+          <div className="card12">
+            <img  src="https://c8.alamy.com/comp/2AKEJJN/student-stress-exam-preparation-icon-cartoon-of-student-stress-exam-preparation-vector-icon-for-web-design-isolated-on-white-background-2AKEJJN.jpg" alt="During Exams Icon" />
             <h3>During Exams</h3>
             <ul>
               <li>Conduct Exams Digitally</li>
@@ -83,8 +84,8 @@ const Welcome = () => {
               <li>Generate Student’s Credibility Reports</li>
             </ul>
           </div>
-          <div className="card1">
-            <img className='image' src="https://5.imimg.com/data5/SELLER/Default/2023/5/309686756/UY/ZB/SO/8675179/online-exam-software-service-provider.png" alt="Post Exams Icon" />
+          <div className="card12">
+            <img src="https://5.imimg.com/data5/SELLER/Default/2023/5/309686756/UY/ZB/SO/8675179/online-exam-software-service-provider.png" alt="Post Exams Icon" />
             <h3>Post-Exams</h3>
             <ul>
               <li>Assign Answer-Sheets To Evaluators</li>

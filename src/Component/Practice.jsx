@@ -1,17 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Practice.css';
-// mongodb for vsCode
-
-const saveResultToLocal = (examName, score, total) => {
-  const existing = JSON.parse(localStorage.getItem("examHistory")) || [];
-  const now = new Date().toLocaleString();
-  const updated = [
-    ...existing,
-    { examName, score, total, completedAt: now }
-  ];
-  localStorage.setItem("examHistory", JSON.stringify(updated));
-};
+import html2pdf from 'html2pdf.js';
 
 const questionsData = [
 {
@@ -166,14 +156,34 @@ const questionsData = [
   }
 ];
 
+
+
+const saveResultToLocal = (examName, score, total) => {
+  const existing = JSON.parse(localStorage.getItem("examHistory")) || [];
+  const now = new Date().toLocaleString();
+  const updated = [...existing, { examName, score, total, completedAt: now }];
+  localStorage.setItem("examHistory", JSON.stringify(updated));
+};
+
+const getGrade = (score) => {
+  if (score >= 27) return "Ex";
+  if (score >= 24) return "A+";
+  if (score >= 21) return "A";
+  if (score >= 18) return "B";
+  if (score >= 15) return "C";
+  if (score >= 10) return "D";
+  return "F";
+};
+
 const Practice = () => {
   const [currentQ, setCurrentQ] = useState(0);
   const [selectedOptions, setSelectedOptions] = useState(Array(questionsData.length).fill(null));
-  const [timeLeft, setTimeLeft] = useState(900); // 15 minutes
+  const [timeLeft, setTimeLeft] = useState(900); // 15 minutes in seconds
   const [showResult, setShowResult] = useState(false);
   const [score, setScore] = useState(0);
   const navigate = useNavigate();
-
+  const userName = localStorage.getItem("userName") || "Student";
+  const examName = "Timed Quiz Test";
 
   useEffect(() => {
     if (showResult) return;
@@ -190,7 +200,6 @@ const Practice = () => {
     return () => clearInterval(timer);
   }, [showResult]);
 
-  // ⏳ Format time MM:SS
   const formatTime = (seconds) => {
     const mins = Math.floor(seconds / 60);
     const secs = seconds % 60;
@@ -220,17 +229,37 @@ const Practice = () => {
   };
 
   const calculateResult = () => {
-    const finalScore = selectedOptions.reduce(
-      (acc, ans, i) => (ans === questionsData[i].correctAnswer ? acc + 1 : acc),
-      0
-    );
+    let finalScore = 0;
+    selectedOptions.forEach((ans, i) => {
+      const correct = questionsData[i].correctAnswer;
+      if (Array.isArray(correct)) {
+        if (correct.includes(ans)) finalScore++;
+      } else {
+        if (ans === correct) finalScore++;
+      }
+    });
     setScore(finalScore);
     setShowResult(true);
-    saveResultToLocal("Practice Test", finalScore, questionsData.length);
+    saveResultToLocal(examName, finalScore, questionsData.length);
   };
 
   const handleResultClose = () => {
     navigate('/home');
+  };
+
+  const downloadCertificate = () => {
+    const cert = document.getElementById("certificate");
+    cert.style.display = "block"; // Show certificate to convert
+    const opt = {
+      margin: 0,
+      filename: `${examName}-Certificate.pdf`,
+      image: { type: 'jpeg', quality: 1 },
+      html2canvas: { scale: 2, useCORS: true, backgroundColor: null },
+      jsPDF: { unit: 'pt', format: 'a4', orientation: 'landscape' },
+    };
+    html2pdf().set(opt).from(cert).save().then(() => {
+      cert.style.display = "none";
+    });
   };
 
   return (
@@ -240,7 +269,7 @@ const Practice = () => {
           Practice<p className="quiz-subtitle">Test📈</p>
         </span>
         <div className="underline3" style={{ width: '405px' }}></div>
-        <p className="timer">⏳Time Left: {formatTime(timeLeft)}⏰</p>
+        <p className="timer">⏳Time Left: {formatTime(timeLeft)} ⏰</p>
 
         {!showResult && (
           <>
@@ -263,22 +292,15 @@ const Practice = () => {
               })}
             </div>
 
-            {/* Progress Bar */}
-            <div className="progress-bar" aria-label="Question progress">
+            <div className="progress-bar">
               <div
                 className="progress-bar-fill"
-                style={{
-                  width: `${((currentQ + 1) / questionsData.length) * 100}%`
-                }}
+                style={{ width: `${((currentQ + 1) / questionsData.length) * 100}%` }}
               />
             </div>
 
             <div className="button-group">
-              <button
-                className="btn prev-btn"
-                onClick={handlePrevious}
-                disabled={currentQ === 0}
-              >
+              <button className="btn prev-btn" onClick={handlePrevious} disabled={currentQ === 0}>
                 Previous
               </button>
               <button
@@ -294,12 +316,126 @@ const Practice = () => {
 
         {showResult && (
           <div className="result-modal">
-            <h2>Test Completed!🎉</h2>
-            <p>Your Score: <strong>{score} / {questionsData.length}</strong>👌🏻</p>
-            <p>Percentage: <strong>{((score / questionsData.length) * 100).toFixed(2)}%</strong>🔥</p>
-            <button className="ok-btn" onClick={handleResultClose}>Go To Home</button>
+            <h2>Test Completed! 🎉</h2>
+            <p>Your Score: <strong>{score} / {questionsData.length}</strong> 👌🏻</p>
+            <p>Percentage: <strong>{((score / questionsData.length) * 100).toFixed(2)}%</strong> 🔥</p>
+            <p>Grade: <strong>{getGrade(score)}</strong> 🏅</p>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginTop: '20px', alignItems: 'center' }}>
+              <button className="ok-btn" onClick={handleResultClose} style={{ width: '200px', padding: '10px', fontWeight: '600', borderRadius: '8px', cursor: 'pointer' }}>
+                Go To Home
+              </button>
+              <button
+                className="ok-btn"
+                onClick={downloadCertificate}
+                style={{
+                  width: '200px',
+                  padding: '10px',
+                  backgroundColor: '#00594c',
+                  color: 'white',
+                  fontWeight: '600',
+                  borderRadius: '8px',
+                  cursor: 'pointer'
+                }}
+              >
+                🎓 Download Your Certificate
+              </button>
+            </div>
           </div>
         )}
+
+        {/* start */}
+        <div
+          id="certificate"
+          style={{
+            display: 'none',
+            width: '660px',
+            height: '440px',
+            margin: '30px auto',
+            border: '8px double #00594c',
+            padding: '40px',
+            textAlign: 'center',
+            fontFamily: 'Georgia, serif',
+            position: 'relative',
+            backgroundColor: '#f9fdfc'
+          }}
+        >
+          <div style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            padding: '10px 40px 0',
+            borderBottom: '2px solid #ccc',
+          }}>
+            <div>
+              <h1 style={{
+                margin: 0,
+                fontSize: '36px',
+                fontFamily: 'Poppins, sans-serif',
+                fontWeight: 'bold'
+              }}>
+                <span style={{ color: '#00b386' }}>Nova</span>
+                <span style={{ color: 'rgba(2, 113, 97, 0.9)' }}>Exam</span>
+              </h1>
+              <p style={{
+                margin: 0,
+                fontSize: '16px',
+                color: '#333',
+                fontFamily: 'Georgia, serif'
+              }}>
+                Certificate of Achievement
+              </p>
+            </div>
+
+            <img
+              src="/images/main.png"
+              alt="NovaExam Seal"
+              style={{
+                width: '80px',
+                height: '80px',
+                objectFit: 'contain'
+              }}
+            />
+          </div>
+
+          <p style={{ fontSize: '16px', paddingTop: '4vh' }}>This is proudly presented to</p>
+          <h1 style={{
+            fontSize: '32px',
+            color: '#00594c',
+            margin: '10px 0 30px',
+            fontWeight: 'bold',
+            textTransform: 'uppercase'
+          }}>
+            {userName}
+          </h1>
+
+          <p style={{ fontSize: '17px', margin: '10px 0' }}>
+            For successfully completing the <strong>{examName}</strong> exam
+          </p>
+
+          <p style={{ fontSize: '16px' }}>Grade: <strong>{getGrade(score)}</strong></p>
+
+          <div style={{
+            position: 'absolute',
+            bottom: '40px',
+            left: '50px',
+            right: '50px',
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center'
+          }}>
+            <div style={{ textAlign: 'left' }}>
+              <p style={{ fontSize: '32px', marginBottom: '1px', fontFamily: 'Brush Script MT', marginLeft: '40px' }}>Akash Maity</p>
+              <p style={{ color: "black", marginTop: '-2vh' }}>_____________________</p>
+              <p style={{ fontSize: '13px' }}>Founder & Project Head, NovaExam</p>
+            </div>
+            <div style={{ marginLeft: '-14vh' }}>
+              <img src="/images/QR.png" alt="QR Code" />
+            </div>
+            <div style={{ textAlign: 'right', fontSize: '13px' }}>
+              Date: {new Date().toLocaleDateString()}
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

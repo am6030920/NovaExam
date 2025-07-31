@@ -232,7 +232,7 @@ h2 {
   margin-top: 15px;
 }
 
-.cards1 {
+.cards12 {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -242,7 +242,7 @@ h2 {
   padding: 0 20px;
 }
 
-.card1 {
+.card12 {
   background: linear-gradient(to bottom right, #f9f9f9, #ffffff);
   border-radius: 16px;
   padding: 30px 25px;
@@ -255,7 +255,7 @@ h2 {
   will-change: transform, box-shadow;
 }
 
-.card1::before {
+.card12::before {
   content: '';
   position: absolute;
   top: -60px;
@@ -267,7 +267,7 @@ h2 {
   z-index: 0;
 }
 
-.card1::after {
+.card12::after {
   content: '';
   position: absolute;
   top: 50%;
@@ -281,13 +281,13 @@ h2 {
   z-index: 1;
 }
 
-.card1:hover {
+.card12:hover {
   transform: translateY(-10px) scale(1.03);
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
   animation: bounce 0.7s ease-in-out;
 }
 
-.card1:hover::after {
+.card12:hover::after {
   width: 300%;
   height: 300%;
 }
@@ -298,7 +298,7 @@ h2 {
   70% { transform: translateY(4px); }
 }
 
-.card1 h3 {
+.card12 h3 {
   text-align: center;
   color: #000;
   font-size: 18px;

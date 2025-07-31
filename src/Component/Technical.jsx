@@ -1,184 +1,180 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Technical.css';
-
-const saveResultToLocal = (examName, score, total) => {
-  const existing = JSON.parse(localStorage.getItem("examHistory")) || [];
-  const now = new Date().toLocaleString();
-  const updated = [
-    ...existing,
-    { examName, score, total, completedAt: now }
-  ];
-  localStorage.setItem("examHistory", JSON.stringify(updated));
-};
+import html2pdf from 'html2pdf.js';
 
 const questionsData = [
   {
-    question: "Which data structure provides O(1) time complexity for insertion, deletion, and search in the average case?",
-    options: ["Binary Search Tree", "Hash Table", "Linked List", "Stack"],
-    correctAnswer: "Hash Table",
+    question: "What is the output of the following C code?\nint x = 10;\nprintf(\"%d\", x++);",
+    options: ["10", "11", "Compilation error", "Undefined behavior"],
+    correct: "10"
   },
   {
-    question: "In Operating Systems, what does the 'thrashing' phenomenon indicate?",
-    options: ["Deadlock", "Excessive swapping", "High throughput", "Context switching"],
-    correctAnswer: "Excessive swapping",
+    question: "Which of the following sorting algorithms has the best average-case time complexity?",
+    options: ["Bubble Sort", "Merge Sort", "Selection Sort", "Insertion Sort"],
+    correct: "Merge Sort"
   },
   {
-    question: "Which SQL statement is used to revoke previously granted privileges?",
-    options: ["DELETE", "REVOKE", "ROLLBACK", "GRANT"],
-    correctAnswer: "REVOKE",
-  },
-  {
-    question: "Which normal form eliminates transitive dependencies in a relational database?",
-    options: ["1NF", "2NF", "3NF", "BCNF"],
-    correctAnswer: "3NF",
-  },
-  {
-    question: "What is the time complexity of heap sort in the worst case?",
-    options: ["O(n log n)", "O(n²)", "O(log n)", "O(n)"],
-    correctAnswer: "O(n log n)",
-  },
-  {
-    question: "Which protocol is used to send emails from a client to a mail server?",
-    options: ["IMAP", "FTP", "SMTP", "POP3"],
-    correctAnswer: "SMTP",
-  },
-  {
-    question: "Which Java concept allows you to define a method in a subclass that already exists in the superclass?",
-    options: ["Inheritance", "Overriding", "Abstraction", "Encapsulation"],
-    correctAnswer: "Overriding",
-  },
-  {
-    question: "Which of the following algorithms is not a comparison-based sorting algorithm?",
-    options: ["Merge Sort", "Quick Sort", "Counting Sort", "Heap Sort"],
-    correctAnswer: "Counting Sort",
-  },
-  {
-    question: "Which scheduling algorithm gives minimum average waiting time for a set of processes?",
-    options: ["FCFS", "SJF", "Round Robin", "Priority"],
-    correctAnswer: "SJF",
-  },
-  {
-    question: "In C++, which concept restricts access to class members?",
-    options: ["Inheritance", "Abstraction", "Encapsulation", "Polymorphism"],
-    correctAnswer: "Encapsulation",
-  },
-  {
-    question: "Which memory management technique uses segmentation and paging together?",
-    options: ["Contiguous allocation", "Demand paging", "Virtual memory", "Segmented paging"],
-    correctAnswer: "Segmented paging",
-  },
-  {
-    question: "Which of the following represents the order of execution in the OS boot process?",
-    options: [
-      "Kernel → BIOS → Bootloader → OS",
-      "BIOS → Bootloader → Kernel → OS",
-      "Bootloader → BIOS → Kernel → OS",
-      "BIOS → Kernel → Bootloader → OS"
-    ],
-    correctAnswer: "BIOS → Bootloader → Kernel → OS",
-  },
-  {
-    question: "Which SQL keyword is used to ensure a column only accepts unique values?",
-    options: ["NOT NULL", "DEFAULT", "UNIQUE", "PRIMARY KEY"],
-    correctAnswer: "UNIQUE",
-  },
-  {
-    question: "Which Python keyword is used to create an anonymous function?",
-    options: ["def", "lambda", "func", "anonymous"],
-    correctAnswer: "lambda",
-  },
-  {
-    question: "Which of the following is true about the TCP protocol?",
-    options: [
-      "It is connectionless",
-      "It does not guarantee delivery",
-      "It ensures ordered delivery",
-      "It is faster than UDP"
-    ],
-    correctAnswer: "It ensures ordered delivery",
-  },
-  {
-    question: "Which data structure is used in the implementation of recursion?",
-    options: ["Queue", "Array", "Stack", "Linked List"],
-    correctAnswer: "Stack",
-  },
-  {
-    question: "Which OSI layer is responsible for logical addressing?",
-    options: ["Transport", "Data Link", "Network", "Physical"],
-    correctAnswer: "Network",
-  },
-  {
-    question: "Which component converts high-level code into machine code at runtime in Java?",
-    options: ["JDK", "JRE", "JVM", "JIT Compiler"],
-    correctAnswer: "JIT Compiler",
-  },
-  {
-    question: "Which of the following is used for version control?",
-    options: ["Oracle", "Git", "Linux", "Docker"],
-    correctAnswer: "Git",
-  },
-  {
-    question: "Which command is used in Linux to find the current directory you’re in?",
-    options: ["ls", "cd", "pwd", "dir"],
-    correctAnswer: "pwd",
-  },
-  {
-    question: "Which HTML element is used to embed JavaScript code?",
-    options: ["<js>", "<javascript>", "<script>", "<code>"],
-    correctAnswer: "<script>",
-  },
-  {
-    question: "In DBMS, what is the primary purpose of a transaction log?",
-    options: ["Store metadata", "Improve performance", "Recovery and rollback", "Maintain table schema"],
-    correctAnswer: "Recovery and rollback",
-  },
-  {
-    question: "What does the ACID property in databases stand for?",
+    question: "In DBMS, what does ACID stand for?",
     options: [
       "Atomicity, Consistency, Isolation, Durability",
-      "Access, Control, Integrity, Durability",
-      "Atomicity, Concurrency, Integration, Durability",
-      "Access, Consistency, Isolation, Deployment"
+      "Accuracy, Consistency, Isolation, Durability",
+      "Atomicity, Consistency, Integrity, Durability",
+      "Atomicity, Concurrency, Isolation, Durability"
     ],
-    correctAnswer: "Atomicity, Consistency, Isolation, Durability",
+    correct: "Atomicity, Consistency, Isolation, Durability"
   },
   {
-    question: "Which of the following data structures is used in BFS (Breadth-First Search)?",
-    options: ["Stack", "Queue", "Priority Queue", "Set"],
-    correctAnswer: "Queue",
+    question: "Which data structure is used for implementing recursion?",
+    options: ["Queue", "Stack", "Heap", "Linked List"],
+    correct: "Stack"
   },
   {
-    question: "Which bitwise operator is used to set a specific bit to 1 in C?",
-    options: ["&", "|", "^", "~"],
-    correctAnswer: "|",
+    question: "What is the time complexity of accessing an element in a Hash Table (average case)?",
+    options: ["O(1)", "O(log n)", "O(n)", "O(n log n)"],
+    correct: "O(1)"
   },
   {
-    question: "Which C storage class stores a variable in the CPU register?",
-    options: ["auto", "static", "extern", "register"],
-    correctAnswer: "register",
+    question: "Which of the following is NOT a NoSQL database?",
+    options: ["MongoDB", "Redis", "MySQL", "Cassandra"],
+    correct: "MySQL"
   },
   {
-    question: "Which of the following is an example of asymmetric encryption?",
-    options: ["AES", "DES", "RSA", "Blowfish"],
-    correctAnswer: "RSA",
+    question: "Which layer in the OSI model is responsible for routing?",
+    options: ["Data Link", "Transport", "Network", "Session"],
+    correct: "Network"
   },
   {
-    question: "Which of the following software models is based on iterative development and customer feedback?",
-    options: ["Waterfall", "V-Model", "Agile", "Spiral"],
-    correctAnswer: "Agile",
+    question: "Which one is a valid IPv6 address?",
+    options: ["192.168.0.1", "fe80::1ff:fe23:4567:890a", "255.255.255.0", "1234:5678"],
+    correct: "fe80::1ff:fe23:4567:890a"
   },
   {
-    question: "What does DNS stand for in networking?",
-    options: ["Digital Network System", "Domain Naming System", "Domain Name System", "Distributed Network Setup"],
-    correctAnswer: "Domain Name System",
+    question: "Which keyword is used to prevent inheritance in Java?",
+    options: ["static", "final", "private", "abstract"],
+    correct: "final"
   },
   {
-    question: "Which cloud service model provides a platform allowing customers to develop, run, and manage apps?",
-    options: ["IaaS", "PaaS", "SaaS", "DBaaS"],
-    correctAnswer: "PaaS",
+    question: "Which algorithm is used in public key encryption?",
+    options: ["DES", "RSA", "MD5", "AES"],
+    correct: "RSA"
+  },
+  {
+    question: "Which of the following is a symmetric encryption algorithm?",
+    options: ["RSA", "ECC", "AES", "Diffie-Hellman"],
+    correct: "AES"
+  },
+  {
+    question: "Which of these languages is interpreted?",
+    options: ["C", "C++", "Java", "Python"],
+    correct: "Python"
+  },
+  {
+    question: "What does Git use internally to track changes?",
+    options: ["Commits", "Blobs", "Trees", "All of the above"],
+    correct: "All of the above"
+  },
+  {
+    question: "Which of the following is a valid HTTP status code for 'Not Found'?",
+    options: ["200", "301", "404", "500"],
+    correct: "404"
+  },
+  {
+    question: "In operating systems, a deadlock can occur when:",
+    options: [
+      "Mutual exclusion exists",
+      "Hold and wait condition exists",
+      "Circular wait exists",
+      "All of the above"
+    ],
+    correct: "All of the above"
+  },
+  {
+    question: "Which of the following is used to uniquely identify a process in OS?",
+    options: ["PID", "Thread ID", "Handle", "Port number"],
+    correct: "PID"
+  },
+  {
+    question: "Which algorithm is used for page replacement?",
+    options: ["FIFO", "LRU", "Optimal", "All of the above"],
+    correct: "All of the above"
+  },
+  {
+    question: "What does SQL injection target?",
+    options: ["Operating system", "Database", "Network", "Compiler"],
+    correct: "Database"
+  },
+  {
+    question: "Which of the following is a preprocessor directive in C?",
+    options: ["#include", "main", "void", "return"],
+    correct: "#include"
+  },
+  {
+    question: "What is the maximum number of child nodes in a binary tree?",
+    options: ["1", "2", "3", "Any number"],
+    correct: "2"
+  },
+  {
+    question: "Which of these is not a valid HTTP method?",
+    options: ["GET", "POST", "PUSH", "DELETE"],
+    correct: "PUSH"
+  },
+  {
+    question: "Which JavaScript keyword declares a constant?",
+    options: ["let", "const", "var", "define"],
+    correct: "const"
+  },
+  {
+    question: "Which data structure gives O(1) time for insertion and deletion from both ends?",
+    options: ["Queue", "Stack", "Deque", "Linked List"],
+    correct: "Deque"
+  },
+  {
+    question: "Which database uses a document-based model?",
+    options: ["MySQL", "MongoDB", "Oracle", "PostgreSQL"],
+    correct: "MongoDB"
+  },
+  {
+    question: "Which of the following is a compile-time error?",
+    options: ["Syntax error", "Runtime error", "Logical error", "Segmentation fault"],
+    correct: "Syntax error"
+  },
+  {
+    question: "Which protocol is used for secure communication over the Internet?",
+    options: ["HTTP", "FTP", "TCP", "HTTPS"],
+    correct: "HTTPS"
+  },
+  {
+    question: "Which principle is violated in a race condition?",
+    options: ["Concurrency", "Mutual exclusion", "Atomicity", "Consistency"],
+    correct: "Atomicity"
+  },
+  {
+    question: "In React, what hook is used for side effects?",
+    options: ["useState", "useEffect", "useContext", "useReducer"],
+    correct: "useEffect"
+  },
+  {
+    question: "Which normalization form removes transitive dependency?",
+    options: ["1NF", "2NF", "3NF", "BCNF"],
+    correct: "3NF"
+  },
+  {
+    question: "Which algorithm is best for finding shortest path in a weighted graph?",
+    options: ["DFS", "BFS", "Dijkstra", "Prim's"],
+    correct: "Dijkstra"
   }
 ];
+
+const getGrade = (score) => {
+  if (score >= 27) return "Ex";
+  if (score >= 24) return "A+";
+  if (score >= 21) return "A";
+  if (score >= 18) return "B";
+  if (score >= 15) return "C";
+  if (score >= 10) return "D";
+  return "F";
+};
 
 const Technical = () => {
   const [currentQ, setCurrentQ] = useState(0);
@@ -187,6 +183,8 @@ const Technical = () => {
   const [showResult, setShowResult] = useState(false);
   const [score, setScore] = useState(0);
   const navigate = useNavigate();
+  const userName = localStorage.getItem("userName") || "Student";
+  const examName = "Timed Quiz Test";
 
   useEffect(() => {
     if (showResult) return;
@@ -231,28 +229,48 @@ const Technical = () => {
     }
   };
 
-  const calculateResult = () => {
-    const finalScore = selectedOptions.reduce(
-      (acc, ans, i) => (ans === questionsData[i].correctAnswer ? acc + 1 : acc),
-      0
-    );
-    saveResultToLocal("Technical Test", finalScore, questionsData.length);
-    setScore(finalScore);
-    setShowResult(true);
-  };
+   const calculateResult = () => {
+  let finalScore = 0;
+  selectedOptions.forEach((ans, i) => {
+    const correct = questionsData[i].correct; 
+    if (Array.isArray(correct)) {
+      if (correct.includes(ans)) finalScore++;
+    } else {
+      if (ans === correct) finalScore++;
+    }
+  });
+  setScore(finalScore);
+  setShowResult(true);
+  saveResultToLocal(examName, finalScore, questionsData.length);
+};
 
   const handleResultClose = () => {
     navigate('/home');
+  };
+
+  const downloadCertificate = () => {
+    const cert = document.getElementById("certificate");
+    cert.style.display = "block"; // Show certificate to convert
+    const opt = {
+      margin: 0,
+      filename: `${examName}-Certificate.pdf`,
+      image: { type: 'jpeg', quality: 1 },
+      html2canvas: { scale: 2, useCORS: true, backgroundColor: null },
+      jsPDF: { unit: 'pt', format: 'a4', orientation: 'landscape' },
+    };
+    html2pdf().set(opt).from(cert).save().then(() => {
+      cert.style.display = "none";
+    });
   };
 
   return (
     <div className='keyboard'>
       <div className="quiz-container">
         <span className="quiz-title">
-          Technical Mcq<p className="quiz-subtitle">Test💻</p>
+         Technical Mcq<p className="quiz-subtitle">Test💻</p>
         </span>
         <div className="underline3" style={{ width: '405px' }}></div>
-        <p className="timer">⏳Time Left: {formatTime(timeLeft)}⏰</p>
+        <p className="timer">⏳Time Left: {formatTime(timeLeft)} ⏰</p>
 
         {!showResult && (
           <>
@@ -275,8 +293,7 @@ const Technical = () => {
               })}
             </div>
 
-            {/* Progress Bar */}
-            <div className="progress-bar" aria-label="Question progress">
+            <div className="progress-bar">
               <div
                 className="progress-bar-fill"
                 style={{ width: `${((currentQ + 1) / questionsData.length) * 100}%` }}
@@ -284,11 +301,7 @@ const Technical = () => {
             </div>
 
             <div className="button-group">
-              <button
-                className="btn prev-btn"
-                onClick={handlePrevious}
-                disabled={currentQ === 0}
-              >
+              <button className="btn prev-btn" onClick={handlePrevious} disabled={currentQ === 0}>
                 Previous
               </button>
               <button
@@ -304,12 +317,126 @@ const Technical = () => {
 
         {showResult && (
           <div className="result-modal">
-            <h2>Test Completed!🎉</h2>
-            <p>Your Score: <strong>{score} / {questionsData.length}</strong>👌🏻</p>
-            <p>Percentage: <strong>{((score / questionsData.length) * 100).toFixed(2)}%</strong>🔥</p>
-            <button className="ok-btn" onClick={handleResultClose}>Go To Home</button>
+            <h2>Test Completed! 🎉</h2>
+            <p>Your Score: <strong>{score} / {questionsData.length}</strong> 👌🏻</p>
+            <p>Percentage: <strong>{((score / questionsData.length) * 100).toFixed(2)}%</strong> 🔥</p>
+            <p>Grade: <strong>{getGrade(score)}</strong> 🏅</p>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginTop: '20px', alignItems: 'center' }}>
+              <button className="ok-btn" onClick={handleResultClose} style={{ width: '200px', padding: '10px', fontWeight: '600', borderRadius: '8px', cursor: 'pointer' }}>
+                Go To Home
+              </button>
+              <button
+                className="ok-btn"
+                onClick={downloadCertificate}
+                style={{
+                  width: '200px',
+                  padding: '10px',
+                  backgroundColor: '#00594c',
+                  color: 'white',
+                  fontWeight: '600',
+                  borderRadius: '8px',
+                  cursor: 'pointer'
+                }}
+              >
+                🎓 Download Your Certificate
+              </button>
+            </div>
           </div>
         )}
+
+        {/* start */}
+        <div
+          id="certificate"
+          style={{
+            display: 'none',
+            width: '660px',
+            height: '440px',
+            margin: '30px auto',
+            border: '8px double #00594c',
+            padding: '40px',
+            textAlign: 'center',
+            fontFamily: 'Georgia, serif',
+            position: 'relative',
+            backgroundColor: '#f9fdfc'
+          }}
+        >
+          <div style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            padding: '10px 40px 0',
+            borderBottom: '2px solid #ccc',
+          }}>
+            <div>
+              <h1 style={{
+                margin: 0,
+                fontSize: '36px',
+                fontFamily: 'Poppins, sans-serif',
+                fontWeight: 'bold'
+              }}>
+                <span style={{ color: '#00b386' }}>Nova</span>
+                <span style={{ color: 'rgba(2, 113, 97, 0.9)' }}>Exam</span>
+              </h1>
+              <p style={{
+                margin: 0,
+                fontSize: '16px',
+                color: '#333',
+                fontFamily: 'Georgia, serif'
+              }}>
+                Certificate of Achievement
+              </p>
+            </div>
+
+            <img
+              src="/images/main.png"
+              alt="NovaExam Seal"
+              style={{
+                width: '80px',
+                height: '80px',
+                objectFit: 'contain'
+              }}
+            />
+          </div>
+
+          <p style={{ fontSize: '16px', paddingTop: '4vh' }}>This is proudly presented to</p>
+          <h1 style={{
+            fontSize: '32px',
+            color: '#00594c',
+            margin: '10px 0 30px',
+            fontWeight: 'bold',
+            textTransform: 'uppercase'
+          }}>
+            {userName}
+          </h1>
+
+          <p style={{ fontSize: '17px', margin: '10px 0' }}>
+            For successfully completing the <strong>{examName}</strong> exam
+          </p>
+
+          <p style={{ fontSize: '16px' }}>Grade: <strong>{getGrade(score)}</strong></p>
+
+          <div style={{
+            position: 'absolute',
+            bottom: '40px',
+            left: '50px',
+            right: '50px',
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center'
+          }}>
+            <div style={{ textAlign: 'left' }}>
+              <p style={{ fontSize: '32px', marginBottom: '1px', fontFamily: 'Brush Script MT', marginLeft: '40px' }}>Akash Maity</p>
+              <p style={{ color: "black", marginTop: '-2vh' }}>_____________________</p>
+              <p style={{ fontSize: '13px' }}>Founder & Project Head, NovaExam</p>
+            </div>
+            <div style={{ marginLeft: '-14vh' }}>
+              <img src="/images/QR.png" alt="QR Code" />
+            </div>
+            <div style={{ textAlign: 'right', fontSize: '13px' }}>
+              Date: {new Date().toLocaleDateString()}
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

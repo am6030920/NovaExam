@@ -1,179 +1,189 @@
-import React, {useState, useEffect} from 'react';
-import {useNavigate} from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Trivia.css';
+import html2pdf from 'html2pdf.js';
+
+const questionsData = [
+  {
+    question: "Which planet in our solar system is known as the Red Planet?",
+    options: ["Earth", "Venus", "Mars", "Jupiter"],
+    correct: "Mars"
+  },
+  {
+    question: "What is the capital city of Australia?",
+    options: ["Sydney", "Melbourne", "Canberra", "Brisbane"],
+    correct: "Canberra"
+  },
+  {
+    question: "Who painted the Mona Lisa?",
+    options: ["Pablo Picasso", "Vincent van Gogh", "Leonardo da Vinci", "Claude Monet"],
+    correct: "Leonardo da Vinci"
+  },
+  {
+    question: "Which animal is known as the 'King of the Jungle'?",
+    options: ["Tiger", "Elephant", "Lion", "Leopard"],
+    correct: "Lion"
+  },
+  {
+    question: "In which year did World War II end?",
+    options: ["1945", "1939", "1918", "1950"],
+    correct: "1945"
+  },
+  {
+    question: "Which metal is liquid at room temperature?",
+    options: ["Gold", "Mercury", "Silver", "Iron"],
+    correct: "Mercury"
+  },
+  {
+    question: "How many continents are there on Earth?",
+    options: ["5", "6", "7", "8"],
+    correct: "7"
+  },
+  {
+    question: "Which country hosted the 2020 Summer Olympics (held in 2021)?",
+    options: ["China", "Brazil", "Japan", "UK"],
+    correct: "Japan"
+  },
+  {
+    question: "Who is the author of the Harry Potter series?",
+    options: ["J.K. Rowling", "Stephen King", "George R.R. Martin", "Rick Riordan"],
+    correct: "J.K. Rowling"
+  },
+  {
+    question: "Which element has the chemical symbol 'O'?",
+    options: ["Osmium", "Oxygen", "Oxide", "Ozone"],
+    correct: "Oxygen"
+  },
+  {
+    question: "What is the largest ocean on Earth?",
+    options: ["Atlantic", "Indian", "Arctic", "Pacific"],
+    correct: "Pacific"
+  },
+  {
+    question: "Which famous scientist developed the theory of relativity?",
+    options: ["Isaac Newton", "Nikola Tesla", "Albert Einstein", "Stephen Hawking"],
+    correct: "Albert Einstein"
+  },
+  {
+    question: "What is the hardest natural substance on Earth?",
+    options: ["Iron", "Gold", "Diamond", "Platinum"],
+    correct: "Diamond"
+  },
+  {
+    question: "Which country is known as the Land of the Rising Sun?",
+    options: ["South Korea", "India", "China", "Japan"],
+    correct: "Japan"
+  },
+  {
+    question: "Which sport is known as the 'king of sports'?",
+    options: ["Cricket", "Football", "Tennis", "Basketball"],
+    correct: "Football"
+  },
+  {
+    question: "How many players are there in a cricket team on the field?",
+    options: ["10", "11", "12", "9"],
+    correct: "11"
+  },
+  {
+    question: "Which gas do plants absorb from the atmosphere?",
+    options: ["Nitrogen", "Carbon Monoxide", "Carbon Dioxide", "Oxygen"],
+    correct: "Carbon Dioxide"
+  },
+  {
+    question: "Which bird is known for mimicking human speech?",
+    options: ["Sparrow", "Pigeon", "Parrot", "Crow"],
+    correct: "Parrot"
+  },
+  {
+    question: "In which country were the pyramids built?",
+    options: ["Mexico", "India", "Peru", "Egypt"],
+    correct: "Egypt"
+  },
+  {
+    question: "Which is the longest river in the world?",
+    options: ["Amazon", "Yangtze", "Nile", "Mississippi"],
+    correct: "Nile"
+  },
+  {
+    question: "Which famous ship sank in 1912 after hitting an iceberg?",
+    options: ["Lusitania", "Titanic", "Poseidon", "Britannic"],
+    correct: "Titanic"
+  },
+  {
+    question: "Who invented the telephone?",
+    options: ["Thomas Edison", "Alexander Graham Bell", "Nikola Tesla", "Guglielmo Marconi"],
+    correct: "Alexander Graham Bell"
+  },
+  {
+    question: "Which Indian festival is known as the Festival of Lights?",
+    options: ["Holi", "Diwali", "Navratri", "Eid"],
+    correct: "Diwali"
+  },
+  {
+    question: "Which is the smallest prime number?",
+    options: ["0", "1", "2", "3"],
+    correct: "2"
+  },
+  {
+    question: "Which country has the most number of time zones?",
+    options: ["Russia", "China", "USA", "France"],
+    correct: "France"
+  },
+  {
+    question: "How many bones are there in the adult human body?",
+    options: ["206", "201", "210", "216"],
+    correct: "206"
+  },
+  {
+    question: "What does 'www' stand for in a website browser?",
+    options: ["World Wide Web", "Web With Widgets", "Wired Web World", "World Web Wide"],
+    correct: "World Wide Web"
+  },
+  {
+    question: "Which language is the most spoken worldwide?",
+    options: ["English", "Mandarin Chinese", "Spanish", "Hindi"],
+    correct: "Mandarin Chinese"
+  },
+  {
+    question: "Which planet has the most moons?",
+    options: ["Jupiter", "Saturn", "Earth", "Neptune"],
+    correct: "Saturn"
+  },
+  {
+    question: "Which is the tallest mountain in the world?",
+    options: ["K2", "Kangchenjunga", "Mount Everest", "Makalu"],
+    correct: "Mount Everest"
+  }
+];
+
+
 
 const saveResultToLocal = (examName, score, total) => {
   const existing = JSON.parse(localStorage.getItem("examHistory")) || [];
   const now = new Date().toLocaleString();
-  const updated = [
-    ...existing,
-    { examName, score, total, completedAt: now }
-  ];
+  const updated = [...existing, { examName, score, total, completedAt: now }];
   localStorage.setItem("examHistory", JSON.stringify(updated));
 };
 
-const questionsData = [
- {
-    question: "Who was the first emperor of the Maurya Dynasty in India?",
-    options: ["Ashoka", "Bindusara", "Chandragupta Maurya", "Harsha"],
-    correctAnswer: "Chandragupta Maurya",
-  },
-  {
-    question: "The Battle of Plassey in 1757 was fought between the British East India Company and which Indian ruler?",
-    options: ["Tipu Sultan", "Mir Qasim", "Siraj-ud-Daulah", "Bahadur Shah Zafar"],
-    correctAnswer: "Siraj-ud-Daulah",
-  },
-  {
-    question: "Which empire built the famous Hagia Sophia before it became a mosque?",
-    options: ["Ottoman Empire", "Roman Empire", "Byzantine Empire", "Persian Empire"],
-    correctAnswer: "Byzantine Empire",
-  },
-  {
-    question: "Which Indian freedom fighter formed the Azad Hind Fauj?",
-    options: ["Bhagat Singh", "Subhas Chandra Bose", "Jawaharlal Nehru", "Bal Gangadhar Tilak"],
-    correctAnswer: "Subhas Chandra Bose",
-  },
-
-  // Sports
-  {
-    question: "Who holds the record for the most goals scored in international football (as of 2024)?",
-    options: ["Lionel Messi", "Sunil Chhetri", "Cristiano Ronaldo", "Pele"],
-    correctAnswer: "Cristiano Ronaldo",
-  },
-  {
-    question: "Which country hosted the 2022 FIFA World Cup?",
-    options: ["Qatar", "Russia", "USA", "Brazil"],
-    correctAnswer: "Qatar",
-  },
-  {
-    question: "Who is the only cricketer to score 100 international centuries?",
-    options: ["Virat Kohli", "Sachin Tendulkar", "Steve Smith", "Ricky Ponting"],
-    correctAnswer: "Sachin Tendulkar",
-  },
-  {
-    question: "How many players are there on a basketball team on the court at one time (per team)?",
-    options: ["4", "5", "6", "7"],
-    correctAnswer: "5",
-  },
-
-  // Movies
-  {
-    question: "Which movie won the Academy Award for Best Picture in 2023?",
-    options: ["Everything Everywhere All at Once", "Avatar: The Way of Water", "Top Gun: Maverick", "The Fabelmans"],
-    correctAnswer: "Everything Everywhere All at Once",
-  },
-  {
-    question: "Who directed the film 'Inception'?",
-    options: ["James Cameron", "Christopher Nolan", "Steven Spielberg", "Quentin Tarantino"],
-    correctAnswer: "Christopher Nolan",
-  },
-  {
-    question: "Which Indian film was nominated for an Oscar in the Best Original Song category for 'Naatu Naatu'?",
-    options: ["RRR", "Pushpa", "Baahubali", "Lagaan"],
-    correctAnswer: "RRR",
-  },
-  {
-    question: "Which actor played the role of Joker in 'The Dark Knight' (2008)?",
-    options: ["Heath Ledger", "Joaquin Phoenix", "Jared Leto", "Tom Hardy"],
-    correctAnswer: "Heath Ledger",
-  },
-
-  // Science
-  {
-    question: "What is the powerhouse of the cell?",
-    options: ["Nucleus", "Ribosome", "Mitochondria", "Chloroplast"],
-    correctAnswer: "Mitochondria",
-  },
-  {
-    question: "Which gas is most abundant in Earth's atmosphere?",
-    options: ["Oxygen", "Carbon Dioxide", "Nitrogen", "Hydrogen"],
-    correctAnswer: "Nitrogen",
-  },
-  {
-    question: "What is the chemical symbol of gold?",
-    options: ["G", "Au", "Ag", "Go"],
-    correctAnswer: "Au",
-  },
-  {
-    question: "Which planet in the solar system has the most moons (as of 2024)?",
-    options: ["Jupiter", "Saturn", "Uranus", "Neptune"],
-    correctAnswer: "Saturn",
-  },
-
-  // Literature
-  {
-    question: "Who wrote the epic 'Paradise Lost'?",
-    options: ["William Shakespeare", "John Milton", "Geoffrey Chaucer", "Alexander Pope"],
-    correctAnswer: "John Milton",
-  },
-  {
-    question: "Which of the following novels was written by George Orwell?",
-    options: ["To the Lighthouse", "Animal Farm", "Great Expectations", "The Catcher in the Rye"],
-    correctAnswer: "Animal Farm",
-  },
-  {
-    question: "Who is the author of the 'Harry Potter' series?",
-    options: ["J.K. Rowling", "Suzanne Collins", "J.R.R. Tolkien", "Rick Riordan"],
-    correctAnswer: "J.K. Rowling",
-  },
-  {
-    question: "Which play features the character 'Iago'?",
-    options: ["Macbeth", "Hamlet", "Othello", "King Lear"],
-    correctAnswer: "Othello",
-  },
-
-  // Current Events
-  {
-    question: "Who is the current President of the United States (as of 2024)?",
-    options: ["Donald Trump", "Joe Biden", "Barack Obama", "Ron DeSantis"],
-    correctAnswer: "Joe Biden",
-  },
-  {
-    question: "Which country became the newest member of BRICS in 2023?",
-    options: ["Saudi Arabia", "Iran", "Egypt", "Argentina"],
-    correctAnswer: "Argentina",
-  },
-  {
-    question: "Which country launched the Chandrayaan-3 mission?",
-    options: ["China", "Russia", "India", "Japan"],
-    correctAnswer: "India",
-  },
-  {
-    question: "Which tech company acquired Twitter in 2022?",
-    options: ["Meta", "Microsoft", "Tesla", "Elon Musk"],
-    correctAnswer: "Elon Musk",
-  },
-
-  // Pop Culture
-  {
-    question: "Which artist holds the record for most streamed song on Spotify as of 2024?",
-    options: ["Ed Sheeran", "Taylor Swift", "The Weeknd", "BTS"],
-    correctAnswer: "The Weeknd",
-  },
-  {
-    question: "Who won the Miss Universe title in 2023?",
-    options: ["R'Bonney Gabriel", "Harnaaz Sandhu", "Amanda Dudamel", "Andrea Meza"],
-    correctAnswer: "R'Bonney Gabriel",
-  },
-  {
-    question: "Which K-pop band has the largest fanbase globally (as of 2024)?",
-    options: ["Blackpink", "BTS", "EXO", "Seventeen"],
-    correctAnswer: "BTS",
-  },
-  {
-    question: "Which social media platform introduced 'Reels'?",
-    options: ["TikTok", "Instagram", "Snapchat", "YouTube"],
-    correctAnswer: "Instagram",
-  }
-];
+const getGrade = (score) => {
+  if (score >= 27) return "Ex";
+  if (score >= 24) return "A+";
+  if (score >= 21) return "A";
+  if (score >= 18) return "B";
+  if (score >= 15) return "C";
+  if (score >= 10) return "D";
+  return "F";
+};
 
 const Trivia = () => {
   const [currentQ, setCurrentQ] = useState(0);
   const [selectedOptions, setSelectedOptions] = useState(Array(questionsData.length).fill(null));
-  const [timeLeft, setTimeLeft] = useState(900); 
+  const [timeLeft, setTimeLeft] = useState(900); // 15 minutes in seconds
   const [showResult, setShowResult] = useState(false);
   const [score, setScore] = useState(0);
   const navigate = useNavigate();
+  const userName = localStorage.getItem("userName") || "Student";
+  const examName = "Timed Quiz Test";
 
   useEffect(() => {
     if (showResult) return;
@@ -219,27 +229,47 @@ const Trivia = () => {
   };
 
   const calculateResult = () => {
-    const finalScore = selectedOptions.reduce(
-      (acc, ans, i) => (ans === questionsData[i].correctAnswer ? acc + 1 : acc),
-      0
-    );
-    setScore(finalScore);
-    saveResultToLocal("Trivia Test", finalScore, questionsData.length);
-    setShowResult(true);
-  };
+  let finalScore = 0;
+  selectedOptions.forEach((ans, i) => {
+    const correct = questionsData[i].correct; 
+    if (Array.isArray(correct)) {
+      if (correct.includes(ans)) finalScore++;
+    } else {
+      if (ans === correct) finalScore++;
+    }
+  });
+  setScore(finalScore);
+  setShowResult(true);
+  saveResultToLocal(examName, finalScore, questionsData.length);
+};
 
   const handleResultClose = () => {
     navigate('/home');
+  };
+
+  const downloadCertificate = () => {
+    const cert = document.getElementById("certificate");
+    cert.style.display = "block"; // Show certificate to convert
+    const opt = {
+      margin: 0,
+      filename: `${examName}-Certificate.pdf`,
+      image: { type: 'jpeg', quality: 1 },
+      html2canvas: { scale: 2, useCORS: true, backgroundColor: null },
+      jsPDF: { unit: 'pt', format: 'a4', orientation: 'landscape' },
+    };
+    html2pdf().set(opt).from(cert).save().then(() => {
+      cert.style.display = "none";
+    });
   };
 
   return (
     <div className='keyboard'>
       <div className="quiz-container">
         <span className="quiz-title">
-          Programming<p className="quiz-subtitle">Test💁</p>
+         Trivia<p className="quiz-subtitle">Test🛸</p>
         </span>
         <div className="underline3" style={{ width: '405px' }}></div>
-        <p className="timer">⏳Time Left: {formatTime(timeLeft)}⏰</p>
+        <p className="timer">⏳Time Left: {formatTime(timeLeft)} ⏰</p>
 
         {!showResult && (
           <>
@@ -262,19 +292,15 @@ const Trivia = () => {
               })}
             </div>
 
-            <div className="progress-bar" aria-label="Question progress">
+            <div className="progress-bar">
               <div
                 className="progress-bar-fill"
-                style={{width: `${((currentQ + 1) / questionsData.length) * 100}%`}}
+                style={{ width: `${((currentQ + 1) / questionsData.length) * 100}%` }}
               />
             </div>
 
             <div className="button-group">
-              <button
-                className="btn prev-btn"
-                onClick={handlePrevious}
-                disabled={currentQ === 0}
-              >
+              <button className="btn prev-btn" onClick={handlePrevious} disabled={currentQ === 0}>
                 Previous
               </button>
               <button
@@ -290,12 +316,126 @@ const Trivia = () => {
 
         {showResult && (
           <div className="result-modal">
-            <h2>Test Completed!🎉</h2>
-            <p>Your Score: <strong>{score} / {questionsData.length}</strong>👌🏻</p>
-            <p>Percentage: <strong>{((score / questionsData.length) * 100).toFixed(2)}%</strong>🔥</p>
-            <button className="ok-btn" onClick={handleResultClose}>Go To Home</button>
+            <h2>Test Completed! 🎉</h2>
+            <p>Your Score: <strong>{score} / {questionsData.length}</strong> 👌🏻</p>
+            <p>Percentage: <strong>{((score / questionsData.length) * 100).toFixed(2)}%</strong> 🔥</p>
+            <p>Grade: <strong>{getGrade(score)}</strong> 🏅</p>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginTop: '20px', alignItems: 'center' }}>
+              <button className="ok-btn" onClick={handleResultClose} style={{ width: '200px', padding: '10px', fontWeight: '600', borderRadius: '8px', cursor: 'pointer' }}>
+                Go To Home
+              </button>
+              <button
+                className="ok-btn"
+                onClick={downloadCertificate}
+                style={{
+                  width: '200px',
+                  padding: '10px',
+                  backgroundColor: '#00594c',
+                  color: 'white',
+                  fontWeight: '600',
+                  borderRadius: '8px',
+                  cursor: 'pointer'
+                }}
+              >
+                🎓 Download Your Certificate
+              </button>
+            </div>
           </div>
         )}
+
+        {/* start */}
+        <div
+          id="certificate"
+          style={{
+            display: 'none',
+            width: '660px',
+            height: '440px',
+            margin: '30px auto',
+            border: '8px double #00594c',
+            padding: '40px',
+            textAlign: 'center',
+            fontFamily: 'Georgia, serif',
+            position: 'relative',
+            backgroundColor: '#f9fdfc'
+          }}
+        >
+          <div style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            padding: '10px 40px 0',
+            borderBottom: '2px solid #ccc',
+          }}>
+            <div>
+              <h1 style={{
+                margin: 0,
+                fontSize: '36px',
+                fontFamily: 'Poppins, sans-serif',
+                fontWeight: 'bold'
+              }}>
+                <span style={{ color: '#00b386' }}>Nova</span>
+                <span style={{ color: 'rgba(2, 113, 97, 0.9)' }}>Exam</span>
+              </h1>
+              <p style={{
+                margin: 0,
+                fontSize: '16px',
+                color: '#333',
+                fontFamily: 'Georgia, serif'
+              }}>
+                Certificate of Achievement
+              </p>
+            </div>
+
+            <img
+              src="/images/main.png"
+              alt="NovaExam Seal"
+              style={{
+                width: '80px',
+                height: '80px',
+                objectFit: 'contain'
+              }}
+            />
+          </div>
+
+          <p style={{ fontSize: '16px', paddingTop: '4vh' }}>This is proudly presented to</p>
+          <h1 style={{
+            fontSize: '32px',
+            color: '#00594c',
+            margin: '10px 0 30px',
+            fontWeight: 'bold',
+            textTransform: 'uppercase'
+          }}>
+            {userName}
+          </h1>
+
+          <p style={{ fontSize: '17px', margin: '10px 0' }}>
+            For successfully completing the <strong>{examName}</strong> exam
+          </p>
+
+          <p style={{ fontSize: '16px' }}>Grade: <strong>{getGrade(score)}</strong></p>
+
+          <div style={{
+            position: 'absolute',
+            bottom: '40px',
+            left: '50px',
+            right: '50px',
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center'
+          }}>
+            <div style={{ textAlign: 'left' }}>
+              <p style={{ fontSize: '32px', marginBottom: '1px', fontFamily: 'Brush Script MT', marginLeft: '40px' }}>Akash Maity</p>
+              <p style={{ color: "black", marginTop: '-2vh' }}>_____________________</p>
+              <p style={{ fontSize: '13px' }}>Founder & Project Head, NovaExam</p>
+            </div>
+            <div style={{ marginLeft: '-14vh' }}>
+              <img src="/images/QR.png" alt="QR Code" />
+            </div>
+            <div style={{ textAlign: 'right', fontSize: '13px' }}>
+              Date: {new Date().toLocaleDateString()}
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
