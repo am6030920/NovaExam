@@ -409,11 +409,11 @@ const Ml = () => {
             {userName}
           </h1>
 
-          <p style={{ fontSize: '17px', margin: '10px 0' }}>
-            For successfully completing the <strong>{examName}</strong> exam
-          </p>
+  <p style={{ fontSize: '17px', margin: '10px 0',marginTop:'-5vh' }}>
+    For successfully completing the <strong>{examName}</strong> exam
+  </p>
 
-          <p style={{ fontSize: '16px' }}>Grade: <strong>{getGrade(score)}</strong></p>
+<p style={{ fontSize: '16px',color:'black', marginTop:'-1vh'}}>Grade: <strong>{getGrade(score)}</strong></p>
 
           <div style={{
             position: 'absolute',

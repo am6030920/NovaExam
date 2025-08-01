@@ -257,32 +257,35 @@ const Programming = () => {
   };
 
  const calculateResult = () => {
-    let finalScore = 0;
-    selectedOptions.forEach((ans, i) => {
-      const correct = questionsData[i].correctAnswer;
-      if (Array.isArray(correct)) {
-        if (correct.includes(ans)) finalScore++;
-      } else {
-        if (ans === correct) finalScore++;
-      }
-    });
-    setScore(finalScore);
-    setShowResult(true);
-    saveResultToLocal(examName, finalScore, questionsData.length);
-  };
+  let finalScore = 0;
+  selectedOptions.forEach((ans, i) => {
+    const correct = questionsData[i].correct; 
+    if (Array.isArray(correct)) {
+      if (correct.includes(ans)) finalScore++;
+    } else {
+      if (ans === correct) finalScore++;
+    }
+  });
+  setScore(finalScore);
+  setShowResult(true);
+  saveResultToLocal(examName, finalScore, questionsData.length);
+};
+
+
 
   const handleResultClose = () => {
     navigate('/home');
   };
 
-  const downloadCertificate = () => {
-    const cert = document.getElementById("certificate");
-    cert.style.display = "block";
-    html2pdf().from(cert).save(`${examName}-Certificate.pdf`);
-    setTimeout(() => {
-      cert.style.display = "none";
-    }, 1000);
-  };
+ const downloadCertificate = () => {
+  const cert = document.getElementById("certificate");
+  cert.style.display = "block";
+  html2pdf().from(cert).save(`${examName}-Certificate.pdf`);
+  setTimeout(() => {
+    cert.style.display = "none";
+  }, 1000);
+};
+
 
   return (
     <div className='keyboard'>
@@ -433,11 +436,14 @@ display: 'none',
     {userName}
   </h1>
 
-  <p style={{ fontSize: '17px', margin: '10px 0' }}>
+  <p style={{ fontSize: '17px', margin: '10px 0',marginTop:'-5vh' }}>
     For successfully completing the <strong>{examName}</strong> exam
   </p>
 
-  <p style={{ fontSize: '16px' }}>Grade: <strong>{getGrade(score)}</strong></p>
+<p style={{ fontSize: '16px',color:'black', marginTop:'-1vh'}}>Grade: <strong>{getGrade(score)}</strong></p>
+
+
+
 
   {/* Signature + Date Row */}
   <div style={{
@@ -450,7 +456,7 @@ display: 'none',
     alignItems: 'center'
   }}>
     <div style={{ textAlign: 'left' }}>
-      <p style={{  fontSize: '32px', marginBottom: '1px',fontFamily:'Brush Script MT',marginLeft:'40px' ,marginLeft:'-0vh'}}>Akash Maity</p>
+      <p style={{  fontSize: '32px', marginBottom: '1px',marginLeft:'40px',marginLeft:'-0vh'}} className='Akash'>Akash Maity</p>
       <p style={{color:"black",marginTop:'-2vh'}}>_____________________</p>
       <p style={{ fontSize: '13px' }}>Founder & Project Head, NovaExam</p>
     </div>

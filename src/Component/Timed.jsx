@@ -228,7 +228,7 @@ const Timed = () => {
     }
   };
 
- const calculateResult = () => {
+const calculateResult = () => {
   let finalScore = 0;
   selectedOptions.forEach((ans, i) => {
     const correct = questionsData[i].correct; 
@@ -242,6 +242,8 @@ const Timed = () => {
   setShowResult(true);
   saveResultToLocal(examName, finalScore, questionsData.length);
 };
+
+
 
 
   const handleResultClose = () => {
@@ -409,11 +411,12 @@ const Timed = () => {
             {userName}
           </h1>
 
-          <p style={{ fontSize: '17px', margin: '10px 0' }}>
-            For successfully completing the <strong>{examName}</strong> exam
-          </p>
+          
+  <p style={{ fontSize: '17px', margin: '10px 0',marginTop:'-5vh' }}>
+    For successfully completing the <strong>{examName}</strong> exam
+  </p>
 
-          <p style={{ fontSize: '16px' }}>Grade: <strong>{getGrade(score)}</strong></p>
+<p style={{ fontSize: '16px',color:'black', marginTop:'-1vh'}}>Grade: <strong>{getGrade(score)}</strong></p>
 
           <div style={{
             position: 'absolute',
