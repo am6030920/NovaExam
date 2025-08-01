@@ -1,65 +1,193 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Higher.css';
+import { FaLaptop, FaChalkboardTeacher, FaCogs, FaChartLine, FaChartPie, FaMoneyBillWave } from 'react-icons/fa';
+import { FaCheckCircle } from 'react-icons/fa';
+
+
 
 const Higher = () => {
+  const navigate = useNavigate();
+
   return (
-    <div className="higher-education">
-      {/* Hero Section */}
-      <section className="hero">
-        <div className="container">
-          <h1>Transforming Higher Education with NovaExam</h1>
-          <p>
-            Empowering universities, colleges, and institutions with scalable, secure, and smart assessment solutions.
-          </p>
-        </div>
-      </section>
+    <div style={{background:'white'}}>
+    <div className="contact-header">
+      <div className="contact-textt">
+        <h1>Higher Education Assessments</h1>
 
-      {/* Why NovaExam */}
-      <section className="section">
-        <div className="container">
-          <h2>Why NovaExam for Higher Education?</h2>
-          <p>
-            NovaExam bridges the gap between academic excellence and digital innovation. Our platform enables seamless online assessments,
-            robust analytics, and a secure testing environment tailored for higher education institutions.
-          </p>
-        </div>
-      </section>
+        <p>
+          Higher Education Assessments help measure a student’s learning, progress, and readiness for future goals.
+          They come in many forms like exams, presentations, projects, and online tests.
+          These assessments check not just knowledge, but also thinking and problem-solving skills.
+          Technology has improved how assessments are done, making them more flexible and efficient.
+          They ensure quality education and help students prepare for real-world challenges.
+        </p>
 
-      {/* Features */}
-      <section className="section features">
-        <div className="container">
-          <pre>
-          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQpPaxK_KJ3zSbQ-O9oMdrCGjglq4L9JzAhw&s" alt="HIGHER EDUCATION WITH US" />
-          <h1>Key Features</h1>
-          </pre>
-          <ul>
-            <li><strong>Scalable Platform:</strong> Support thousands of students simultaneously.</li>
-            <li><strong>AI Proctoring:</strong> Maintain academic integrity with intelligent monitoring.</li>
-            <li><strong>Flexible Assessment Types:</strong> MCQs, essays, coding, and project evaluations.</li>
-            <li><strong>Seamless Integrations:</strong> Integrate with LMS and SIS effortlessly.</li>
-            <li><strong>Real-time Analytics:</strong> Get actionable performance insights instantly.</li>
-          </ul>
-        </div>
-      </section>
 
-      <section className="section benefits">
-        <div className="container">
-          <h2>Benefits for Institutions</h2>
-          <ul>
-            <li>Reduce administrative workload with automation.</li>
-            <li>Support remote, hybrid, and in-person learning environments.</li>
-            <li>Improve learning outcomes with insightful analytics.</li>
-            <li>Ensure fairness and transparency in assessments.</li>
-          </ul>
+        <button
+  className="contact-btn"
+  onClick={() => navigate('/Contact')}
+>
+  Contact Us
+</button>
+
+
+      </div>
+      <div className="contact-image">
+        <img src="https://examonline.in/wp-content/uploads/2025/04/16-1024x1024.png" alt="Team Working" />
+      </div>
+    </div>
+      {/* second */}
+      <div className="features-section">
+      <button className="features-label">Features</button>
+      <h1 style={{fontFamily:'Trebuchet MS'}}>With NovaExam,you can enjoy a range of benefits</h1>
+      <div className="underline2"></div>
+
+      <div className="features-grid">
+        <div className="feature-item">
+          <FaLaptop className="feature-icon" />
+          <h4>Protect Academic Integrity</h4>
+          <p>Safeguard your institution’s reputation with a robust remote proctoring solution.</p>
         </div>
-      </section>
-      <section className="cta">
-        <div className="container">
-          <h2>Ready to Modernize Your Exams?</h2>
-          <p>Join leading institutions that trust NovaExam for secure and intelligent assessment delivery.</p>
-          <button className="cta-button">Request a Demo</button>
+
+        <div className="feature-item">
+          <FaChalkboardTeacher className="feature-icon" />
+          <h4>Enhance Student Experience</h4>
+          <p>Reduce test anxiety and provide a supportive testing environment.</p>
         </div>
-      </section>
+
+        <div className="feature-item">
+          <FaCogs className="feature-icon" />
+          <h4>Streamline Workflows</h4>
+          <p>Save time and resources with efficient exam creation and marking tools.</p>
+        </div>
+
+        <div className="feature-item">
+          <FaChartLine className="feature-icon" />
+          <h4>Ensure Scalability</h4>
+          <p>Handle large student populations with ease.</p>
+        </div>
+
+        <div className="feature-item">
+          <FaChartPie className="feature-icon" />
+          <h4>Data-Driven Insights</h4>
+          <p>Gain valuable data from AI-powered assessments and proctoring.</p>
+        </div>
+
+        <div className="feature-item">
+          <FaMoneyBillWave className="feature-icon" />
+          <h4>Cost-Effective Solutions</h4>
+          <p>Protect your budget with flat-rate pricing and affordable options.</p>
+        </div>
+      </div>
+    </div> 
+      {/* third */}
+         <div className="proctoring-section">
+      <div className="proctoring-content">
+        <button className="proctoring-label">Proctoring As A Service</button>
+        <p className="proctoring-description">
+          NovaExam offers a range of proctoring services to meet the diverse needs of your institution.
+        </p>
+
+        <ul className="proctoring-list">
+          <li>
+            <FaCheckCircle className="check-icon" />
+            <strong>Automated Proctoring:</strong> Conduct exams with fully automated proctoring for convenience and efficiency.
+          </li>
+          
+          <li>
+            <FaCheckCircle className="check-icon" />
+            <strong>Secure Browser:</strong> Utilize a 100% safe anti-cheating lockdown browser.
+          </li>
+          <li>
+            <FaCheckCircle className="check-icon" />
+            <strong>Compatibility:</strong> Works seamlessly on any device and with low internet connectivity.
+          </li>
+          <li>
+            <FaCheckCircle className="check-icon" />
+            <strong>Candidate Verification:</strong> Prevent candidate impersonation with robust verification tools.
+          </li>
+        </ul>
+      </div>
+
+      <div className="proctoring-image">
+        <img src="https://examonline.in/wp-content/uploads/2025/04/13.png" alt="Proctoring Illustration" />
+      </div>
+    </div>
+    {/* last */}
+    <div className="last" style={{marginTop:'10vh',background:'#e8ebeaff'}}>
+      <p style={{fontSize:'3vh',display:'flex',justifyContent:'center',color:'black',fontFamily:'Trebuchet MS'}}>Revolutionize Your Online Assessments using ExamOnline. Contact us now for a complimentary demo and consultation.</p>
+        <div style={{display:'flex',justifyContent:'center',marginTop:'3vh'}}>
+        <button
+        style={{width:'25vh',height:'6vh'}}
+  className="contact-btn"
+  onClick={() => navigate('/Contact')}
+>
+  Contact Us
+</button>
+</div>
+    </div>
+          <footer className="footer">
+        <div className="footer-container">
+          <div className="footer-section">
+            <h4>Types Of Exams</h4>
+            <ul>
+              <li>Programming Exams</li>
+              <li>General Knowledge</li>
+              <li>Timed Quiz</li>
+              <li>Practice Test</li>
+              <li>Technical Quizzes</li>
+              <li>Trivia Quizzes</li>
+              <li>Machine Learning</li>
+            </ul>
+          </div>
+
+          <div className="footer-section">
+            <h4>INDUSTRY</h4>
+            <ul>
+              <li>Higher Education Sector</li>
+              <li>College-Level</li>
+              <li>Competitive Exam Preparation</li>
+              <li>IT & Coding Training</li>
+              <li>General Knowledge & Current Affairs</li>
+            </ul>
+          </div>
+
+          <div className="footer-section">
+            <h4>About Us</h4>
+            <ul>
+              <li>AboutUs</li>
+              <li>Company</li>
+              <li>Our Team</li>
+            </ul>
+          </div>
+
+          <div className="footer-section contact">
+            <h4>Contact Us:</h4>
+            <p><strong>Sales Department:</strong></p>
+            <p className="sales">Sales: +91 9831403680</p>
+            <p className="sales">✉ am6030920@gmail.com</p>
+            <br />
+            <p><strong>Support Department:</strong></p>
+            <p className="sales">📞 Support: +91 9831403680</p>
+            <p className="sales">✉ am6030920@gmail.com</p>
+            <p>Support All time</p>
+            <br />
+            <p><strong>Find Us On:</strong></p>
+            <div className="social-icons">
+              <a href="https://in.linkedin.com/"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRokEYt0yyh6uNDKL8uksVLlhZ35laKNQgZ9g&s" alt="LinkedIn" width="40" height="30" /></a>
+              <a href="https://www.facebook.com/"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsgEDLSHcm4l3PcMHNa2Nojf2jTs1jqEdxuA&s" alt="Facebook" width="40" height="30" /></a>
+              <a href="https://www.youtube.com/"><img src="https://upload.wikimedia.org/wikipedia/commons/6/62/YouTube_social_white_square_%282024%29.svg" alt="YouTube" width="40" height="30" /></a>
+              <a href="https://www.instagram.com/?hl=en"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Instagram_logo_2022.svg/250px-Instagram_logo_2022.svg.png" alt="Instagram" width="40" height="30" /></a>
+              <a href="https://x.com/"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Logo_of_Twitter.svg/640px-Logo_of_Twitter.svg.png" alt="Twitter" width="40" height="30" /></a>
+            </div>
+          </div>
+        </div>
+        <div className="footer-bottom">
+          <p>©2025 NovaExam</p>
+        </div>
+       
+      </footer>
     </div>
   );
 };

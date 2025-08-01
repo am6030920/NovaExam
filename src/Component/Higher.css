@@ -1,100 +1,198 @@
-.higher-education {
-  font-family: Poppins;
-  color: #333;
-  line-height: 1.6;
-  background-color: #fff;
+.contact-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 60px 80px;
+  background-color: #e4f8f1;
 }
 
-
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 2rem 1rem;
+.contact-textt {
+  flex: 1;
+  padding: 0;
+  margin: 0;
+  margin-top: -200px;
 }
 
-.hero {
-  background-color: #b2e7a2;
-  color: #fff;
-  padding: 4rem 1rem;
-  text-align: center;
+.contact-textt h1 {
+  font-size: 52px;
+  margin-bottom: 15px;
+  color: #1e1f1f;
+  font-family: futura,sans-serif;
+  margin-top: 29vh;
+  margin-left: 15vh;
+  
+} 
+
+.contact-textt p {
+    font-family: futura, sans-serif;
+  font-size: 16px;
+  color: #1b1b1b;
+  margin-left: 15vh;
 }
 
-.hero h1 {
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
+.contact-image {
+  flex: 1;
+  display: flex;
+  justify-content: center;
 }
 
-.hero p {
-  font-size: 1.25rem;
-  max-width: 700px;
-  margin: 0 auto;
+.contact-image img {
+  max-width: 60%;
+  height: auto;
+  border-radius: 10px;
 }
-
-/* Section Base */
-.section {
-  padding: 3rem 1rem;
-}
-
-.section h2 {
-  font-size: 2rem;
-  color: #b7f8aa;
-  margin-bottom: 1rem;
-}
-
-.section ul {
-  padding-left: 1.5rem;
-  list-style-type: disc;
-  margin-top: 1rem;
-}
-
-.section li {
-  margin-bottom: 0.5rem;
-}
-
-/* CTA Section */
-.cta {
-  background-color: #baf08d;
-  color: #363434;
-  text-align: center;
-  padding: 4rem 1rem;
-}
-
-.cta h2 {
-  font-size: 2rem;
-  margin-bottom: 1rem;
-}
-
-.cta-button {
-  background-color: #fff;
-  color: #003366;
+.contact-btn{
+  height: 5vh;
+  width: 19vh;
+  margin-top: 2vh;
+    margin-left: 15vh;
+  background-color: rgb(34, 172, 101);
   border: none;
-  padding: 0.75rem 2rem;
-  font-size: 1rem;
-  font-weight: 600;
+  color: #edf4f8;
+  border-radius: 5px;
+  font-weight: bold;
+
+  }
+  .contact-btn:hover{
+    background-color: #fff;
+    color: black;
+  }
+
+
+  /* second */
+
+
+  .features-section {
+  text-align: center;
+  padding: 50px 20px;
+  background-color: #fff;
+}
+
+.features-label {
+  background-color: #00c37a;
+  color: white;
+  border: none;
+  padding: 6px 14px;
+  font-size: 14px;
   border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+  margin-bottom: 10px;
 }
 
-.cta-button:hover {
-  background-color: #2c2b2b;
+.features-section h2 {
+  font-size: 24px;
+  margin-top: 10px;
+  font-weight: bold;
 }
 
-/* Responsive Adjustments */
-@media (min-width: 768px) {
-  .hero h1 {
-    font-size: 3rem;
-  }
+.underline {
+  width: 100px;
+  height: 3px;
+  background-color: #00c37a;
+  margin: 10px auto 30px auto;
+  border-radius: 5px;
+}
 
-  .hero p {
-    font-size: 1.5rem;
-  }
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 30px;
+  margin-top: 20px;
+  margin-left: 45vh;
+   margin-right: 45vh;
+   gap: 10vh;
+}
 
-  .section h2 {
-    font-size: 2.25rem;
-  }
+.feature-item {
+  text-align: center;
+  padding: 10px;
+  background-color: #f3f4f5;
+  height: 25vh;
+  border-radius: 10px;
+}
 
-  .cta h2 {
-    font-size: 2.5rem;
-  }
+.feature-icon {
+  font-size: 36px;
+  color: #00c37a;
+  margin-bottom: 10px;
+}
+
+.feature-item h4 {
+  font-weight: bold;
+  margin: 10px 0 5px;
+}
+
+.feature-item p {
+  font-size: 14px;
+  color: #333;
+}
+.proctoring-section {
+  display: flex;
+  
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 60px 30px;
+  gap: 40px;
+  flex-wrap: wrap;
+  margin-left: 25vh;
+   margin-right: 25vh;
+}
+
+.proctoring-content {
+  flex: 1;
+  min-width: 300px;
+
+}
+
+.proctoring-label {
+  background-color: #00c37a;
+  color: white;
+  border: none;
+  padding: 6px 14px;
+  font-size: 14px;
+  border-radius: 4px;
+  margin-bottom: 3vh;
+  display: flex;
+ 
+ 
+}
+
+.proctoring-description {
+  font-size: 16px;
+  color: #1a1a1a;
+  margin-bottom: 4vh;
+   font-family: Trebuchet MS;
+   font-size: 19px;
+}
+
+.proctoring-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+ 
+}
+
+.proctoring-list li {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 16px;
+  line-height: 1.5;
+  color: #000;
+}
+
+.check-icon {
+  color: #00c37a;
+  margin-right: 10px;
+  margin-top: 3px;
+  font-size: 18px;
+}
+
+.proctoring-image {
+  flex: 1;
+  min-width: 300px;
+  text-align: center;
+}
+
+.proctoring-image img {
+  width: 100%;
+  max-width: 500px;
 }
