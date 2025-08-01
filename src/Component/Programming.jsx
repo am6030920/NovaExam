@@ -179,13 +179,13 @@ const downloadCertificate = () => {
   };
 
   html2pdf().set(opt).from(cert).save().then(() => {
-    cert.style.display = "none"; // hide again after download
+    cert.style.display = "none"; 
   });
 };
 
 
 
-// Helper functions
+
 const saveResultToLocal = (examName, score, total) => {
   const existing = JSON.parse(localStorage.getItem("examHistory")) || [];
   const now = new Date().toLocaleString();
@@ -256,11 +256,16 @@ const Programming = () => {
     }
   };
 
-  const calculateResult = () => {
-    const finalScore = selectedOptions.reduce(
-      (acc, ans, i) => (ans === questionsData[i].correctAnswer ? acc + 1 : acc),
-      0
-    );
+ const calculateResult = () => {
+    let finalScore = 0;
+    selectedOptions.forEach((ans, i) => {
+      const correct = questionsData[i].correctAnswer;
+      if (Array.isArray(correct)) {
+        if (correct.includes(ans)) finalScore++;
+      } else {
+        if (ans === correct) finalScore++;
+      }
+    });
     setScore(finalScore);
     setShowResult(true);
     saveResultToLocal(examName, finalScore, questionsData.length);

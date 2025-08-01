@@ -27,7 +27,7 @@ const Welcome = () => {
             Designed specifically for educational institutions, coaching centers, and training platforms, NovaExam removes the traditional limitations of exam halls and brings assessments into the digital age — all while maintaining the same level of trust and reliability expected from physical exams.
             Start conducting secure, scalable, and smart online exams with NovaExam — where technology meets integrity.🏅
 
-            <img src="https://examonline.in/wp-content/uploads/2024/05/4.9-Ratings-1-1.png" alt="" srcset="" />
+           
 
           </p>
 

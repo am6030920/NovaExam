@@ -249,7 +249,7 @@ const Gk = () => {
 
   const downloadCertificate = () => {
     const cert = document.getElementById("certificate");
-    cert.style.display = "block"; // Show certificate to convert
+    cert.style.display = "block"; 
     const opt = {
       margin: 0,
       filename: `${examName}-Certificate.pdf`,
