@@ -84,7 +84,6 @@ function SignupPage() {
       return;
     }
 
-    // Save username to localStorage for certificate use
     localStorage.setItem("userName", formData.name);
 
     alert('🎉 Signup Successful! Welcome to NovaExam.');
@@ -105,7 +104,7 @@ function SignupPage() {
   return (
     <div className="signup-container">
       <div className="left-panel">
-        <h1 className="logo">
+        <h1 className="logo" style={{marginTop:'1vh',marginLeft:'-20vh'}}>
           <img
             className="logo1"
             src="https://dynamic.design.com/asset/logo/b777bb05-ef3a-40c1-81e5-c218a4b7311f/logo?logoTemplateVersion=1&v=638750126514600000&text=+NovaExam+online+exam+potel&layout=auto"
@@ -113,10 +112,10 @@ function SignupPage() {
           />
           NovaExam
         </h1>
-        <h6 className="title">Let's, <h6>Get Started!✈️</h6></h6>
-        <p className="subtitle">Create your account and put your knowledge to the test!🗯️</p>
+        <h6 className="title" style={{marginTop:'-0.1vh'}}>Let's, <h6 style={{marginTop:'-1vh'}}>Get Started!✈️</h6></h6>
+        <p className="subtitle" style={{marginTop:'-1vh'}}>Create your account and put your knowledge to the test!🗯️</p>
 
-        <form className="signup-form" onSubmit={handleSubmit}>
+        <form className="signup-form" onSubmit={handleSubmit} >
           <label>Name</label>
           <div className="input-group">
             <svg fill="#000000" width="20px" height="20px" viewBox="0 0 24 24">

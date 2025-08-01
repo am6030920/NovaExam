@@ -1,23 +1,24 @@
+/* Base Styles */
 body {
   margin: 0;
-  font-family: ADORN serif;
- 
+  font-family: 'ADORN serif', Georgia, serif;
   animation: fadeIn 1.2s ease-in-out;
-  
+  background-color: #0e0e0e;
+  color: white;
 }
 
 .signup-container {
   display: flex;
   height: 100vh;
-  background-color: #0e0e0e;
-  color: white;
   overflow: hidden;
+  flex-direction: row;
+  background-color: #0e0e0e;
 }
 
+/* Left Panel */
 .left-panel {
   width: 45%;
-  padding: 50px;
-  padding-left: 100px;
+  padding: 50px 50px 50px 100px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -26,18 +27,11 @@ body {
   animation: slideInLeft 1s ease-out;
 }
 
-.logo1 {
-  padding: 0;
-  margin: 0;
-  height: 40px;
-  width: 40px;
-  padding-right: 1%;
-}
-
+/* Right Panel */
 .right-panel {
-  padding: 0;
-  margin: 0;
   width: 55%;
+  margin: 0;
+  padding: 0;
   background-color: #fcfcfc;
   display: flex;
   align-items: center;
@@ -46,12 +40,19 @@ body {
 }
 
 .right-panel img {
-  padding: 0;
   padding-left: 105px;
   max-width: 100%;
   height: auto;
   border-radius: 20px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+/* Logo & Titles */
+.logo1 {
+  height: 40px;
+  width: 40px;
+  margin: 0;
+  padding-right: 1%;
 }
 
 .logo {
@@ -73,10 +74,11 @@ body {
 
 .subtitle {
   color: rgb(218, 218, 218);
-  margin: 1px 0 30px;
   font-size: 16px;
+  margin: 1px 0 30px;
 }
 
+/* Form Styles */
 .signup-form label {
   margin-top: 10px;
   font-size: 15px;
@@ -86,7 +88,7 @@ body {
 .input-group {
   display: flex;
   align-items: center;
- background:rgb(16 14 14); 
+  background: rgb(16, 14, 14);
   border: 1px solid;
   padding: 10px;
   border-radius: 8px;
@@ -101,21 +103,21 @@ body {
 }
 
 .input-group input {
-  background:rgb(16 14 14); 
+  background: rgb(16, 14, 14);
   border: none;
   outline: none;
   color: white;
   flex: 1;
   font-size: 16px;
   margin-left: 10px;
-  caret-color: #00b894; /* optional: custom cursor color */
+  caret-color: #00b894;
 }
-
 
 .input-group .icon {
   color: #9e9e9e;
 }
 
+/* Buttons & Links */
 .create-account {
   margin-top: 30px;
   background-color: #0076ff;
@@ -124,9 +126,8 @@ body {
   border-radius: 8px;
   color: white;
   font-size: 16px;
-  cursor: pointer;
-  justify-items: center;
   font-weight: 600;
+  cursor: pointer;
   width: 82%;
   transition: background 0.3s, color 0.3s, transform 0.2s;
 }
@@ -138,20 +139,19 @@ body {
 }
 
 .forgot-password {
-  margin-top: -15px;
+  display: block;
+  text-align: right;
   color: #3498db;
   font-size: 14px;
-  text-align: right;
-  display: block;
   text-decoration: none;
   padding-right: 105px;
+  margin-top: -15px;
 }
 
 .forgot-password:hover {
   color: #00b894;
   text-decoration: underline;
 }
-
 
 .have {
   display: flex;
@@ -169,6 +169,11 @@ body {
 .log:hover {
   text-decoration: underline;
   color: #00b894;
+}
+
+.start {
+  color: white;
+  text-decoration: none;
 }
 
 /* Animations */
@@ -202,7 +207,54 @@ body {
     opacity: 1;
   }
 }
-.start{
-  color: white;
-  text-decoration: none;
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .signup-container {
+    flex-direction: column;
+  }
+
+  .left-panel,
+  .right-panel {
+    width: 100%;
+    height: auto;
+    padding: 40px;
+    text-align: center;
+  }
+
+  .right-panel img {
+    padding: 0;
+    margin-top: 20px;
+    max-width: 80%;
+  }
+
+  .forgot-password {
+    padding-right: 0;
+    text-align: center;
+    margin-top: 10px;
+  }
+}
+
+@media (max-width: 600px) {
+  .title {
+    font-size: 32px;
+  }
+
+  .subtitle {
+    font-size: 14px;
+  }
+
+  .input-group,
+  .create-account {
+    width: 100%;
+  }
+
+  .left-panel,
+  .right-panel {
+    padding: 20px;
+  }
+
+  .have {
+    font-size: 14px;
+  }
 }

@@ -42,7 +42,7 @@ function LoginPage() {
   return (
     <div className="signup-container">
       <div className="left-panel">
-        <div className="logo2">
+        <div className="logo2" style={{marginTop:'5vh' ,marginLeft:'-6vh'}}>
           <h1 className="logo">
             <img
               className="logo1"
@@ -53,19 +53,20 @@ function LoginPage() {
           </h1>
         </div>
 
-        <h6 className="title">You’re back....👀</h6>
-        <span className="span">Welcome!</span>
+        <h6 className="title" style={{marginTop:'-5vh'}}> You’re back....👀</h6>
+        <span className="span" style={{marginTop:'-3vh'}}>Welcome!</span>
         <p className="subtitle">Access your account and continue your journey....🧠</p>
 
         <form className="signup-form" onSubmit={handleSubmit}>
-          <label htmlFor="email">Email</label>
-          <div className="input-group">
+          <label htmlFor="email" >Email</label>
+          <div className="input-group" style={{height:'3vh'}}>
             <svg
               width="20px"
               height="20px"
               viewBox="0 0 24 24"
               xmlns="http://www.w3.org/2000/svg"
               className="icon line-color"
+              style={{marginTop:'2.8vh'}}
             >
               <polygon
                 points="17 19 21 19 21 7.43 17 10.86 17 19"

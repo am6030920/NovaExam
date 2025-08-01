@@ -450,7 +450,7 @@ display: 'none',
     alignItems: 'center'
   }}>
     <div style={{ textAlign: 'left' }}>
-      <p style={{  fontSize: '32px', marginBottom: '1px',fontFamily:'Brush Script MT',marginLeft:'40px' }}>Akash Maity</p>
+      <p style={{  fontSize: '32px', marginBottom: '1px',fontFamily:'Brush Script MT',marginLeft:'40px' ,marginLeft:'-0vh'}}>Akash Maity</p>
       <p style={{color:"black",marginTop:'-2vh'}}>_____________________</p>
       <p style={{ fontSize: '13px' }}>Founder & Project Head, NovaExam</p>
     </div>
