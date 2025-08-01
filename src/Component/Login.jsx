@@ -8,41 +8,58 @@ function LoginPage() {
   const [formData, setFormData] = useState({
     email: '',
     password: '',
-    errorMessage: '',
   });
+
+  const [showPassword, setShowPassword] = useState(false);
+  const [customMessage, setCustomMessage] = useState('');
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
       ...formData,
       [name]: value,
-      errorMessage: '',
     });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    const emailRegex = /^[^\s@]+@gmail\.com$/;
+    const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[@#$%^&+=!]).{9,}$/;
+
     if (!formData.email || !formData.password) {
-      setFormData({ ...formData, errorMessage: 'Please fill in all fields.' });
+      setCustomMessage("⚠️ Please fill in all fields.");
+      setTimeout(() => setCustomMessage(''), 3000);
       return;
     }
 
-    console.log('NovaExam Login Data:', formData);
+    if (!emailRegex.test(formData.email)) {
+      setCustomMessage("❌ Email must be a valid @gmail.com address.");
+      setTimeout(() => setCustomMessage(''), 3000);
+      return;
+    }
 
-    setFormData({
-      email: '',
-      password: '',
-      errorMessage: '',
-    });
+    if (!passwordRegex.test(formData.password)) {
+      setCustomMessage("❌ Password must be 9+ chars with 1 uppercase, 1 number, and 1 special char.");
+      setTimeout(() => setCustomMessage(''), 4000);
+      return;
+    }
 
-    navigate('/Home');
+    console.log("NovaExam Login Data:", formData);
+    setCustomMessage("✅ Login Successful!");
+
+    setTimeout(() => {
+      setCustomMessage('');
+      navigate('/Home');
+    }, 2000);
+
+    setFormData({ email: '', password: '' });
   };
 
   return (
     <div className="signup-container">
       <div className="left-panel">
-        <div className="logo2" style={{marginTop:'5vh' ,marginLeft:'-6vh'}}>
+        <div className="logo2" style={{ marginTop: '2vh', marginLeft: '-6vh' }}>
           <h1 className="logo">
             <img
               className="logo1"
@@ -53,13 +70,13 @@ function LoginPage() {
           </h1>
         </div>
 
-        <h6 className="title" style={{marginTop:'-5vh'}}> You’re back....👀</h6>
-        <span className="span" style={{marginTop:'-3vh'}}>Welcome!</span>
+        <h6 className="title" style={{ marginTop: '-5vh' }}>You’re back....👀</h6>
+        <span className="span" style={{ marginTop: '-3vh' }}>Welcome!</span>
         <p className="subtitle">Access your account and continue your journey....🧠</p>
 
         <form className="signup-form" onSubmit={handleSubmit}>
-          <label htmlFor="email" >Email</label>
-          <div className="input-group" style={{height:'3vh'}}>
+          <label htmlFor="email">Email</label>
+          <div className="input-group" style={{height:'4vh'}}>
             <svg
               width="20px"
               height="20px"
@@ -117,6 +134,7 @@ function LoginPage() {
               height="20px"
               viewBox="0 0 15 15"
               xmlns="http://www.w3.org/2000/svg"
+              style={{ marginTop: '8px', marginRight: '10px' }}
             >
               <path
                 d="M12.5 8.5V7.5C12.5 6.94772 12.0523 6.5 11.5 6.5H1.5C0.947715 6.5 0.5 6.94772 0.5 7.5V13.5C0.5 14.0523 0.947715 14.5 1.5 14.5H11.5C12.0523 14.5 12.5 14.0523 12.5 13.5V12.5M12.5 8.5H8.5C7.39543 8.5 6.5 9.39543 6.5 10.5C6.5 11.6046 7.39543 12.5 8.5 12.5H12.5M12.5 8.5C13.6046 8.5 14.5 9.39543 14.5 10.5C14.5 11.6046 13.6046 12.5 12.5 12.5M3.5 6.5V3.5C3.5 1.84315 4.84315 0.5 6.5 0.5C8.15685 0.5 9.5 1.84315 9.5 3.5V6.5M12 10.5H13M10 10.5H11M8 10.5H9"
@@ -124,7 +142,7 @@ function LoginPage() {
               />
             </svg>
             <input
-              type="password"
+              type={showPassword ? "text" : "password"}
               id="password"
               name="password"
               placeholder="********"
@@ -132,23 +150,38 @@ function LoginPage() {
               onChange={handleChange}
               required
             />
+            <span
+              onClick={() => setShowPassword(!showPassword)}
+              style={{ cursor: 'pointer', marginLeft: '8px', color: 'white' }}
+            >
+              {showPassword ? '🙈' : '👁️'}
+            </span>
           </div>
-
-          {formData.errorMessage && (
-            <p className="error-message">{formData.errorMessage}</p>
-          )}
 
           <div className="have1">
             <Link to="/forgot-password" className="logp">Forgot Password?</Link>
           </div>
 
           <button type="submit" className="create-account">
-            Welcome back
+            Submitted 😀
           </button>
 
           <div className="have">
             <span>Don't have an account? <Link to="/signup" className="log">Create one</Link></span>
           </div>
+
+          {customMessage && (
+            <div className="custom-alert" style={{
+              marginTop: '15px',
+              color: 'white',
+              background: '#444',
+              padding: '10px',
+              borderRadius: '8px',
+              textAlign: 'center',
+            }}>
+              {customMessage}
+            </div>
+          )}
         </form>
       </div>
 

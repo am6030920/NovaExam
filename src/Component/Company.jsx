@@ -1,11 +1,12 @@
-import { useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import './Company.css';
 
 const Company = () => {
+  const navigate =useNavigate();   
   return (
     <div className="company-page">
       
-      <section className="section intro">
+      <div className="section intro" >
         <div className="image">
           <img src="https://dynamic.design.com/asset/logo/b777bb05-ef3a-40c1-81e5-c218a4b7311f/logo?logoTemplateVersion=1&v=638750126514600000&text=+NovaExam+online+exam+potel&layout=auto" alt="Exam" />
         </div>
@@ -16,10 +17,16 @@ const Company = () => {
             Our mission is to provide the most secure, efficient, and cost-effective solution to educational institutions and corporations across the world.
           </p>
           <div style={{paddingTop:"15px",marginLeft:"15px"}}>
-          <button style={{width:"20vh",height:"5vh",background:"#4078f1ff",color:"#fff",border:"none",fontWeight:"bold",}}>OUR MISSION</button>
+          {/* <button style={{width:"20vh",height:"5vh",background:"#4078f1ff",color:"#fff",border:"none",fontWeight:"bold",}}>OUR MISSION</button> */}
+          <button
+          onClick={() =>navigate('/Contact')}
+          style={{width:"20vh",height:"5vh",background:"#4078f1ff",color:"#fff",border:"none",fontWeight:"bold",}}>
+            Contact Us
+            </button>
+            
           </div>
         </div>
-      </section>
+      </div>
 
       <section className="section about">
         <div className="content">

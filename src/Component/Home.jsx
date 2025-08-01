@@ -56,7 +56,7 @@ function Home() {
       <option value="/College">College-Level</option>
       <option value="/Competitive">Competitive Prep</option>
       <option value="/It">IT Training</option>
-      <option value="/Genaral">GK & Current Affairs</option>
+      <option value="/Genaral">Innovation & Development</option>
     </select>
     <select defaultValue="" required className="custom-select" onChange={handleAboutChange}>
       <option value="" disabled>About Us</option>
@@ -251,7 +251,7 @@ function Home() {
               <li>College-Level</li>
               <li>Competitive Exam Preparation</li>
               <li>IT & Coding Training</li>
-              <li>General Knowledge & Current Affairs</li>
+              <li>Innovation & Development</li>
             </ul>
           </div>
 

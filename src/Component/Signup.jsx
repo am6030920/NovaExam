@@ -86,10 +86,10 @@ function SignupPage() {
 
     localStorage.setItem("userName", formData.name);
 
-    alert('🎉 Signup Successful! Welcome to NovaExam.');
+    alert('🎉 Signup Successful! go to logIn.');
 
     console.log('NovaExam Signup Data:', formData);
-    navigate('/home');
+    navigate('/login');
 
     setFormData({
       name: '',
