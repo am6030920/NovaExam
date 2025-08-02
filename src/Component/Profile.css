@@ -279,7 +279,7 @@
   margin-top: 12px;
 }
 
-.history-btn, .logout-btn, .home-btn, .edit-button {
+.history-btn, .logout-btn, .home-btn, .edit-button, .Dowload {
   padding: 8px 14px;
   border: none;
   border-radius: 8px;
@@ -287,6 +287,20 @@
   color: white;
   cursor: pointer;
   font-weight: 600;
+}
+
+.logout-btn:hover{
+  background-color: #1e1bd6;
+  color: #f0fdfb;
+  
+}
+.Dowload:hover{
+    background-color: #1e1bd6;
+  color: #f0fdfb;
+}
+.history-btn:hover{
+   background-color: #1e1bd6;
+  color: #f0fdfb;
 }
 
 .exam-history {
@@ -304,4 +318,25 @@
   padding: 8px;
   border: 1px solid #ccc;
   text-align: center;
+}
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.modal-content {
+  background: white;
+  padding: 30px;
+  border-radius: 10px;
+  max-width: 500px;
+  width: 90%;
+  box-shadow: 0 0 10px #000;
 }

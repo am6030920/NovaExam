@@ -27,7 +27,7 @@ function Home() {
 
   return (
     <div style={{ background: 'white' }}>
-    <div className="nova-navbar" style={{ fontFamily: "Poppins" }}>
+    <div className="nova-navbar" style={{ fontFamily: "Poppins",height:'7vh'}}>
   <div className="logo-section">
     <img
       src="https://dynamic.design.com/asset/logo/b777bb05-ef3a-40c1-81e5-c218a4b7311f/logo?logoTemplateVersion=1&v=638750126514600000&text=+NovaExam+online+exam+potel&layout=auto"
@@ -64,6 +64,7 @@ function Home() {
       <option value="/About">Our Team</option>
       <option value="/contact">Contact</option>
       <option value="/career">Career</option>
+       <option value="/home">Home</option>
     </select>
 
 

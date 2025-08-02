@@ -1,30 +1,56 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Profile.css';
+import html2pdf from 'html2pdf.js';
 
 const Profile = () => {
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
-    name: 'NovaExam',
-    Email: 'email@gmail.com',
-    phone: '+91 00-000-00000',
-    mobile: '+91 00-000-00000',
-    address: 'Enter Your Address',
-    College: 'Enter Your College',
-    Github: 'Enter Your Link',
-    Linkedin: 'Enter Your Link'
+    name: localStorage.getItem("studentName") || 'NovaExam',
+    Email: localStorage.getItem("studentEmail") || 'email@gmail.com',
+    phone: localStorage.getItem("studentPhone") || '+91 00-000-00000',
+    mobile: localStorage.getItem("studentMobile") || '+91 00-000-00000',
+    address: localStorage.getItem("studentAddress") || 'Enter Your Address',
+    College: localStorage.getItem("studentCollege") || 'Enter Your College',
+    Github: localStorage.getItem("studentGithub") || 'Enter Your Link',
+    Linkedin: localStorage.getItem("studentLinkedin") || 'Enter Your Link'
   });
 
-  const [image, setImage] = useState("https://cdn-icons-png.flaticon.com/512/3135/3135715.png");
+  const [image, setImage] = useState(localStorage.getItem("studentImage") || "https://cdn-icons-png.flaticon.com/512/3135/3135715.png");
   const [editing, setEditing] = useState(false);
   const [showHistory, setShowHistory] = useState(false);
   const [examHistory, setExamHistory] = useState([]);
+
+  const [showCertificates, setShowCertificates] = useState(false);
+  const [certificates, setCertificates] = useState([]);
 
   useEffect(() => {
     const history = JSON.parse(localStorage.getItem("examHistory")) || [];
     setExamHistory(history);
   }, []);
+
+  useEffect(() => {
+    const storedCertificates = JSON.parse(localStorage.getItem('certificates')) || [];
+    setCertificates(storedCertificates);
+  }, []);
+
+  useEffect(() => {
+    if (!editing) {
+      localStorage.setItem("studentName", formData.name);
+      localStorage.setItem("studentEmail", formData.Email);
+      localStorage.setItem("studentPhone", formData.phone);
+      localStorage.setItem("studentMobile", formData.mobile);
+      localStorage.setItem("studentAddress", formData.address);
+      localStorage.setItem("studentCollege", formData.College);
+      localStorage.setItem("studentGithub", formData.Github);
+      localStorage.setItem("studentLinkedin", formData.Linkedin);
+    }
+  }, [editing, formData]);
+
+  useEffect(() => {
+    localStorage.setItem("studentImage", image);
+  }, [image]);
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -42,20 +68,54 @@ const Profile = () => {
 
   const handleLogout = () => {
     if (window.confirm("Are you sure you want to logout?")) {
-
+      localStorage.removeItem("studentName");
+      localStorage.removeItem("studentEmail");
+      localStorage.removeItem("studentPhone");
+      localStorage.removeItem("studentMobile");
+      localStorage.removeItem("studentAddress");
+      localStorage.removeItem("studentCollege");
+      localStorage.removeItem("studentGithub");
+      localStorage.removeItem("studentLinkedin");
+      localStorage.removeItem("studentImage");
       navigate("/");
     }
   };
 
   const goHome = () => {
     if (window.confirm("Back To Home...")) {
-    
       navigate("/Home");
     }
   };
 
+  const downloadCertificate = (cert) => {
+    const container = document.createElement('div');
+    container.innerHTML = `
+      <div style="width: 1000px; height: 700px; padding: 50px; border: 10px solid #1a1a1a; text-align: center; font-family: 'Georgia'; position: relative;">
+        <img src="your-logo-url-here" alt="Logo" style="position: absolute; top: 30px; left: 40px; height: 80px;" />
+        <h1 style="margin-top: 100px; font-size: 40px;">Certificate of Achievement</h1>
+        <p style="font-size: 20px;">This is to certify that</p>
+        <h2 style="font-size: 30px; font-weight: bold;">${formData.name}</h2>
+        <p style="font-size: 18px;">has successfully completed the <strong>${cert.examName || "NovaExam Test"}</strong> exam with a score of</p>
+        <h3 style="font-size: 24px;">${cert.score}/30</h3>
+        <p style="font-size: 18px;">Grade: <strong>${cert.grade}</strong></p>
+        <p style="position: absolute; bottom: 30px; left: 50px;">Date: ${cert.date}</p>
+        <p style="position: absolute; bottom: 30px; right: 50px;">Akash Maity, NovaExam Head</p>
+      </div>
+    `;
+
+    const opt = {
+      margin: 0,
+      filename: `${cert.examName || 'NovaExam'}-Certificate.pdf`,
+      image: { type: 'jpeg', quality: 1 },
+      html2canvas: { scale: 2, useCORS: true, backgroundColor: null },
+      jsPDF: { unit: 'pt', format: 'a4', orientation: 'landscape' },
+    };
+
+    html2pdf().set(opt).from(container).save();
+  };
+
   return (
-    <div className='bg'>
+    <div className='bg' style={{ fontFamily: 'poppins' }}>
       <p className="profile-title">
         Your <span className="profile-highlight">Profile ❤️</span>
       </p>
@@ -139,6 +199,40 @@ const Profile = () => {
           <button className="edit-button" onClick={() => setEditing(!editing)}>
             {editing ? 'Save' : 'Edit'}
           </button>
+
+          {/* Certificate Button */}
+          <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '-4vh' }}>
+            <button className='Dowload' onClick={() => setShowCertificates(true)}>Your Certificate</button>
+          </div>
+
+          {/* Certificate Modal */}
+          {showCertificates && (
+            <div className="modal">
+              <div className="modal-content">
+                <h1 style={{ marginBottom: '10px' }}>🎓 Your Certificates</h1>
+                {certificates.length === 0 ? (
+                  <p>No certificates found.</p>
+                ) : (
+                  <ul>
+                    {certificates.map((cert, index) => (
+                      <li key={index} style={{ marginBottom: '15px' }}>
+                        <span>#{index + 1} - Score: {cert.score}/30 | Grade: {cert.grade} | Date: {cert.date}</span>
+                        <button
+                          style={{ marginLeft: '15px' }}
+                          onClick={() => downloadCertificate(cert)}
+                        >
+                          Download
+                        </button>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+                <button onClick={() => setShowCertificates(false)} style={{ marginTop: '20px' }}>
+                  Close
+                </button>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>

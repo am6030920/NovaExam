@@ -1,13 +1,104 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Career.css';
 import "./Home.css"
 
 const Career = () => {
+   const navigate = useNavigate();
+  const [isShrunk, setIsShrunk] = useState(false);
+
+  const handleExamNavigation = (e) => {
+    const selectedPath = e.target.value;
+    if (selectedPath) {
+      navigate(selectedPath);
+    }
+  };
+
+  const handleAboutChange = (e) => {
+    const selectedPath = e.target.value;
+    if (selectedPath) {
+      navigate(selectedPath);
+    }
+  };
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const offset = window.scrollY;
+      setIsShrunk(offset > 50);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+  
 
   return (
     <div style={{ padding: "0", margin: "0", background: "white" }}>
+            <div className={`nova-navbar ${isShrunk ? 'shrink' : ''}`} style={{ fontFamily: "Poppins" }}>
+        <div className="logo-section">
+          <img
+            src="https://dynamic.design.com/asset/logo/b777bb05-ef3a-40c1-81e5-c218a4b7311f/logo?logoTemplateVersion=1&v=638750126514600000&text=+NovaExam+online+exam+potel&layout=auto"
+            alt="NovaExam Logo"
+            className="logo"
+          />
+          <h1 className="site-title">
+            Nova<span className="light-title">Exam</span>
+          </h1>
+        </div>
 
-      <div className="career" style={{ background: '#d8f6f0ff' }}>
+        <div className="dropdown-section" style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
+          <select defaultValue="" required className="custom-select" onChange={handleExamNavigation}>
+            <option value="" disabled>Type of Test</option>
+            <option value="/Programming">Programming Test</option>
+            <option value="/Gk">GK Test</option>
+            <option value="/Timed">Timed Quiz</option>
+            <option value="/Practice">Practice MCQ</option>
+            <option value="/Technical">Technical Test</option>
+            <option value="/Trivia">Trivia Exam</option>
+            <option value="/Ml">Machine Learning Test</option>
+          </select>
+
+          <select defaultValue="" required className="custom-select" onChange={handleAboutChange}>
+            <option value="" disabled>Industry</option>
+            <option value="/Higher">Higher Education</option>
+            <option value="/College">College-Level</option>
+            <option value="/Competitive">Competitive Prep</option>
+            <option value="/It">IT Training</option>
+            <option value="/Genaral">Innovation & Development</option>
+          </select>
+
+          <select defaultValue="" required className="custom-select" onChange={handleAboutChange}>
+            <option value="" disabled>About Us</option>
+            <option value="/company">Company</option>
+            <option value="/About">Our Team</option>
+            <option value="/contact">Contact</option>
+            <option value="/career">Career</option>
+            <option value="/home">Home</option>
+
+          </select>
+
+          <div
+            className="profile-icon"
+            onClick={() => navigate('/Profile')}
+            style={{
+              cursor: 'pointer',
+              fontSize: '24px',
+              padding: '8px',
+              borderRadius: '50%',
+              backgroundColor: '#e4f8f1',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+            title="Your Profile"
+          >
+            👤
+          </div>
+        </div>
+      </div>
+
+
+      <div className="career" style={{ background: '#d8f6f0ff' ,marginTop:'15.5vh'}}>
         <div className="career-banner">
           <div className="banner-text">
             <h1>

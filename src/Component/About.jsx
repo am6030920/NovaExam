@@ -1,7 +1,34 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './About.css';
 
 const About = () => {
+  const navigate = useNavigate();
+  const [isShrunk, setIsShrunk] = useState(false);
+
+  const handleExamNavigation = (e) => {
+    const selectedPath = e.target.value;
+    if (selectedPath) {
+      navigate(selectedPath);
+    }
+  };
+
+  const handleAboutChange = (e) => {
+    const selectedPath = e.target.value;
+    if (selectedPath) {
+      navigate(selectedPath);
+    }
+  };
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const offset = window.scrollY;
+      setIsShrunk(offset > 50);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
   const headingTranslations = [
     "Meet The Team Behind NovaExam",
     "नोवाएग्जाम के पीछे की टीम से मिलें",
@@ -38,9 +65,72 @@ const About = () => {
 
   return (
     <div className='About' style={{ background: '#fff', margin: '0', padding: '0' }}>
+       <div className={`nova-navbar ${isShrunk ? 'shrink' : ''}`} style={{ fontFamily: "Poppins" }}>
+        <div className="logo-section">
+          <img
+            src="https://dynamic.design.com/asset/logo/b777bb05-ef3a-40c1-81e5-c218a4b7311f/logo?logoTemplateVersion=1&v=638750126514600000&text=+NovaExam+online+exam+potel&layout=auto"
+            alt="NovaExam Logo"
+            className="logo"
+          />
+          <h1 className="site-title">
+            Nova<span className="light-title">Exam</span>
+          </h1>
+        </div>
+
+        <div className="dropdown-section" style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
+          <select defaultValue="" required className="custom-select" onChange={handleExamNavigation}>
+            <option value="" disabled>Type of Test</option>
+            <option value="/Programming">Programming Test</option>
+            <option value="/Gk">GK Test</option>
+            <option value="/Timed">Timed Quiz</option>
+            <option value="/Practice">Practice MCQ</option>
+            <option value="/Technical">Technical Test</option>
+            <option value="/Trivia">Trivia Exam</option>
+            <option value="/Ml">Machine Learning Test</option>
+          </select>
+
+          <select defaultValue="" required className="custom-select" onChange={handleAboutChange}>
+            <option value="" disabled>Industry</option>
+            <option value="/Higher">Higher Education</option>
+            <option value="/College">College-Level</option>
+            <option value="/Competitive">Competitive Prep</option>
+            <option value="/It">IT Training</option>
+            <option value="/Genaral">Innovation & Development</option>
+          </select>
+
+          <select defaultValue="" required className="custom-select" onChange={handleAboutChange}>
+            <option value="" disabled>About Us</option>
+            <option value="/company">Company</option>
+            <option value="/About">Our Team</option>
+            <option value="/contact">Contact</option>
+            <option value="/career">Career</option>
+                   <option value="/home">Home</option>
+
+          </select>
+
+          <div
+            className="profile-icon"
+            onClick={() => navigate('/Profile')}
+            style={{
+              cursor: 'pointer',
+              fontSize: '24px',
+              padding: '8px',
+              borderRadius: '50%',
+              backgroundColor: '#e4f8f1',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+            title="Your Profile"
+          >
+            👤
+          </div>
+        </div>
+      </div>
+
       <div className="First-Box" style={{
         background: 'linear-gradient(90deg, #d5e2f6ff, #d8eaf2ff, #f2f9f7ff, #dff4ecff, #edf0f7ff, #e2e2e2)',
-        fontFamily: 'futura,sans-serif', margin: '8px 30px', borderRadius: '20px', height: '550px'
+        fontFamily: 'futura,sans-serif', margin: '8px 30px', borderRadius: '20px', height: '550px',marginTop:'15vh'
 
       }}>
         <h1 className='First-H1 animated-heading'>{headingTranslations[headingIndex]}</h1>

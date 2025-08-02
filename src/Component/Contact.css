@@ -246,3 +246,35 @@ body {
 }
 
 
+.nova-navbar {
+  position: fixed;
+  top: 0;
+  background-color: white;
+  transition: all 0.3s ease;
+  z-index: 999;
+  padding: 20px 30px;
+}
+
+.nova-navbar.shrink {
+  padding: 10px 20px;
+  background-color: #f9f9f9;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.logo-section h1 {
+  font-size: 32px;
+  transition: font-size 0.3s ease;
+}
+
+.nova-navbar.shrink .logo-section h1 {
+  font-size: 24px;
+}
+
+
+.nova-navbar.shrink .logo {
+  height: 35px;
+}
+
+.contact-page {
+  margin-top: 100px; /* to avoid overlap with fixed navbar */
+}

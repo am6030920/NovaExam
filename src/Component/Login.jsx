@@ -25,7 +25,6 @@ function LoginPage() {
     e.preventDefault();
 
     const emailRegex = /^[^\s@]+@gmail\.com$/;
-    const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[@#$%^&+=!]).{9,}$/;
 
     if (!formData.email || !formData.password) {
       setCustomMessage("⚠️ Please fill in all fields.");
@@ -39,19 +38,20 @@ function LoginPage() {
       return;
     }
 
-    if (!passwordRegex.test(formData.password)) {
-      setCustomMessage("❌ Password must be 9+ chars with 1 uppercase, 1 number, and 1 special char.");
-      setTimeout(() => setCustomMessage(''), 4000);
-      return;
+    // Get stored credentials from localStorage
+    const storedEmail = localStorage.getItem("userEmail");
+    const storedPassword = localStorage.getItem("userPassword");
+
+    if (formData.email === storedEmail && formData.password === storedPassword) {
+      setCustomMessage("✅ Login Successful!");
+      setTimeout(() => {
+        setCustomMessage('');
+        navigate('/Home');
+      }, 2000);
+    } else {
+      setCustomMessage("❌ Invalid email or password.");
+      setTimeout(() => setCustomMessage(''), 3000);
     }
-
-    console.log("NovaExam Login Data:", formData);
-    setCustomMessage("✅ Login Successful!");
-
-    setTimeout(() => {
-      setCustomMessage('');
-      navigate('/Home');
-    }, 2000);
 
     setFormData({ email: '', password: '' });
   };
@@ -76,14 +76,14 @@ function LoginPage() {
 
         <form className="signup-form" onSubmit={handleSubmit}>
           <label htmlFor="email">Email</label>
-          <div className="input-group" style={{height:'4vh'}}>
+          <div className="input-group" style={{ height: '4vh' }}>
             <svg
               width="20px"
               height="20px"
               viewBox="0 0 24 24"
               xmlns="http://www.w3.org/2000/svg"
               className="icon line-color"
-              style={{marginTop:'2.8vh'}}
+              style={{ marginTop: '2.8vh' }}
             >
               <polygon
                 points="17 19 21 19 21 7.43 17 10.86 17 19"

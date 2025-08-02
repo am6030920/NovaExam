@@ -23,6 +23,7 @@
   },
   "dependencies": {
     "@auth0/auth0-react": "^2.3.0",
+    "@emailjs/browser": "^4.4.1",
     "@hugeicons/react": "^1.0.5",
     "bcryptjs": "^3.0.2",
     "bootstrap": "^5.3.7",
