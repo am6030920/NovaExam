@@ -1,10 +1,16 @@
 import { Link } from "react-router-dom";
-import React from 'react';
-import './Navbar.css'; 
+import React, { useEffect, useState } from 'react';
+import './Navbar.css';
 
 const Navbar = () => {
+  const [show, setShow] = useState(false);
+
+  useEffect(() => {
+    setTimeout(() => setShow(true), 100); // Fade-in animation
+  }, []);
+
   return (
-    <div className="Nav">
+    <div className={`Nav ${show ? "fade-slide-in" : ""}`}>
       <div className="branding">
         <img
           className="name"
@@ -16,8 +22,8 @@ const Navbar = () => {
         </div>
       </div>
       <div className="auth-buttons">
-        <Link className="Log" to="/login">Login</Link>
-        <Link className="signup" to="/signup">SignUp</Link>
+        <Link className="Log" to="/login">Sign In</Link>
+        <Link className="signup" to="/signup">Get Started</Link>
       </div>
     </div>
   );

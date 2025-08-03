@@ -127,7 +127,7 @@ const handleSubmit = (e) => {
     return (
       <div className="signup-container">
         <div className="left-panel">
-          <h1 className="logo" style={{marginTop:'1vh',marginLeft:'-20vh'}}>
+          <h1 className="logo" style={{marginTop:'1vh',marginLeft:'-15vh'}}>
             <img
               className="logo1"
               src="https://dynamic.design.com/asset/logo/b777bb05-ef3a-40c1-81e5-c218a4b7311f/logo?logoTemplateVersion=1&v=638750126514600000&text=+NovaExam+online+exam+potel&layout=auto"

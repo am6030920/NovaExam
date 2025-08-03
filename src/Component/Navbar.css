@@ -91,7 +91,7 @@
   font-weight: 600;
   color: #fff;
   background: linear-gradient(120deg, #5bd28b, #20b4a8);
-  border: none;
+  border: 1px solid rgb(255, 255, 255);
   border-radius: 50px;
   text-decoration: none;
   cursor: pointer;
@@ -104,6 +104,7 @@
   z-index: 1;
 }
 
+/* Glow border behind the button */
 .signup::before,
 .Log::before {
   content: "";
@@ -122,19 +123,27 @@
   animation: borderGlow 6s linear infinite;
 }
 
+/* Show the glowing border on hover */
 .signup:hover::before,
 .Log:hover::before {
   opacity: 1;
 }
 
+/* Base hover effect */
 .signup:hover,
 .Log:hover {
   background-position: right center;
   transform: translateY(-4px) scale(1.05);
-  box-shadow: 0 12px 24px rgba(56, 239, 125, 0.3), 0 0 40px rgba(17, 153, 142, 0.5);
+  /* Keep original box-shadow and add a new stronger shadow on top */
+  box-shadow: 
+    0 0 15px rgba(56, 239, 125, 0.4),   /* original glow */
+    0 0 30px rgba(17, 153, 142, 0.4),   /* original glow */
+    0 12px 24px rgba(56, 239, 125, 0.3), /* new stronger glow */
+    0 0 40px rgba(17, 153, 142, 0.5);    /* new stronger glow */
   color: #051937;
 }
 
+/* Light streak animation */
 .signup::after,
 .Log::after {
   content: '';
@@ -153,6 +162,7 @@
   transition: all 0.5s;
 }
 
+/* Move the light streak across the button on hover */
 .signup:hover::after,
 .Log:hover::after {
   left: 120%;
@@ -175,6 +185,7 @@
     background-position: 400%;
   }
 }
+
 
 
 @media (max-width: 1024px) {
@@ -234,3 +245,4 @@
     padding: 10px 20px;
   }
 }
+

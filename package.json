@@ -33,7 +33,7 @@
     "html2pdf.js": "^0.10.3",
     "jsonwebtoken": "^9.0.2",
     "lucide-react": "^0.525.0",
-    "mongoose": "^8.16.5",
+    "mongoose": "^8.17.0",
     "pdfkit": "^0.17.1",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
