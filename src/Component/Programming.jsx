@@ -372,7 +372,7 @@ const Programming = () => {
 
         {/* start */}
 <div id="certificate" style={{
-display: 'none',
+display: '',
     width: '660px',
     height: '440px',
     margin: '30px auto',
@@ -441,11 +441,6 @@ display: 'none',
   </p>
 
 <p style={{ fontSize: '16px',color:'black', marginTop:'-1vh'}}>Grade: <strong>{getGrade(score)}</strong></p>
-
-
-
-
-  {/* Signature + Date Row */}
   <div style={{
     position: 'absolute',
     bottom: '40px',
@@ -456,8 +451,10 @@ display: 'none',
     alignItems: 'center'
   }}>
     <div style={{ textAlign: 'left' }}>
-      <p style={{  fontSize: '32px', marginBottom: '1px',marginLeft:'40px',marginLeft:'-0vh'}} className='Akash'>Akash Maity</p>
-      <p style={{color:"black",marginTop:'-2vh'}}>_____________________</p>
+      <p style={{ fontSize: '28px', marginBottom: '0px', marginLeft: '50px', marginLeft: '-0vh' }}
+
+className='Akash'>Akash Maity</p>
+      <p style={{color:"black",marginTop:'-3vh'}}>_____________________</p>
       <p style={{ fontSize: '13px' }}>Founder & Project Head, NovaExam</p>
     </div>
     <div style={{marginLeft:'-14vh'}}>
