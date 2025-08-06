@@ -1,119 +1,12 @@
-  import React, { useState } from 'react';
-  import { Link, useNavigate } from 'react-router-dom';
-  import { useAuth0 } from "@auth0/auth0-react";
-  import './Signup.css';
-  import emailjs from '@emailjs/browser';
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import './Signup.css';
+import emailjs from '@emailjs/browser';
 
+function SignupPage() {
+  const navigate = useNavigate();
 
-  function SignupPage() {
-    const navigate = useNavigate();
-    // const { loginWithRedirect } = useAuth0();
-
-    const [formData, setFormData] = useState({
-      name: '',
-      email: '',
-      password: '',
-      confirmPassword: '',
-      agree: false,
-      errorMessage: '',
-    });
-
-    const [showPassword, setShowPassword] = useState(false);
-    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-
-    const handleChange = (e) => {
-      const { name, value, type, checked } = e.target;
-      setFormData({
-        ...formData,
-        [name]: type === 'checkbox' ? checked : value,
-        errorMessage: '',
-      });
-    };
-
-    const validateName = (name) => {
-      const nameRegex = /^[A-Za-z\s]+$/;
-      if (!nameRegex.test(name) || name.trim() === '') {
-        return 'Name must contain only letters and spaces.';
-      }
-      return '';
-    };
-
-    const validateEmail = (email) => {
-      const emailRegex = /^[^\s@]+@gmail\.com$/;
-      if (!emailRegex.test(email)) {
-        return 'Email must be a valid @gmail.com address.';
-      }
-      return '';
-    };
-
-    const validatePassword = (password) => {
-      const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
-      if (!passwordRegex.test(password)) {
-        return 'Password must be at least 8 characters and include 1 uppercase letter, 1 number, and 1 special character.';
-      }
-      return '';
-    };
-const handleSubmit = (e) => {
-  e.preventDefault();
-
-  const nameError = validateName(formData.name);
-  const emailError = validateEmail(formData.email);
-  const passwordError = validatePassword(formData.password);
-
-  if (nameError) {
-    setFormData({ ...formData, errorMessage: nameError });
-    return;
-  }
-
-  if (emailError) {
-    setFormData({ ...formData, errorMessage: emailError });
-    return;
-  }
-
-  if (passwordError) {
-    setFormData({ ...formData, errorMessage: passwordError });
-    return;
-  }
-
-  if (formData.password !== formData.confirmPassword) {
-    setFormData({ ...formData, errorMessage: 'Passwords do not match!' });
-    return;
-  }
-
-  if (!formData.agree) {
-    setFormData({ ...formData, errorMessage: 'You must agree to the terms.' });
-    return;
-  }
-  localStorage.setItem("userEmail", formData.email);
-  localStorage.setItem("userPassword", formData.password);
-  localStorage.setItem("userName", formData.name);
-  localStorage.setItem("studentName", formData.name);
-  localStorage.setItem("studentEmail", formData.email);
-
-  emailjs.send(
-   'service_11dsjyb',    
-  'template_7yf1jaa',          
-  {
-    name: formData.name,
-    email: formData.email,
-    title: 'Welcome to Nova Exam!',
-    message: 'Thank you for signing up. Your Nova Exam journey begins now!',
-    time: new Date().toLocaleString(),
-  },
-  'wUUdTr3NqsHRWW5XG' 
-  )
-  .then(() => {
-    console.log("📧 Email sent to student successfully.");
-  })
-  .catch((err) => {
-    console.error("❌ Failed to send email:", err);
-  });
-
-  alert('🎉 Signup Successful! go to logIn.');
-
-  navigate('/login');
-
-  setFormData({
+  const [formData, setFormData] = useState({
     name: '',
     email: '',
     password: '',
@@ -121,10 +14,122 @@ const handleSubmit = (e) => {
     agree: false,
     errorMessage: '',
   });
-};
 
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-    return (
+  const handleChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    setFormData({
+      ...formData,
+      [name]: type === 'checkbox' ? checked : value,
+      errorMessage: '',
+    });
+  };
+
+  const validateName = (name) => {
+    const nameRegex = /^[A-Za-z\s]+$/;
+    return nameRegex.test(name) ? '' : 'Name must contain only letters and spaces.';
+  };
+
+  const validateEmail = (email) => {
+    const emailRegex = /^[^\s@]+@gmail\.com$/;
+    return emailRegex.test(email) ? '' : 'Email must be a valid @gmail.com address.';
+  };
+
+  const validatePassword = (password) => {
+    const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
+    return passwordRegex.test(password)
+      ? ''
+      : 'Password must be at least 8 characters and include 1 uppercase letter, 1 number, and 1 special character.';
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const nameError = validateName(formData.name);
+    const emailError = validateEmail(formData.email);
+    const passwordError = validatePassword(formData.password);
+
+    if (nameError || emailError || passwordError) {
+      setFormData({ ...formData, errorMessage: nameError || emailError || passwordError });
+      return;
+    }
+
+    if (formData.password !== formData.confirmPassword) {
+      setFormData({ ...formData, errorMessage: 'Passwords do not match!' });
+      return;
+    }
+
+    if (!formData.agree) {
+      setFormData({ ...formData, errorMessage: 'You must agree to the terms.' });
+      return;
+    }
+
+    // Send signup data to backend
+    fetch('http://localhost:5000/api/auth/signup', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        name: formData.name,
+        email: formData.email,
+        password: formData.password
+      })
+    })
+      .then(async (response) => {
+        const data = await response.json();
+
+        if (!response.ok) {
+          throw new Error(data.message || 'Signup failed');
+        }
+
+        // Save to localStorage (optional)
+        localStorage.setItem("userName", formData.name);
+        localStorage.setItem("userEmail", formData.email);
+        localStorage.setItem("studentName", formData.name);
+        localStorage.setItem("studentEmail", formData.email);
+
+        // Send welcome email
+        emailjs.send(
+          'service_11dsjyb',
+          'template_7yf1jaa',
+          {
+            name: formData.name,
+            email: formData.email,
+            title: 'Welcome to Nova Exam!',
+            message: 'Thank you for signing up. Your Nova Exam journey begins now!',
+            time: new Date().toLocaleString(),
+          },
+          'wUUdTr3NqsHRWW5XG'
+        ).then(() => {
+          console.log("📧 Email sent to student successfully.");
+        }).catch((err) => {
+          console.error("❌ Failed to send email:", err);
+        });
+
+        alert('🎉 Signup Successful! Go to login.');
+        navigate('/login');
+
+        setFormData({
+          name: '',
+          email: '',
+          password: '',
+          confirmPassword: '',
+          agree: false,
+          errorMessage: '',
+        });
+      })
+      .catch((error) => {
+        setFormData(prev => ({
+          ...prev,
+          errorMessage: error.message
+        }));
+      });
+  };
+
+   return (
       <div className="signup-container">
         <div className="left-panel">
           <h1 className="logo" style={{marginTop:'1vh',marginLeft:'-15vh'}}>

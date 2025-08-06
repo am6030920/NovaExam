@@ -15,45 +15,45 @@ function LoginPage() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({
-      ...formData,
+    setFormData(prev => ({
+      ...prev,
       [name]: value,
-    });
+    }));
   };
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
+    const { email, password } = formData;
     const emailRegex = /^[^\s@]+@gmail\.com$/;
-
-    if (!formData.email || !formData.password) {
-      setCustomMessage("⚠️ Please fill in all fields.");
+    if (!email || !password) {
+      setCustomMessage("Please fill in all fields.");
       setTimeout(() => setCustomMessage(''), 3000);
       return;
     }
-
-    if (!emailRegex.test(formData.email)) {
-      setCustomMessage("❌ Email must be a valid @gmail.com address.");
+    if (!emailRegex.test(email)) {
+      setCustomMessage("Email must be a valid @gmail.com address.");
       setTimeout(() => setCustomMessage(''), 3000);
       return;
     }
-
-    // Get stored credentials from localStorage
-    const storedEmail = localStorage.getItem("userEmail");
-    const storedPassword = localStorage.getItem("userPassword");
-
-    if (formData.email === storedEmail && formData.password === storedPassword) {
-      setCustomMessage("✅ Login Successful!");
+    try {
+      const response = await fetch('http://localhost:5000/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
+      });
+      const data = await response.json();
+      if (!response.ok) {
+        throw new Error(data.message || 'Login failed');
+      }
+      setCustomMessage("Login Successful!");
       setTimeout(() => {
         setCustomMessage('');
         navigate('/Home');
       }, 2000);
-    } else {
-      setCustomMessage("❌ Invalid email or password.");
+
+    } catch (error) {
+      setCustomMessage(error.message);
       setTimeout(() => setCustomMessage(''), 3000);
     }
-
-    setFormData({ email: '', password: '' });
   };
 
   return (
@@ -163,7 +163,7 @@ function LoginPage() {
           </div>
 
           <button type="submit" className="create-account">
-            Submitted 😀
+            Submitted
           </button>
 
           <div className="have">

@@ -23,12 +23,13 @@ import College from './Component/College';
 import Competitive from './Component/Competitive';
 import Genaral from './Component/Genaral';
 import It from './Component/It';
+import Normal from './Component/Normal';
 
 
 
 const AppContent = () => {
   const location = useLocation();
-  const hideNavbarPaths = ['/login', '/signup', '/home', '/about', '/programming', '/gk', '/timed', '/practice', '/technical', '/trivia', '/ml', '/contact', '/company', '/profile', '/career', '/higher', '/college', '/competitive', '/genaral', '/it'];
+  const hideNavbarPaths = ['/login', '/signup', '/home', '/about', '/programming', '/gk', '/timed', '/practice', '/technical', '/trivia', '/ml', '/contact', '/company', '/profile', '/career', '/higher', '/college', '/competitive', '/genaral', '/it','/normal'];
 
   return (
     <>
@@ -56,6 +57,7 @@ const AppContent = () => {
         <Route path="/competitive" element={<Competitive />} />
         <Route path="/genaral" element={<Genaral />} />
         <Route path="/it" element={<It />} />
+        <Route path='/normal' element={<Normal/>} />
 
       </Routes>
 
