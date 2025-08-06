@@ -372,7 +372,7 @@ const Programming = () => {
 
         {/* start */}
 <div id="certificate" style={{
-display: '',
+display: 'none',
     width: '660px',
     height: '440px',
     margin: '30px auto',
