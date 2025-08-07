@@ -3,6 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import './Login.css';
 import { FaEnvelope, FaLock } from 'react-icons/fa';
+import { MdVisibility, MdVisibilityOff } from 'react-icons/md';
 
 function LoginPage() {
   const navigate = useNavigate();
@@ -99,6 +100,7 @@ function LoginPage() {
         <form className="signup-form" onSubmit={handleSubmit}>
           <label htmlFor="email">Email</label>
           <div className="input-group" style={{ height: '4vh' }}>
+            <FaEnvelope style={{ marginRight: '8px', color: '#555' }} />
             <input
               type="email"
               id="email"
@@ -112,8 +114,9 @@ function LoginPage() {
 
           <label htmlFor="password">Password</label>
           <div className="input-group">
+            <FaLock style={{ marginRight: '8px', color: '#555' }} />
             <input
-              type={showPassword ? "text" : "password"}
+              type={showPassword ? 'text' : 'password'}
               id="password"
               name="password"
               placeholder="********"
@@ -125,7 +128,7 @@ function LoginPage() {
               onClick={() => setShowPassword(!showPassword)}
               style={{ cursor: 'pointer', marginLeft: '8px', color: 'white' }}
             >
-              {showPassword ? '🙈' : '👁️'}
+              {showPassword ? <MdVisibilityOff /> : <MdVisibility />}
             </span>
           </div>
 
