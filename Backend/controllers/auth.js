@@ -1,54 +1,88 @@
-const express = require('express');
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
-const router = express.Router();
-const User = require('../models/User');
+// const express = require('express');
+// const router = express.Router();
+// const bcrypt = require('bcryptjs');
+// const jwt = require('jsonwebtoken');
+// const User = require('../models/User');
 
-// Signup Route
-router.post('/signup', async (req, res) => {
-  const { name, email, password } = req.body;
+// // Email validator
+// const isValidEmail = (email) => {
+//   return /^[a-zA-Z0-9._%+-]+@gmail\.com$/.test(email);
+// };
 
-  try {
-    // Check if user exists
-    let user = await User.findOne({ email });
-    if (user) return res.status(400).json({ msg: 'User already exists' });
+// // Password validator
+// const isValidPassword = (password) => {
+//   return /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{9,}$/.test(password);
+// };
 
-    // Hash password
-    const hashedPassword = await bcrypt.hash(password, 10);
+// // ==== SIGNUP ====
+// router.post('/signup', async (req, res) => {
+//   const { name, email, password } = req.body;
 
-    // Create user
-    user = new User({ name, email, password: hashedPassword });
-    await user.save();
+//   // Input validations
+//   if (!name || name.trim() === '') {
+//     return res.status(400).json({ msg: 'Name is required' });
+//   }
 
-    // Create token
-    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+//   if (!isValidEmail(email)) {
+//     return res.status(400).json({ msg: 'Email must end with @gmail.com' });
+//   }
 
-    res.json({ token, user: { name: user.name, email: user.email } });
-  } catch (err) {
-    res.status(500).send('Server error');
-  }
-});
+//   if (!isValidPassword(password)) {
+//     return res.status(400).json({
+//       msg: 'Password must be at least 9 characters, include 1 uppercase letter, 1 number, and 1 special character',
+//     });
+//   }
 
-// Login Route
-router.post('/login', async (req, res) => {
-  const { email, password } = req.body;
+//   try {
+//     const userExist = await User.findOne({ email });
+//     if (userExist) return res.status(400).json({ msg: 'User already exists' });
 
-  try {
-    // Find user
-    let user = await User.findOne({ email });
-    if (!user) return res.status(400).json({ msg: 'Invalid credentials' });
+//     const hashedPassword = await bcrypt.hash(password, 10);
+//     const newUser = new User({ name, email, password: hashedPassword });
+//     await newUser.save();
 
-    // Check password
-    const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) return res.status(400).json({ msg: 'Invalid credentials' });
+//     res.status(201).json({ msg: 'Signup successful' });
+//   } catch (err) {
+//     res.status(500).json({ msg: 'Server error during signup' });
+//   }
+// });
 
-    // Create token
-    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+// // ==== LOGIN ====
+// router.post('/login', async (req, res) => {
+//   const { email, password } = req.body;
 
-    res.json({ token, user: { name: user.name, email: user.email } });
-  } catch (err) {
-    res.status(500).send('Server error');
-  }
-});
+//   // Input validations
+//   if (!isValidEmail(email)) {
+//     return res.status(400).json({ msg: 'Invalid email. Must end with @gmail.com' });
+//   }
 
-module.exports = router;
+//   if (!password || password.length < 9) {
+//     return res.status(400).json({ msg: 'Invalid password format' });
+//   }
+
+//   try {
+//     const user = await User.findOne({ email });
+//     if (!user) return res.status(400).json({ msg: 'Email not registered' });
+
+//     const isMatch = await bcrypt.compare(password, user.password);
+//     if (!isMatch) return res.status(400).json({ msg: 'Incorrect password' });
+
+//     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
+//       expiresIn: '7d',
+//     });
+
+//     res.status(200).json({
+//       msg: 'Login successful',
+//       token,
+//       user: {
+//         id: user._id,
+//         name: user.name,
+//         email: user.email,
+//       },
+//     });
+//   } catch (err) {
+//     res.status(500).json({ msg: 'Server error during login' });
+//   }
+// });
+
+// module.exports = router;

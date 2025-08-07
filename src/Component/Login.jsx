@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
+import axios from 'axios';
 import './Login.css';
+import { FaEnvelope, FaLock } from 'react-icons/fa';
 
 function LoginPage() {
   const navigate = useNavigate();
@@ -8,52 +10,72 @@ function LoginPage() {
   const [formData, setFormData] = useState({
     email: '',
     password: '',
+    errorMessage: '',
   });
 
   const [showPassword, setShowPassword] = useState(false);
-  const [customMessage, setCustomMessage] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
+  const handleInputChange = (e) => {
     setFormData({
       ...formData,
-      [name]: value,
+      [e.target.name]: e.target.value,
+      errorMessage: '',
     });
   };
 
-  const handleSubmit = (e) => {
+  const validateEmail = (email) => {
+    if (!email.endsWith('@gmail.com')) {
+      return 'Email must end with @gmail.com';
+    }
+    return '';
+  };
+
+  const validatePassword = (password) => {
+    const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
+    if (!passwordRegex.test(password)) {
+      return 'Password must be at least 8 characters and include 1 uppercase letter, 1 number, and 1 special character.';
+    }
+    return '';
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const emailRegex = /^[^\s@]+@gmail\.com$/;
+    const emailError = validateEmail(formData.email);
+    const passwordError = validatePassword(formData.password);
 
-    if (!formData.email || !formData.password) {
-      setCustomMessage("⚠️ Please fill in all fields.");
-      setTimeout(() => setCustomMessage(''), 3000);
+    if (emailError || passwordError) {
+      setFormData({
+        ...formData,
+        errorMessage: emailError || passwordError,
+      });
       return;
     }
 
-    if (!emailRegex.test(formData.email)) {
-      setCustomMessage("❌ Email must be a valid @gmail.com address.");
-      setTimeout(() => setCustomMessage(''), 3000);
-      return;
+    try {
+      setIsLoading(true);
+      const response = await axios.post('http://localhost:5000/api/auth/login', {
+        email: formData.email.trim(),
+        password: formData.password,
+      });
+
+      if (response.data && response.data.token) {
+        localStorage.setItem('token', response.data.token);
+        localStorage.setItem('name', response.data.name);
+        localStorage.setItem('email', response.data.email);
+        navigate('/home');
+      } else {
+        setFormData({ ...formData, errorMessage: 'Invalid response from server.' });
+      }
+    } catch (err) {
+      setFormData({
+        ...formData,
+        errorMessage: err.response?.data?.message || 'Login failed. Please try again.',
+      });
+    } finally {
+      setIsLoading(false);
     }
-
-    // Get stored credentials from localStorage
-    const storedEmail = localStorage.getItem("userEmail");
-    const storedPassword = localStorage.getItem("userPassword");
-
-    if (formData.email === storedEmail && formData.password === storedPassword) {
-      setCustomMessage("✅ Login Successful!");
-      setTimeout(() => {
-        setCustomMessage('');
-        navigate('/Home');
-      }, 2000);
-    } else {
-      setCustomMessage("❌ Invalid email or password.");
-      setTimeout(() => setCustomMessage(''), 3000);
-    }
-
-    setFormData({ email: '', password: '' });
   };
 
   return (
@@ -77,77 +99,26 @@ function LoginPage() {
         <form className="signup-form" onSubmit={handleSubmit}>
           <label htmlFor="email">Email</label>
           <div className="input-group" style={{ height: '4vh' }}>
-            <svg
-              width="20px"
-              height="20px"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-              className="icon line-color"
-              style={{ marginTop: '2.8vh' }}
-            >
-              <polygon
-                points="17 19 21 19 21 7.43 17 10.86 17 19"
-                style={{
-                  fill: "none",
-                  stroke: "white",
-                  strokeLinecap: "round",
-                  strokeLinejoin: "round",
-                  strokeWidth: 2,
-                }}
-              />
-              <polygon
-                points="7 10.86 3 7.43 3 19 7 19 7 10.86"
-                style={{
-                  fill: "black",
-                  stroke: "white",
-                  strokeLinecap: "round",
-                  strokeLinejoin: "round",
-                  strokeWidth: 2,
-                }}
-              />
-              <path
-                d="M21,7.43h0l-4,3.43-5,4.28L7,10.86,3,7.43H3A2.42,2.42,0,0,1,7,5.59H7l5,4.29,5-4.29h0A2.42,2.42,0,0,1,21,7.43Z"
-                style={{
-                  fill: "white",
-                  stroke: "rgb(44, 169, 188)",
-                  strokeLinecap: "round",
-                  strokeLinejoin: "round",
-                  strokeWidth: 2,
-                }}
-              />
-            </svg>
             <input
               type="email"
               id="email"
               name="email"
               placeholder="am6030920@gmail.com"
               value={formData.email}
-              onChange={handleChange}
+              onChange={handleInputChange}
               required
             />
           </div>
 
           <label htmlFor="password">Password</label>
           <div className="input-group">
-            <svg
-              width="20px"
-              height="20px"
-              viewBox="0 0 15 15"
-              xmlns="http://www.w3.org/2000/svg"
-              style={{ marginTop: '8px', marginRight: '10px' }}
-            >
-              <path
-                d="M12.5 8.5V7.5C12.5 6.94772 12.0523 6.5 11.5 6.5H1.5C0.947715 6.5 0.5 6.94772 0.5 7.5V13.5C0.5 14.0523 0.947715 14.5 1.5 14.5H11.5C12.0523 14.5 12.5 14.0523 12.5 13.5V12.5M12.5 8.5H8.5C7.39543 8.5 6.5 9.39543 6.5 10.5C6.5 11.6046 7.39543 12.5 8.5 12.5H12.5M12.5 8.5C13.6046 8.5 14.5 9.39543 14.5 10.5C14.5 11.6046 13.6046 12.5 12.5 12.5M3.5 6.5V3.5C3.5 1.84315 4.84315 0.5 6.5 0.5C8.15685 0.5 9.5 1.84315 9.5 3.5V6.5M12 10.5H13M10 10.5H11M8 10.5H9"
-                stroke="white"
-              />
-            </svg>
             <input
               type={showPassword ? "text" : "password"}
               id="password"
               name="password"
               placeholder="********"
               value={formData.password}
-              onChange={handleChange}
+              onChange={handleInputChange}
               required
             />
             <span
@@ -162,15 +133,15 @@ function LoginPage() {
             <Link to="/forgot-password" className="logp">Forgot Password?</Link>
           </div>
 
-          <button type="submit" className="create-account">
-            Submitted 😀
+          <button type="submit" className="create-account" disabled={isLoading}>
+            {isLoading ? 'Logging in...' : 'Submit'}
           </button>
 
           <div className="have">
             <span>Don't have an account? <Link to="/signup" className="log">Create one</Link></span>
           </div>
 
-          {customMessage && (
+          {formData.errorMessage && (
             <div className="custom-alert" style={{
               marginTop: '15px',
               color: 'white',
@@ -179,7 +150,7 @@ function LoginPage() {
               borderRadius: '8px',
               textAlign: 'center',
             }}>
-              {customMessage}
+              {formData.errorMessage}
             </div>
           )}
         </form>
