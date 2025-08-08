@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Career.css';
-import "./Home.css"
+import "./Home.css";
 
 const Career = () => {
-   const navigate = useNavigate();
+  const navigate = useNavigate();
   const [isShrunk, setIsShrunk] = useState(false);
 
   const handleExamNavigation = (e) => {
@@ -30,11 +30,10 @@ const Career = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-  
 
   return (
     <div style={{ padding: "0", margin: "0", background: "white" }}>
-            <div className={`nova-navbar ${isShrunk ? 'shrink' : ''}`} style={{ fontFamily: "Poppins" }}>
+      <div className={`nova-navbar ${isShrunk ? 'shrink' : ''}`} style={{ fontFamily: "Poppins" }}>
         <div className="logo-section">
           <img
             src="https://dynamic.design.com/asset/logo/b777bb05-ef3a-40c1-81e5-c218a4b7311f/logo?logoTemplateVersion=1&v=638750126514600000&text=+NovaExam+online+exam+potel&layout=auto"
@@ -74,7 +73,6 @@ const Career = () => {
             <option value="/contact">Contact</option>
             <option value="/career">Career</option>
             <option value="/home">Home</option>
-
           </select>
 
           <div
@@ -97,8 +95,7 @@ const Career = () => {
         </div>
       </div>
 
-
-      <div className="career" style={{ background: '#d8f6f0ff' ,marginTop:'15.5vh'}}>
+      <div className="career" style={{ background: '#d8f6f0ff', marginTop: '15.5vh' }}>
         <div className="career-banner">
           <div className="banner-text">
             <h1>
@@ -106,14 +103,17 @@ const Career = () => {
               Finding the right career for<br />
               everyone starts here....
             </h1>
-            <p style={{ marginTop: "2vh" }}>At NovaExam, we believe in unlocking potential through the power of knowledge and opportunity. As we continue to grow, we’re opening doors for passionate individuals who want to make a real impact in the world of online education. Whether you're a developer, educator, designer, or strategist — there's a place for you here. Join us on this exciting journey and shape the future of learning, together.</p>
+            <p style={{ marginTop: "2vh" }}>
+              At NovaExam, we believe in unlocking potential through the power of knowledge and opportunity. As we continue to grow, we’re opening doors for passionate individuals who want to make a real impact in the world of online education. Whether you're a developer, educator, designer, or strategist — there's a place for you here. Join us on this exciting journey and shape the future of learning, together.
+            </p>
           </div>
           <div className="banner-image">
             <img src="https://examonline.in/wp-content/uploads/2023/03/Secure-and-Convenient.svg" alt="Career Illustration" />
           </div>
         </div>
       </div>
-      <div >
+
+      <div>
         <div className="button-wrapper">
           <button className="explore-btn">How To Work</button>
         </div>
@@ -121,8 +121,9 @@ const Career = () => {
           display: "flex", justifyContent: "center",
           paddingTop: "2vh", fontSize: "26px", paddingBottom: "2vh"
         }}>Learn about our work</h3>
-        <div className="underline" style={{ width: "45vh" }} ></div>
+        <div className="underline" style={{ width: "45vh" }}></div>
       </div>
+
       <div className="what-we-do-section">
         <div className="info-card">
           <h3>What we do</h3>
@@ -139,72 +140,88 @@ const Career = () => {
         <div className="info-card">
           <h3>How NovaExam Helps You</h3>
           <p>
-          NovaExam provides easy-to-use practice tests with timers and instant results, helping you track your progress and improve your skills. Our platform supports various subjects to prepare you effectively for your exams.
+            NovaExam provides easy-to-use practice tests with timers and instant results, helping you track your progress and improve your skills. Our platform supports various subjects to prepare you effectively for your exams.
           </p>
         </div>
       </div>
-      {/* second box */}
-      <div style={{paddingTop:"15vh"}}>
-      <h3 style={{
+
+      {/* Testimonials Section */}
+      <div className="testimonials-section">
+        <h3 style={{ textAlign: 'center', margin: '20px 0' }}>What Our Team Says</h3>
+        <div className="testimonial-card">
+          <p>"Working at NovaExam has been a transformative experience. The team is supportive and innovative!"</p>
+          <h4>- John Doe, Software Engineer</h4>
+        </div>
+        <div className="testimonial-card">
+          <p>"I love the culture here! Everyone is passionate about education and making a difference."</p>
+          <h4>- Akash Maity, lead Developer</h4>
+        </div>
+      </div>
+
+      {/* Second Box */}
+      <div style={{ paddingTop: "15vh" }}>
+        <h3 style={{
           display: "flex", justifyContent: "center",
           paddingTop: "2vh", fontSize: "26px", paddingBottom: "2vh"
         }}>What we believe in</h3>
-        <div className="underline" style={{ width: "45vh" }} ></div>
-      <div className="what-we-do-section">
-        <div className="info-card">
-          <h3>Innovation</h3>
-          <p>
-            At NovaExam, we continuously innovate to create engaging and efficient learning experiences. By combining technology with smart testing methods, we make exam preparation faster, easier, and more effective for every learner.
-          </p>
-        </div>
-        <div className="info-card">
-          <h3>Mission</h3>
-          <p>
-            Our mission at NovaExam is to empower learners by providing accessible, reliable, and effective online exam tools that boost confidence and help achieve academic success.
-          </p>
-        </div>
-        <div className="info-card">
-          <h3>Diversity</h3>
-          <p>
-          At NovaExam, we celebrate diversity by offering inclusive learning materials that cater to students from all backgrounds, ensuring equal opportunities for success.
-          </p>
+        <div className="underline" style={{ width: "45vh" }}></div>
+        <div className="what-we-do-section">
+          <div className="info-card">
+            <h3>Innovation</h3>
+            <p>
+              At NovaExam, we continuously innovate to create engaging and efficient learning experiences. By combining technology with smart testing methods, we make exam preparation faster, easier, and more effective for every learner.
+            </p>
+          </div>
+          <div className="info-card">
+            <h3>Mission</h3>
+            <p>
+              Our mission at NovaExam is to empower learners by providing accessible, reliable, and effective online exam tools that boost confidence and help achieve academic success.
+            </p>
+          </div>
+          <div className="info-card">
+            <h3>Diversity</h3>
+            <p>
+              At NovaExam, we celebrate diversity by offering inclusive learning materials that cater to students from all backgrounds, ensuring equal opportunities for success.
+            </p>
+          </div>
         </div>
       </div>
-      </div>
-      {/* third box */}
-      <div style={{paddingTop:"15vh"}}>
-      <h3 style={{
+
+      {/* Third Box */}
+      <div style={{ paddingTop: "15vh" }}>
+        <h3 style={{
           display: "flex", justifyContent: "center",
           paddingTop: "2vh", fontSize: "26px", paddingBottom: "2vh"
         }}>Benefits that work for you</h3>
-        <div className="underline" style={{ width: "45vh" }} ></div>
-      <div className="what-we-do-section">
-        <div className="info-card">
-          <h3>Flexible Learning</h3>
-         <ul>
-          <li>Access tests 24/7—no time restrictions or deadlines.</li>
-          <li>Practice at your own speed, pause and resume when you’re ready.</li>
-          <li>Prepare from anywhere—home, library, or on the go.</li>
-         </ul>
-        </div>
-        <div className="info-card">
-          <h3>User-Friendly Design</h3>
-         <ul>
-          <li>imple layout that keeps you focused on learning, not navigating.</li>
-          <li>No ads or pop-ups—just pure exam practice</li>
-          <li>Effortlessly switch between questions and sections</li>
-         </ul>
-        </div>
-        <div className="info-card">
-          <h3>Detailed Result Summary</h3>
-         <ul><li>
-          View your score immediately after submitting the test.</li>
-          <li>Understand the logic behind each correct answer (if provided).</li>
-          <li>Analyze your strengths and weaknesses by category.</li>
-          </ul>
+        <div className="underline" style={{ width: "45vh" }}></div>
+        <div className="what-we-do-section">
+          <div className="info-card">
+            <h3>Flexible Learning</h3>
+            <ul>
+              <li>Access tests 24/7—no time restrictions or deadlines.</li>
+              <li>Practice at your own speed, pause and resume when you’re ready.</li>
+              <li>Prepare from anywhere—home, library, or on the go.</li>
+            </ul>
+          </div>
+          <div className="info-card">
+            <h3>User-Friendly Design</h3>
+            <ul>
+              <li>Simple layout that keeps you focused on learning, not navigating.</li>
+              <li>No ads or pop-ups—just pure exam practice.</li>
+              <li>Effortlessly switch between questions and sections.</li>
+            </ul>
+          </div>
+          <div className="info-card">
+            <h3>Detailed Result Summary</h3>
+            <ul>
+              <li>View your score immediately after submitting the test.</li>
+              <li>Understand the logic behind each correct answer (if provided).</li>
+              <li>Analyze your strengths and weaknesses by category.</li>
+            </ul>
+          </div>
         </div>
       </div>
-      </div>
+
       <footer className="footer">
         <div className="footer-container">
           <div className="footer-section">
@@ -234,7 +251,7 @@ const Career = () => {
           <div className="footer-section">
             <h4>About Us</h4>
             <ul>
-              <li>AboutUs</li>
+              <li>About Us</li>
               <li>Company</li>
               <li>Our Team</li>
             </ul>
@@ -264,13 +281,9 @@ const Career = () => {
         <div className="footer-bottom">
           <p>©2025 NovaExam</p>
         </div>
-       
       </footer>
-
     </div>
   );
 };
 
 export default Career;
-
-

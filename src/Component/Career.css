@@ -91,3 +91,15 @@
   line-height: 1.6;
   padding-top: 4vh;
 }
+.testimonial-card {
+  background-color: #fff;
+  border: 1px solid #e6e6e6;
+  border-radius: 8px;
+  padding: 20px;
+  margin: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+.testimonial-card:hover {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
