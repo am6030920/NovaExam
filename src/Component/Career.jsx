@@ -96,11 +96,9 @@ const Career = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-<<<<<<< HEAD
 
   const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
-=======
->>>>>>> 9b66b30808c8647217cbc7e3b9077855199397f3
+
 
   return (
     <div style={{ padding: "0", margin: "0", background: "white" }}>
@@ -184,7 +182,7 @@ const Career = () => {
         </div>
       </div>
 
-<<<<<<< HEAD
+
       {/* Job Openings Section */}
       <section style={{ padding: "4vh 5vw", background: "#eef9f7" }}>
         <h1 style={{ textAlign: "center", marginBottom: "3vh" }}>Current Job Openings</h1>
@@ -232,8 +230,7 @@ const Career = () => {
    
 
       {/* Existing content (what we do, beliefs, benefits, footer) */}
-=======
->>>>>>> 9b66b30808c8647217cbc7e3b9077855199397f3
+
       <div>
         <div className="button-wrapper">
           <button className="explore-btn">How To Work</button>
@@ -266,15 +263,14 @@ const Career = () => {
         </div>
       </div>
 
-<<<<<<< HEAD
+
       {/* second box */}
-=======
       {/* Testimonials Section */}
       <div className="testimonials-section">
         <h3 style={{ textAlign: 'center', margin: '20px 0' }}>What Our Team Says</h3>
         <div className="testimonial-card">
           <p>"Working at NovaExam has been a transformative experience. The team is supportive and innovative!"</p>
-          <h4>- John Doe, Software Engineer</h4>
+          <h4>- Indranil Das, Developer</h4>
         </div>
         <div className="testimonial-card">
           <p>"I love the culture here! Everyone is passionate about education and making a difference."</p>
@@ -283,17 +279,13 @@ const Career = () => {
       </div>
 
       {/* Second Box */}
->>>>>>> 9b66b30808c8647217cbc7e3b9077855199397f3
       <div style={{ paddingTop: "15vh" }}>
         <h3 style={{
           display: "flex", justifyContent: "center",
           paddingTop: "2vh", fontSize: "26px", paddingBottom: "2vh"
         }}>What we believe in</h3>
-<<<<<<< HEAD
+
         <div className="underline" style={{ width: "45vh" }} ></div>
-=======
-        <div className="underline" style={{ width: "45vh" }}></div>
->>>>>>> 9b66b30808c8647217cbc7e3b9077855199397f3
         <div className="what-we-do-section">
           <div className="info-card">
             <h3>Innovation</h3>
@@ -315,22 +307,17 @@ const Career = () => {
           </div>
         </div>
       </div>
-
-<<<<<<< HEAD
-      {/* third box */}
-=======
       {/* Third Box */}
->>>>>>> 9b66b30808c8647217cbc7e3b9077855199397f3
+
       <div style={{ paddingTop: "15vh" }}>
         <h3 style={{
           display: "flex", justifyContent: "center",
           paddingTop: "2vh", fontSize: "26px", paddingBottom: "2vh"
         }}>Benefits that work for you</h3>
-<<<<<<< HEAD
+
         <div className="underline" style={{ width: "45vh" }} ></div>
-=======
-        <div className="underline" style={{ width: "45vh" }}></div>
->>>>>>> 9b66b30808c8647217cbc7e3b9077855199397f3
+        
+
         <div className="what-we-do-section">
           <div className="info-card">
             <h3>Flexible Learning</h3>
@@ -358,30 +345,7 @@ const Career = () => {
           </div>
         </div>
       </div>
-<<<<<<< HEAD
-   {/* Employee Testimonials */}
-      <section style={{ padding: "4vh 5vw" }}>
-        <h1 style={{ textAlign: "center", marginBottom: "3vh" }}>What Our Team Says</h1>
-        <div className="testimonials" style={{ display: "flex", gap: "3vw", flexWrap: "wrap", justifyContent: "center" }}>
-          {testimonials.map((test, i) => (
-            <div
-              key={i}
-              className="testimonial-card"
-              style={{
-                background: "#e9f4f2ff",
-                padding: "20px",
-                borderRadius: "10px",
-                width: "300px",
-                boxShadow: "0 4px 8px rgba(0,0,0,0.1)",
-                fontStyle: "italic",
-              }}
-            >
-              <p>"{test.message}"</p>
-              <p style={{ fontWeight: "bold", marginTop: "10px" }}>{test.name} - {test.role}</p>
-            </div>
-          ))}
-        </div>
-      </section>
+
 
       {/* Newsletter Subscription */}
       <section style={{ background: "#cde4deff", color: "white", padding: "3vh 2vw", textAlign: "center", marginTop: "5vh" }}>
@@ -418,9 +382,7 @@ const Career = () => {
         {subscriptionMessage && <p style={{ marginTop: "1vh" }}>{subscriptionMessage}</p>}
       </section>
       {/* Footer */}
-=======
 
->>>>>>> 9b66b30808c8647217cbc7e3b9077855199397f3
       <footer className="footer">
         <div className="footer-container">
           <div className="footer-section">
