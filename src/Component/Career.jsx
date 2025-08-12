@@ -86,20 +86,15 @@ const Career = () => {
       setSubscriptionMessage("Please enter a valid email address.");
     }
   };
-
   useEffect(() => {
     const handleScroll = () => {
       const offset = window.scrollY;
       setIsShrunk(offset > 50);
     };
-
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-
   const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
-
-
   return (
     <div style={{ padding: "0", margin: "0", background: "white" }}>
       <div className={`nova-navbar ${isShrunk ? 'shrink' : ''}`} style={{ fontFamily: "Poppins" }}>
