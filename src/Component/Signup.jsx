@@ -226,7 +226,7 @@ function SignupPage() {
                 onClick={() => setShowPassword(!showPassword)}
                 style={{ cursor: 'pointer', marginLeft: '8px', color: 'white' }}
               >
-                {showPassword ? '🙈' : '👁️'}
+                {showPassword ? '👁️' : '🙈'}
               </span>
             </div>
 
@@ -250,7 +250,7 @@ function SignupPage() {
                 onClick={() => setShowConfirmPassword(!showConfirmPassword)}
                 style={{ cursor: 'pointer', marginLeft: '8px', color: 'white' }}
               >
-                {showConfirmPassword ? '🙈' : '👁️'}
+                {showConfirmPassword ? '👁️' : '🙈'}
               </span>
             </div>
 

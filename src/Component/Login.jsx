@@ -154,7 +154,7 @@ function LoginPage() {
               onClick={() => setShowPassword(!showPassword)}
               style={{ cursor: 'pointer', marginLeft: '8px', color: 'white' }}
             >
-              {showPassword ? '🙈' : '👁️'}
+              {showPassword ?  '👁️' : '🙈'}
             </span>
           </div>
 
