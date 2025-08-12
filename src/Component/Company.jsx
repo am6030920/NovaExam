@@ -1,15 +1,40 @@
-import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import './Company.css';
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import "./Company.css";
+
+const faqs = [
+  {
+    question: "What types of exams does NovaExam support?",
+    answer:
+      "We support Programming, GK, Timed Quizzes, Practice Tests, Technical, Trivia, and Machine Learning exams.",
+  },
+  {
+    question: "Is NovaExam secure?",
+    answer:
+      "Yes, we use advanced encryption, real-time monitoring, and secure authentication to ensure exam integrity.",
+  },
+  {
+    question: "Can I access NovaExam from anywhere?",
+    answer:
+      "Absolutely! Our platform is designed for anytime, anywhere access for both students and institutions.",
+  },
+];
 
 const Company = () => {
   const navigate = useNavigate();
   const [isShrunk, setIsShrunk] = useState(false);
+  const [showBackToTop, setShowBackToTop] = useState(false);
+  const [expandedFaq, setExpandedFaq] = useState(null);
+  const [countersStarted, setCountersStarted] = useState(false);
+  const [usersCount, setUsersCount] = useState(0);
+  const [examsCount, setExamsCount] = useState(0);
+  const [certCount, setCertCount] = useState(0);
 
   const handleExamNavigation = (e) => {
     const selectedPath = e.target.value;
     if (selectedPath) {
       navigate(selectedPath);
+      window.scrollTo({ top: 0, behavior: "smooth" });
     }
   };
 
@@ -17,6 +42,7 @@ const Company = () => {
     const selectedPath = e.target.value;
     if (selectedPath) {
       navigate(selectedPath);
+      window.scrollTo({ top: 0, behavior: "smooth" });
     }
   };
 
@@ -24,15 +50,72 @@ const Company = () => {
     const handleScroll = () => {
       const offset = window.scrollY;
       setIsShrunk(offset > 50);
+      setShowBackToTop(offset > 300);
+
+      // Start counters animation when section is visible
+      const countersSection = document.getElementById("counters-section");
+      if (
+        countersSection &&
+        !countersStarted &&
+        offset + window.innerHeight > countersSection.offsetTop + 100
+      ) {
+        setCountersStarted(true);
+      }
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-  
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [countersStarted]);
+
+  // Animate counters
+  useEffect(() => {
+  if (countersStarted) {
+    const usersTarget = 12000;
+    const examsTarget = 3500;
+    const certTarget = 15000;
+    const stepUsers = Math.ceil(usersTarget / 100);
+    const stepExams = Math.ceil(examsTarget / 100);
+    const stepCert = Math.ceil(certTarget / 100);
+
+    const interval = setInterval(() => {
+      setUsersCount((prev) => (prev + stepUsers >= usersTarget ? 0 : prev + stepUsers));
+      setExamsCount((prev) => (prev + stepExams >= examsTarget ? 0 : prev + stepExams));
+      setCertCount((prev) => (prev + stepCert >= certTarget ? 0 : prev + stepCert));
+    }, 30);
+
+    // Remove this stopping condition:
+    // if (usersCount === usersTarget && examsCount === examsTarget && certCount === certTarget) {
+    //   clearInterval(interval);
+    // }
+
+    return () => clearInterval(interval);
+  }
+}, [countersStarted]);
+
+
+  const toggleFaq = (index) => {
+    setExpandedFaq(expandedFaq === index ? null : index);
+  };
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const showMissionAlert = () => {
+    alert(
+      "Our mission is to revolutionize exams with a secure, accessible, and innovative platform that empowers learners worldwide."
+    );
+  };
+
+  const showCommitmentAlert = () => {
+    alert(
+      "We are committed to top-notch security standards ensuring trust and integrity in every assessment."
+    );
+  };
+
   return (
     <div className="company-page">
-            <div className={`nova-navbar ${isShrunk ? 'shrink' : ''}`} style={{ fontFamily: "Poppins" }}>
+        <div className={`nova-navbar ${isShrunk ? 'shrink' : ''}`} style={{ fontFamily: "Poppins" }}>
         <div className="logo-section">
           <img
             src="https://dynamic.design.com/asset/logo/b777bb05-ef3a-40c1-81e5-c218a4b7311f/logo?logoTemplateVersion=1&v=638750126514600000&text=+NovaExam+online+exam+potel&layout=auto"
@@ -94,103 +177,258 @@ const Company = () => {
         </div>
       </div>
 
-      <div className="section intro" style={{marginTop:'15vh'}} >
-        <div className="image">
-          <img src="https://dynamic.design.com/asset/logo/b777bb05-ef3a-40c1-81e5-c218a4b7311f/logo?logoTemplateVersion=1&v=638750126514600000&text=+NovaExam+online+exam+potel&layout=auto" alt="Exam" />
-        </div>
-        <div className="content">
-          <h1>We Are Nova Exam</h1>
-          <p>
-            Welcome to NOVA EXAM, the innovative remote proctoring solution that’s transforming the way online exams are conducted. <br />
-            Our mission is to provide the most secure, efficient, and cost-effective solution to educational institutions and corporations across the world.
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          padding: "15vh  100px",
+          backgroundColor: "#fdfdfd",
+        }}
+      >
+        {/* Left Content */}
+        <div style={{ flex: 1, paddingRight: "40px" }}>
+          <h1 style={{ fontSize: "36px", fontWeight: "bold", marginBottom: "20px" }}>
+            We are <span style={{ fontWeight: "bold" }}>NovaExam</span>
+          </h1>
+          <p
+            style={{
+              fontSize: "16px",
+              lineHeight: "1.6",
+              color: "#333",
+              marginBottom: "20px",
+            }}
+          >
+            Welcome to NovaExam, the next-generation online examination platform designed to transform the way assessments are conducted. We are committed to providing a secure, efficient, and cost-effective solution that caters to the needs of educational institutions and organizations worldwide. With advanced technology and user-friendly features, NovaExam ensures a smooth, reliable, and fair examination experience for both examiners and examinees
           </p>
-          <div style={{paddingTop:"15px",marginLeft:"15px"}}>
-          {/* <button style={{width:"20vh",height:"5vh",background:"#4078f1ff",color:"#fff",border:"none",fontWeight:"bold",}}>OUR MISSION</button> */}
           <button
-          onClick={() =>navigate('/Contact')}
-          style={{width:"20vh",height:"5vh",background:"#4078f1ff",color:"#fff",border:"none",fontWeight:"bold",}}>
-            Contact Us
-            </button>
-            
-          </div>
+            style={{
+              backgroundColor: "#21c87a",
+              color: "white",
+              border: "none",
+              padding: "8px 16px",
+              borderRadius: "5px",
+              fontWeight: "bold",
+              cursor: "pointer",
+            }}
+          >
+            Mission
+          </button>
+        </div>
+
+        {/* Right Image */}
+        <div style={{ flex: 1, textAlign: "center" }}>
+          <img
+            src="https://examonline.in/wp-content/uploads/2023/03/about-us.png"
+            alt="ExamOnline Illustration"
+            style={{ width: "80%", maxWidth: "500px" }}
+          />
         </div>
       </div>
 
       <section className="section about">
-        <div className="content">
-          <h1>ABOUT NOVA EXAM</h1>
-          <p>
-            NOVA EXAM was created with the vision of transforming the traditional approach to exam administration. <br />
-            Our founders recognized the need for a secure, reliable, and easy-to-use remote proctoring solution. <br />
-            We began developing a product that would meet the evolving demands of modern-day exams.
-          </p>
+        <div className="">
+          <h1 style={{fontFamily:'Times New Roman',fontSize:"5vh"}}>ABOUT NOVA EXAM</h1>
+          <div className='underline1'></div>
+          <div>
+            NovaExam is a cutting-edge online examination platform built to redefine the future of digital assessments. Our mission is simple — to make exams smarter, faster, and more secure. Whether for schools, universities, or corporate organizations, NovaExam provides a seamless environment where assessments can be conducted anytime, anywhere, without compromising integrity.
+            <br/>
+            With robust security features, intuitive navigation, and real-time monitoring, we ensure that both examiners and examinees have a stress-free experience. Our platform supports multiple test formats, detailed performance analytics, and certificate generation, making it a complete end-to-end solution for modern examinations.
+
+            At NovaExam, we believe in empowering education and professional growth through innovation, accessibility, and trust.
         </div>
-        <div className="image">
-          <img src="/images/exam1.jpg" alt="Online Exams" />
         </div>
+
       </section>
 
-      
-      <section className="section mission">
-        <div className="image">
-          <img src="/images/mission.jpg" alt="Goal Representation" />
-        </div>
-        <div className="content">
-          <h1>OUR MISSION</h1>
-          <p>
-            At NOVA EXAM, we believe that remote proctoring can level the playing field and provide equal opportunities to students and job applicants. <br />
-            Our mission is to empower educational institutions and corporations with advanced technology to conduct online exams with confidence. <br />
-            We are committed to security, reliability, and accessibility — delivering custom solutions tailored to our clients' unique needs.
-          </p>
-          <div style={{paddingTop:"15px",marginLeft:"15px"}}>
-          <button style={{width:"20vh",height:"5vh",background:"#4078f1ff",color:"#fff",border:"none",fontWeight:"bold",}}>OUR MISSION</button>
-          </div>
-        </div>
-      </section>
 
-     
-      <section className="section team">
-        <div className="content">
-          <h1>OUR TEAM</h1>
-          <p>
-            Our team comprises passionate professionals in technology and education. <br />
-            We blend expertise in software development, security, and education to build an innovative and effective platform. <br />
-            We collaborate closely with clients to understand their needs and deliver customized solutions — always striving to stay ahead in technology and security.
-          </p>
-            <div style={{paddingTop:"15px",marginLeft:"15px"}}>
-          <button style={{width:"20vh",height:"5vh",background:"#4078f1ff",color:"#fff",border:"none",fontWeight:"bold",}}>TEAM</button>
-        </div>
-        </div>
-        <div className="image">
-          <img src="/images/our team.jpg" alt="Our Team" />
-        </div>
-      </section>
-
-    
-      <section className="section commitment">
-        <div className="content">
-          <h1>OUR COMMITMENT TO SECURITY</h1>
-          <p>
-            At NOVA EXAM, exam security is our top priority. <br />
-            We use advanced AI algorithms to detect and prevent cheating and train proctors to monitor suspicious behavior. <br />
-            Our platform incorporates features like two-factor authentication and data encryption to ensure security and protect client data.
-          </p>
-            <div style={{paddingTop:"15px",marginLeft:"15px"}}>
-          <button style={{width:"20vh",height:"5vh",background:"#4078f1ff",color:"#fff",border:"none",fontWeight:"bold",}}>COMMITMENT</button>
-          </div>
-        </div>
-        <div className="image">
-          <img src="/images/security.jpg" alt="Security" />
-        </div>
-      </section>
-
-      
-      <section className="thankyou">
-        <p>
-          Thank you for choosing NOVA EXAM as your trusted remote proctoring solution. <br />
-          For questions or support, feel free to contact us — we're always here to help.
+      <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "space-between",
+        padding: "60px 140px",
+        backgroundColor: "#fdfdfd",
+      }}
+    >
+      {/* Left Content */}
+      <div style={{ flex: 1, paddingRight: "40px" }}>
+        <h1 style={{ fontSize: "36px", fontWeight: "bold", marginBottom: "20px" }}>
+          Our Mission
+        </h1>
+        <p
+          style={{
+            fontSize: "16px",
+            lineHeight: "1.6",
+            color: "#333",
+            marginBottom: "20px",
+          }}
+        >
+          At NovaExam, our mission is to revolutionize the examination process by delivering a platform that is secure, efficient, and accessible to everyone. We strive to eliminate geographical barriers, reduce operational costs, and ensure fairness in every assessment. By combining advanced technology with a user-friendly experience, we aim to empower educational institutions, organizations, and learners worldwide to achieve their goals with confidence and integrity.
         </p>
+        <button
+          style={{
+            backgroundColor: "#21c87a",
+            color: "white",
+            border: "none",
+            padding: "8px 16px",
+            borderRadius: "5px",
+            fontWeight: "bold",
+            cursor: "pointer",
+          }}
+        >
+          Mission
+        </button>
+      </div>
+
+      {/* Right Image */}
+      <div style={{ flex: 1, textAlign: "center" }}>
+        <img
+          src="https://examonline.in/wp-content/uploads/2023/03/achievement.png"
+          alt="ExamOnline Illustration"
+          style={{ width: "80%", maxWidth: "500px" }}
+        />
+      </div>
+    </div>
+
+
+       <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "space-between",
+        padding: "60px 140px",
+        backgroundColor: "#fdfdfd",
+      }}
+    >
+      {/* Left Content */}
+      <div style={{ flex: 1, paddingRight: "40px" }}>
+        <h1 style={{ fontSize: "36px", fontWeight: "bold", marginBottom: "20px" }}>
+          Our Commitment to Security
+        </h1>
+        <p
+          style={{
+            fontSize: "16px",
+            lineHeight: "1.6",
+            color: "#333",
+            marginBottom: "20px",
+          }}
+        >
+         At NovaExam, security is at the heart of everything we do. We understand that trust is built on protecting the integrity of every assessment. Our platform is equipped with advanced encryption, secure authentication, and real-time monitoring to prevent unauthorized access or malpractice. From data privacy to exam proctoring, every feature is designed to safeguard both examiners and examinees. We continuously update our systems to meet the highest industry standards, ensuring a safe, fair, and transparent examination environment.
+
+
+        </p>
+        <button
+          style={{
+            backgroundColor: "#21c87a",
+            color: "white",
+            border: "none",
+            padding: "8px 16px",
+            borderRadius: "5px",
+            fontWeight: "bold",
+            cursor: "pointer",
+          }}
+        >
+          Commitment
+        </button>
+      </div>
+
+      {/* Right Image */}
+      <div style={{ flex: 1, textAlign: "center" }}>
+        <img
+          src="https://examonline.in/wp-content/uploads/2021/12/Privacy-Security-Q32021.png"
+          alt="ExamOnline Illustration"
+          style={{ width: "80%", maxWidth: "500px" }}
+        />
+      </div>
+    </div>
+
+
+      {/* Counters Section */}
+      <section
+        id="counters-section"
+        style={{
+          backgroundColor: "#21c87a",
+          color: "#fff",
+          padding: "60px 20px",
+          display: "flex",
+          justifyContent: "center",
+          gap: "60px",
+          flexWrap: "wrap",
+          textAlign: "center",
+          fontFamily: "Poppins",
+        }}
+      >
+        <div>
+          <h1 style={{ fontSize: "3rem", marginBottom: "10px" }}>{usersCount.toLocaleString()}</h1>
+          <p style={{ fontSize: "1.2rem" }}>Registered Users</p>
+        </div>
+        <div>
+          <h1 style={{ fontSize: "3rem", marginBottom: "10px" }}>{examsCount.toLocaleString()}</h1>
+          <p style={{ fontSize: "1.2rem" }}>Exams Conducted</p>
+        </div>
+        <div>
+          <h1 style={{ fontSize: "3rem", marginBottom: "10px" }}>{certCount.toLocaleString()}</h1>
+          <p style={{ fontSize: "1.2rem" }}>Certificates Issued</p>
+        </div>
       </section>
+
+      {/* FAQ Section */}
+      <section
+        className="faq-section"
+        style={{
+          maxWidth: "900px",
+          margin: "60px auto",
+          padding: "0 20px",
+          fontFamily: "Poppins",
+        }}
+      >
+        <h1 style={{ textAlign: "center", marginBottom: "30px" }}>Frequently Asked Questions</h1>
+        {faqs.map((faq, index) => (
+          <div
+            key={index}
+            style={{
+              borderBottom: "1px solid #ddd",
+              padding: "15px 0",
+              cursor: "pointer",
+            }}
+            onClick={() => toggleFaq(index)}
+            role="button"
+            tabIndex={0}
+            onKeyPress={(e) => {
+              if (e.key === "Enter") toggleFaq(index);
+            }}
+            aria-expanded={expandedFaq === index}
+            aria-controls={`faq-answer-${index}`}
+          >
+            <h3 style={{ margin: 0, fontWeight: "600" }}>{faq.question}</h3>
+            <p
+              id={`faq-answer-${index}`}
+              style={{
+                maxHeight: expandedFaq === index ? "500px" : "0",
+                overflow: "hidden",
+                transition: "max-height 0.3s ease",
+                marginTop: expandedFaq === index ? "10px" : "0",
+              }}
+            >
+              {faq.answer}
+            </p>
+          </div>
+        ))}
+      </section>
+
+     <section className="thankyou">
+        <p style={{padding:"10px 120px"}}>
+          Thank you for choosing NovaExam as your trusted online examination platform.
+If you have any questions or wish to learn more about our services, feel free to reach out to us. Our dedicated support team is always ready to assist you and ensure you have the best experience possible with NovaExam.
+        </p>
+        
+      </section>
+
+
+          
+
+
       <footer className="footer">
         <div className="footer-container">
           <div className="footer-section">
@@ -250,7 +488,7 @@ const Company = () => {
         <div className="footer-bottom">
           <p>©2025 NovaExam</p>
         </div>
-       
+
       </footer>
     </div>
   );

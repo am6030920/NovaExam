@@ -25,36 +25,53 @@ function Home() {
     }
   };
 
-  // === Feedback section with localStorage support ===
-  const defaultComments = [
-    { name: "Ankit Sharma", feedback: "NovaExam helped me prepare for my BCA semester—timed exams are amazing!" },
-    { name: "Riya Das", feedback: "Very helpful for mock tests and the leaderboard motivates me a lot!" },
-    { name: "Kunal Roy", feedback: "Clean interface and lots of variety in questions. Loved it!" },
-    { name: "Akash Maity", feedback: "It feels just like a real exam. Loved the timer, navigation, and the overall vibe!" }
-  ];
-
-  const [comments, setComments] = useState(() => {
-    // Load from localStorage or use default
-    const saved = localStorage.getItem('novaExamFeedback');
-    return saved ? JSON.parse(saved) : defaultComments;
-  });
-
+  // Feedback states
+  const [comments, setComments] = useState([]);
   const [newName, setNewName] = useState("");
   const [newFeedback, setNewFeedback] = useState("");
   const [showForm, setShowForm] = useState(false);
-
-  // Save comments to localStorage whenever comments change
-  useEffect(() => {
-    localStorage.setItem('novaExamFeedback', JSON.stringify(comments));
-  }, [comments]);
+    useEffect(() => {
+    fetch('/api/feedback')
+      .then(res => {
+        if (!res.ok) throw new Error('Failed to fetch feedback');
+        return res.json();
+      })
+      .then(data => {
+        setComments(data);
+      })
+      .catch(err => {
+        console.error(err);
+        setComments([
+          { name: "Ankit Sharma", feedback: "NovaExam helped me prepare for my BCA semester—timed exams are amazing!" },
+          { name: "Riya Das", feedback: "Very helpful for mock tests and the leaderboard motivates me a lot!" },
+          { name: "Kunal Roy", feedback: "Clean interface and lots of variety in questions. Loved it!" },
+          { name: "Akash Maity", feedback: "It feels just like a real exam. Loved the timer, navigation, and the overall vibe!" }
+        ]);
+      });
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (newName.trim() && newFeedback.trim()) {
-      setComments([...comments, { name: newName.trim(), feedback: newFeedback.trim() }]);
-      setNewName("");
-      setNewFeedback("");
-      setShowForm(false);
+      fetch('/api/feedback', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name: newName.trim(), feedback: newFeedback.trim() })
+      })
+        .then(res => {
+          if (!res.ok) throw new Error('Failed to submit feedback');
+          return res.json();
+        })
+        .then(savedFeedback => {
+          setComments(prev => [...prev, savedFeedback]);
+          setNewName("");
+          setNewFeedback("");
+          setShowForm(false);
+        })
+        .catch(err => {
+          alert('Error submitting feedback. Please try again later.');
+          console.error(err);
+        });
     } else {
       alert("Please enter both name and feedback");
     }
@@ -62,6 +79,7 @@ function Home() {
 
   return (
     <div style={{ background: 'white' }}>
+      {/* Navbar */}
       <div className="nova-navbar" style={{ fontFamily: "Poppins", height: '7vh' }}>
         <div className="logo-section">
           <img
@@ -121,7 +139,8 @@ function Home() {
           </div>
         </div>
       </div>
-
+            
+      {/* Banner and main content */}
       <div className="okeyy">
         <div className="main-content">
           <div className="banner">
@@ -169,6 +188,7 @@ function Home() {
         </div>
       </div>
 
+      {/* Featured exams */}
       <div className="featured-exams" style={{ padding: '60px 20px', backgroundColor: '#fffefeff' }}>
         <h1 style={{ textAlign: 'center', color: '#027161', fontFamily: 'Futura' }}>Featured Exams 📌</h1>
         <div style={{ display: 'flex', justifyContent: 'center', gap: '30px', flexWrap: 'wrap', marginTop: '30px' }}>
@@ -236,7 +256,6 @@ function Home() {
           What Our <span style={{ color: "#7497e8ff", textShadow: '1px 1px 4px rgba(0,0,0,0.2)' }}>Users</span> Say 💭
         </h1>
 
-        {/* Toggle form button */}
         <div style={{ textAlign: 'center', marginBottom: '20px' }}>
           <button
             onClick={() => setShowForm(!showForm)}
@@ -257,7 +276,6 @@ function Home() {
           </button>
         </div>
 
-        {/* Feedback form */}
         {showForm && (
           <form
             onSubmit={handleSubmit}
@@ -308,7 +326,7 @@ function Home() {
               onBlur={e => e.target.style.borderColor = "#91c9b9"}
               required
             />
-            <button
+           <button
               type="submit"
               style={{
                 padding: "14px 0",
@@ -329,167 +347,161 @@ function Home() {
           </form>
         )}
 
-        {/* Display feedback cards */}
+        {/* Feedback cards display */}
         <div
-      style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(4, 1fr)',
-        gap: '30px',
-        marginTop: '40px',
-        maxWidth: '1360px',
-        marginLeft: 'auto',
-        marginRight: 'auto',
-        padding: '0 20px',
-      }}
-    >
-      {comments.map((user, i) => (
-        <div
-          key={i}
           style={{
-            maxWidth: '320px',
-            background: 'linear-gradient(135deg, #e0f7f4 0%, #ffffff 100%)',
-            padding: '30px 25px',
-            borderRadius: '22px',
-            minHeight: '210px',
-            boxShadow: '0 15px 35px rgba(2, 113, 97, 0.15)',
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'space-between',
-            fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
-            transition: 'transform 0.3s ease, box-shadow 0.3s ease',
-            cursor: 'default',
-            margin: 'auto',
-            userSelect: 'none',
-          }}
-          onMouseEnter={e => {
-            e.currentTarget.style.transform = 'translateY(-8px) scale(1.04)';
-            e.currentTarget.style.boxShadow = '0 20px 40px rgba(2, 113, 97, 0.3)';
-          }}
-          onMouseLeave={e => {
-            e.currentTarget.style.transform = 'none';
-            e.currentTarget.style.boxShadow = '0 15px 35px rgba(2, 113, 97, 0.15)';
+            display: 'grid',
+            gridTemplateColumns: 'repeat(4, 1fr)',
+            gap: '30px',
+            marginTop: '40px',
+            maxWidth: '1360px',
+            marginLeft: 'auto',
+            marginRight: 'auto',
+            padding: '0 20px',
           }}
         >
-          {/* Feedback Text with quote icon */}
-          <div
-            style={{
-              position: 'relative',
-              paddingLeft: '40px',
-              color: '#004d40',
-              fontSize: '17px',
-              fontStyle: 'italic',
-              lineHeight: '1.6',
-              letterSpacing: '0.02em',
-            }}
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="#027161"
-              viewBox="0 0 24 24"
-              width="28px"
-              height="28px"
-              style={{
-                position: 'absolute',
-                left: '0',
-                top: '-5px',
-                opacity: 0.2,
-                transform: 'rotate(180deg)',
-              }}
-            >
-              <path d="M7.17 6A5 5 0 0 0 2 11v6a1 1 0 0 0 1 1h6a5 5 0 0 0 5-5v-1a5 5 0 0 0-6.83-5zM7 15H4v-3a3 3 0 0 1 3-3v3a1 1 0 0 0 0 2zM18 6a5 5 0 0 0-5 5v1a5 5 0 0 0 6.83 5H22a1 1 0 0 0 1-1v-6a5 5 0 0 0-5-5zM17 15h-3v-3a3 3 0 0 1 3-3v3a1 1 0 0 0 0 2z" />
-            </svg>
-            “{user.feedback}”
-          </div>
-
-          {/* Divider line */}
-          <hr
-            style={{
-              margin: '20px 0',
-              border: 'none',
-              height: '1.5px',
-              borderRadius: '1px',
-              background: 'linear-gradient(90deg, #00bfa5, #00695c)',
-              opacity: 0.3,
-            }}
-          />
-
-          {/* User info section */}
-          <div
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-            }}
-          >
-            {/* User avatar circle */}
+          {comments.map((user, i) => (
             <div
+              key={i}
               style={{
-                backgroundColor: '#027161',
-                color: '#fff',
-                borderRadius: '50%',
-                width: '48px',
-                height: '48px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                fontWeight: '700',
-                fontSize: '18px',
-                userSelect: 'none',
-                boxShadow: '0 2px 8px rgba(2, 113, 97, 0.3)',
-              }}
-              title={user.name}
-            >
-              {user.name
-                .split(' ')
-                .map(n => n[0])
-                .join('')
-                .toUpperCase()}
-            </div>
-
-            {/* User name and badge */}
-            <div
-              style={{
-                flex: '1',
-                marginLeft: '15px',
+                maxWidth: '320px',
+                background: 'linear-gradient(135deg, #e0f7f4 0%, #ffffff 100%)',
+                padding: '30px 25px',
+                borderRadius: '22px',
+                minHeight: '210px',
+                boxShadow: '0 15px 35px rgba(2, 113, 97, 0.15)',
                 display: 'flex',
                 flexDirection: 'column',
+                justifyContent: 'space-between',
+                fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
+                transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+                cursor: 'default',
+                margin: 'auto',
+                userSelect: 'none',
+              }}
+              onMouseEnter={e => {
+                e.currentTarget.style.transform = 'translateY(-8px) scale(1.04)';
+                e.currentTarget.style.boxShadow = '0 20px 40px rgba(2, 113, 97, 0.3)';
+              }}
+              onMouseLeave={e => {
+                e.currentTarget.style.transform = 'none';
+                e.currentTarget.style.boxShadow = '0 15px 35px rgba(2, 113, 97, 0.15)';
               }}
             >
-              <p
+              <div
                 style={{
-                  margin: 0,
-                  fontWeight: '700',
-                  fontSize: '16px',
+                  position: 'relative',
+                  paddingLeft: '40px',
                   color: '#004d40',
-                  letterSpacing: '0.05em',
-                  textTransform: 'capitalize',
-                  userSelect: 'text',
+                  fontSize: '17px',
+                  fontStyle: 'italic',
+                  lineHeight: '1.6',
+                  letterSpacing: '0.02em',
                 }}
               >
-                {user.name}
-              </p>
-              <span
-                style={{
-                  marginTop: '4px',
-                  fontSize: '12px',
-                  color: '#00bfa5',
-                  fontWeight: '600',
-                  textTransform: 'uppercase',
-                  letterSpacing: '0.1em',
-                  userSelect: 'none',
-                }}
-              >
-                Verified User
-              </span>
-            </div>
-          </div>
-        </div>
-      ))}
-    </div>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="#027161"
+                  viewBox="0 0 24 24"
+                  width="28px"
+                  height="28px"
+                  style={{
+                    position: 'absolute',
+                    left: '0',
+                    top: '-5px',
+                    opacity: 0.2,
+                    transform: 'rotate(180deg)',
+                  }}
+                >
+                  <path d="M7.17 6A5 5 0 0 0 2 11v6a1 1 0 0 0 1 1h6a5 5 0 0 0 5-5v-1a5 5 0 0 0-6.83-5zM7 15H4v-3a3 3 0 0 1 3-3v3a1 1 0 0 0 0 2zM18 6a5 5 0 0 0-5 5v1a5 5 0 0 0 6.83 5H22a1 1 0 0 0 1-1v-6a5 5 0 0 0-5-5zM17 15h-3v-3a3 3 0 0 1 3-3v3a1 1 0 0 0 0 2z" />
+                </svg>
+                “{user.feedback}”
+              </div>
 
+              <hr
+                style={{
+                  margin: '20px 0',
+                  border: 'none',
+                  height: '1.5px',
+                  borderRadius: '1px',
+                  background: 'linear-gradient(90deg, #00bfa5, #00695c)',
+                  opacity: 0.3,
+                }}
+              />
+
+              <div
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                }}
+              >
+                <div
+                  style={{
+                    backgroundColor: '#027161',
+                    color: '#fff',
+                    borderRadius: '50%',
+                    width: '48px',
+                    height: '48px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    fontWeight: '700',
+                    fontSize: '18px',
+                    userSelect: 'none',
+                    boxShadow: '0 2px 8px rgba(2, 113, 97, 0.3)',
+                  }}
+                  title={user.name}
+                >
+                  {user.name
+                    .split(' ')
+                    .map(n => n[0])
+                    .join('')
+                    .toUpperCase()}
+                </div>
+
+                <div
+                  style={{
+                    flex: '1',
+                    marginLeft: '15px',
+                    display: 'flex',
+                    flexDirection: 'column',
+                  }}
+                >
+                  <p
+                    style={{
+                      margin: 0,
+                      fontWeight: '700',
+                      fontSize: '16px',
+                      color: '#004d40',
+                      letterSpacing: '0.05em',
+                      textTransform: 'capitalize',
+                      userSelect: 'text',
+                    }}
+                  >
+                    {user.name}
+                  </p>
+                  <span
+                    style={{
+                      marginTop: '4px',
+                      fontSize: '12px',
+                      color: '#00bfa5',
+                      fontWeight: '600',
+                      textTransform: 'uppercase',
+                      letterSpacing: '0.1em',
+                      userSelect: 'none',
+                    }}
+                  >
+                    Verified User
+                  </span>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
 
-      <footer className="footer">
+   <footer className="footer">
         <div className="footer-container">
           <div className="footer-section">
             <h4>Types Of Exams</h4>
@@ -549,6 +561,7 @@ function Home() {
           <p>©2025 NovaExam</p>
         </div>
       </footer>
+
     </div>
   );
 }

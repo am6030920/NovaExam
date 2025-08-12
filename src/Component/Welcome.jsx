@@ -1,4 +1,6 @@
 import React from 'react'
+import { useNavigate } from "react-router-dom";
+
 import "./Welcome.css"
 
 
@@ -13,6 +15,7 @@ const features = [
 
 
 const Welcome = () => {
+  const navigate = useNavigate();
   return (
     <div className='welcome-container'>
       <div className='bal' >
@@ -62,7 +65,7 @@ const Welcome = () => {
       </div>
 
       <section className="section">
-        <h2>Complete Online Exam Management Lifecycle Built-in a Single Software🧑‍💻</h2>
+        <h1 style={{fontSize:"5vh"}}><span style={{color:'rgba(75, 75, 75, 0.98)'}}>Complete Online</span><span style={{color:'rgba(7, 106, 99, 0.98)'}}>Exam Management </span><span style={{color:'rgba(77, 109, 183, 0.98)'}}>Lifecycle Built-in a</span><span style={{color:'rgba(86, 81, 224, 0.56)'}}> Single Software🧑‍💻</span></h1>
         <div className="underline" style={{width:'130vh'}}></div>
 
         <div className="cards12">
@@ -96,11 +99,11 @@ const Welcome = () => {
         </div>
       </section>
       <div className="why-choose-section">
-        <h2>Why Choose ExamOnline🤷‍♂️</h2>
+        <h2 style={{fontSize:"6vh"}}>Why Choose ExamOnline🤷‍♂️</h2>
         <div className="underline1"></div>
 
         <div className="container">
-          <div className="features">
+          <div className="features" style={{marginTop:"-10vh"}}>
             <div className="feature">
               <img
                 src="https://cdn-icons-png.flaticon.com/512/1828/1828640.png"
@@ -335,12 +338,7 @@ const Welcome = () => {
           </p>
         </div>
       </div>
-      <div className="make">
-                  <h2>Make It Easier for You and Your Candidates to Conduct and Take Exams🚩
-          </h2>
-          <div className="underline4"></div>
-          <p className='ki'>Make it easier for you and your candidates to conduct and take exams with ExamOnline’s comprehensive online examination platform. Our solution streamlines the entire process, starting from effortless exam scheduling and secure candidate registration to robust remote proctoring that guarantees exam integrity. Candidates can conveniently take exams from any location and device, while administrators benefit from real-time monitoring and automated evaluation features that save valuable time and resources. By eliminating the need for physical paperwork and manual grading, ExamOnline reduces administrative overhead and minimizes errors, ensuring accurate and timely results. The intuitive user interface is designed to be accessible for all skill levels, providing a seamless experience for both examiners and candidates alike. Whether you are running small quizzes or large-scale competitive exams, ExamOnline offers scalable, secure, and efficient tools to make the entire examination process stress-free, transparent, and fair.</p>
-        </div>
+    
 
 
            <div className="section1">
@@ -375,7 +373,81 @@ const Welcome = () => {
         </div>
       </div>
     </div>
-        <div class="try-wrapper">
+        
+
+        <div style={{  background: "linear-gradient(90deg, #1c7ee1ff 0%, #60c9c4ff 100%)",
+   }}>
+          <h1 style={{padding:"10px 40vh",display:"flex",justifyContent:"center",fontSize:"5vh",color:"#fff"}}>Make It Easier for You and Your Candidates to Conduct</h1>
+          <h1 style={{display:"flex",justifyContent:"center",marginTop:"-3vh",fontSize:"5vh",color:"#fff"
+
+          }}> and Take Exams 🚩</h1>
+          <div className='underline' style={{width:"88vh"}}></div>
+          <p style={{padding:"10px 40vh",display:"flex",textAlign:"center",fontSize:"2.2vh",color:""}}>Make it easier for you and your candidates to conduct and take exams with NovaExam's comprehensive online examination platform. Our solution streamlines the entire process, starting from effortless exam scheduling and secure candidate registration to robust remote proctoring that guarantees exam integrity.</p>
+         <div
+  style={{
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    gap: "20px",
+    paddingTop: "8vh",
+    paddingBottom: "2vh",
+    
+  }}
+>
+  <button
+    style={{
+      width: "22vh",
+      height: "6vh",
+      border: "2px solid #0056b3",
+      borderRadius: "35px",
+      background: "#fff",
+      color: "#0056b3",
+      fontSize: "17px",
+      fontWeight: "600",
+      cursor: "pointer",
+      transition: "all 0.3s ease",
+    }}
+        onMouseOver={(e) => {
+          e.target.style.background = "#0056b3";
+          e.target.style.color = "#fff";
+        }}
+        onMouseOut={(e) => {
+          e.target.style.background = "#fff";
+          e.target.style.color = "#0056b3";
+        }}
+        onClick={() => navigate("/Signup")}
+      >
+        Get Started
+      </button>
+
+  <button
+    style={{
+      width: "22vh",
+      height: "6vh",
+      border: "2px solid #28a745",
+      borderRadius: "35px",
+      background: "#fff",
+      color: "#28a745",
+      fontSize: "17px",
+      fontWeight: "600",
+      cursor: "pointer",
+      transition: "all 0.3s ease",
+    }}
+    onMouseOver={(e) => {
+      e.target.style.background = "#28a745";
+      e.target.style.color = "#fff";
+    }}
+    onMouseOut={(e) => {
+      e.target.style.background = "#fff";
+      e.target.style.color = "#28a745";
+    }}
+  >
+    Schedule Demo
+  </button>
+</div>
+
+
+          <div class="try-wrapper">
         <div className="try"> <span>🎓Try it for free</span>
         <span>🎓Try it for free</span>
         <span>🎓Try it for free</span>
@@ -384,6 +456,7 @@ const Welcome = () => {
         <span>🎓Try it for free</span>
         </div>
 </div>
+        </div>
        
              <footer className="footer6">
       <div className="footer-content6">

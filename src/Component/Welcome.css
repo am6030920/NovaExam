@@ -1069,3 +1069,98 @@
     transform: scale(1.05);
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
   }
+/* Extra Responsive Tweaks */
+
+/* Large Tablets & Small Laptops */
+@media (max-width: 1200px) {
+  .main, .main1 {
+    padding-left: 40px;
+    font-size: 3vw;
+  }
+  .main2 {
+    padding-right: 40px;
+  }
+  .vag {
+    padding-left: 0;
+    transform: translateY(-250px);
+  }
+}
+
+/* Tablets */
+@media (max-width: 992px) {
+  .image1 img {
+    margin-top: 0;
+    max-width: 100%;
+  }
+  .feature, .feature3 {
+    padding-left: 20px;
+  }
+  .section, .test, .make {
+    margin: 20px;
+    padding: 20px;
+  }
+}
+
+/* Mobile Landscape */
+@media (max-width: 768px) {
+  .main, .main1 {
+    font-size: 24px;
+    padding-left: 15px;
+    text-align: center;
+  }
+  .main2 {
+    padding: 0 15px;
+    text-align: center;
+  }
+  img {
+    max-width: 100%;
+    height: auto;
+    padding-left: 0;
+  }
+  .card-container {
+    flex-direction: column;
+    align-items: center;
+  }
+  .vag {
+    transform: translateY(-150px);
+    flex-direction: column;
+    padding-left: 0;
+  }
+  .underline, .underline1, .underline2, .underline3, .underline4, .underline5 {
+    width: 90%;
+  }
+  .ki {
+    padding: 15px;
+  }
+}
+
+/* Mobile Portrait */
+@media (max-width: 480px) {
+  .main, .main1 {
+    font-size: 20px;
+  }
+  .main2 {
+    font-size: 14px;
+  }
+  .feature, .feature3 {
+    flex-direction: column;
+    padding-left: 0;
+    text-align: center;
+  }
+  .image4 img, .image6 img {
+    width: 100%;
+    margin: 0 auto;
+  }
+  .try {
+    font-size: 22px;
+    gap: 40px;
+  }
+  .footer-content6 {
+    flex-direction: column;
+    align-items: center;
+  }
+  .footer-left6, .footer-right6 {
+    max-width: 100%;
+    text-align: center;
+  }
+}

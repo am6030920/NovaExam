@@ -262,9 +262,7 @@ function SignupPage() {
                 onChange={handleChange}
               />
               <span>I agree to the terms and conditions </span>
-              <Link to="/forgot-password" className="forgot-password">
-                Forgot Password?
-              </Link>
+              
             </label>
 
             {formData.errorMessage && (

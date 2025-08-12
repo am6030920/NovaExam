@@ -20,37 +20,48 @@ const Profile = () => {
   const [image, setImage] = useState(localStorage.getItem("studentImage") || "https://cdn-icons-png.flaticon.com/512/3135/3135715.png");
   const [editing, setEditing] = useState(false);
   const [showHistory, setShowHistory] = useState(false);
-  const [examHistory, setExamHistory] = useState([]);
-
-  const [showCertificates, setShowCertificates] = useState(false);
-  const [certificates, setCertificates] = useState([]);
-
-  useEffect(() => {
-    const history = JSON.parse(localStorage.getItem("examHistory")) || [];
-    setExamHistory(history);
-  }, []);
-
-  useEffect(() => {
-    const storedCertificates = JSON.parse(localStorage.getItem('certificates')) || [];
-    setCertificates(storedCertificates);
-  }, []);
-
-  useEffect(() => {
-    if (!editing) {
-      localStorage.setItem("studentName", formData.name);
-      localStorage.setItem("studentEmail", formData.Email);
-      localStorage.setItem("studentPhone", formData.phone);
-      localStorage.setItem("studentMobile", formData.mobile);
-      localStorage.setItem("studentAddress", formData.address);
-      localStorage.setItem("studentCollege", formData.College);
-      localStorage.setItem("studentGithub", formData.Github);
-      localStorage.setItem("studentLinkedin", formData.Linkedin);
+  const [examHistory, setExamHistory] = useState(() => {
+    try {
+      return JSON.parse(localStorage.getItem("examHistory")) || [];
+    } catch {
+      return [];
     }
-  }, [editing, formData]);
+  });
+  const [showCertificates, setShowCertificates] = useState(false);
+  const [certificates, setCertificates] = useState(() => {
+    try {
+      return JSON.parse(localStorage.getItem('certificates')) || [];
+    } catch {
+      return [];
+    }
+  });
 
+  // Save form data instantly on change
+  useEffect(() => {
+    localStorage.setItem("studentName", formData.name);
+    localStorage.setItem("studentEmail", formData.Email);
+    localStorage.setItem("studentPhone", formData.phone);
+    localStorage.setItem("studentMobile", formData.mobile);
+    localStorage.setItem("studentAddress", formData.address);
+    localStorage.setItem("studentCollege", formData.College);
+    localStorage.setItem("studentGithub", formData.Github);
+    localStorage.setItem("studentLinkedin", formData.Linkedin);
+  }, [formData]);
+
+  // Save image instantly
   useEffect(() => {
     localStorage.setItem("studentImage", image);
   }, [image]);
+
+  // Sync exam history changes to localStorage
+  useEffect(() => {
+    localStorage.setItem("examHistory", JSON.stringify(examHistory));
+  }, [examHistory]);
+
+  // Sync certificates changes to localStorage
+  useEffect(() => {
+    localStorage.setItem("certificates", JSON.stringify(certificates));
+  }, [certificates]);
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -68,6 +79,7 @@ const Profile = () => {
 
   const handleLogout = () => {
     if (window.confirm("Are you sure you want to logout?")) {
+      // Clear all stored user data
       localStorage.removeItem("studentName");
       localStorage.removeItem("studentEmail");
       localStorage.removeItem("studentPhone");
@@ -77,6 +89,8 @@ const Profile = () => {
       localStorage.removeItem("studentGithub");
       localStorage.removeItem("studentLinkedin");
       localStorage.removeItem("studentImage");
+      localStorage.removeItem("examHistory");
+      localStorage.removeItem("certificates");
       navigate("/");
     }
   };

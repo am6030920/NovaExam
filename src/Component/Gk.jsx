@@ -157,6 +157,16 @@ const questionsData = [
   },
 ];
 
+// You can shuffle questions on mount if you want randomness:
+function shuffleArray(array) {
+  const arr = array.slice();
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
 const saveResultToLocal = (examName, score, total) => {
   const existing = JSON.parse(localStorage.getItem("examHistory")) || [];
   const now = new Date().toLocaleString();
@@ -175,17 +185,28 @@ const getGrade = (score) => {
 };
 
 const Gk = () => {
+  const [questions, setQuestions] = useState([]);
   const [currentQ, setCurrentQ] = useState(0);
-  const [selectedOptions, setSelectedOptions] = useState(Array(questionsData.length).fill(null));
-  const [timeLeft, setTimeLeft] = useState(900); // 15 minutes in seconds
+  const [selectedOptions, setSelectedOptions] = useState([]);
+  const [timeLeft, setTimeLeft] = useState(900);
   const [showResult, setShowResult] = useState(false);
   const [score, setScore] = useState(0);
   const navigate = useNavigate();
+
   const userName = localStorage.getItem("userName") || "Student";
-  const examName = "General Knowledge Test";
+  const examName = "Programming Test";
+
+  // Shuffle questions once on component mount
+  useEffect(() => {
+    const shuffled = shuffleArray(questionsData);
+    setQuestions(shuffled);
+    setSelectedOptions(Array(shuffled.length).fill(null));
+  }, []);
 
   useEffect(() => {
     if (showResult) return;
+    if (questions.length === 0) return;
+
     const timer = setInterval(() => {
       setTimeLeft((prev) => {
         if (prev <= 1) {
@@ -196,8 +217,9 @@ const Gk = () => {
         return prev - 1;
       });
     }, 1000);
+
     return () => clearInterval(timer);
-  }, [showResult]);
+  }, [showResult, questions]);
 
   const formatTime = (seconds) => {
     const mins = Math.floor(seconds / 60);
@@ -212,7 +234,7 @@ const Gk = () => {
   };
 
   const handleNext = () => {
-    if (currentQ < questionsData.length - 1) {
+    if (currentQ < questions.length - 1) {
       setCurrentQ(currentQ + 1);
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } else {
@@ -230,7 +252,7 @@ const Gk = () => {
   const calculateResult = () => {
     let finalScore = 0;
     selectedOptions.forEach((ans, i) => {
-      const correct = questionsData[i].correctAnswer;
+      const correct = questions[i].correct;
       if (Array.isArray(correct)) {
         if (correct.includes(ans)) finalScore++;
       } else {
@@ -239,7 +261,7 @@ const Gk = () => {
     });
     setScore(finalScore);
     setShowResult(true);
-    saveResultToLocal(examName, finalScore, questionsData.length);
+    saveResultToLocal(examName, finalScore, questions.length);
   };
 
   const handleResultClose = () => {
@@ -248,18 +270,14 @@ const Gk = () => {
 
   const downloadCertificate = () => {
     const cert = document.getElementById("certificate");
-    cert.style.display = "block"; 
-    const opt = {
-      margin: 0,
-      filename: `${examName}-Certificate.pdf`,
-      image: { type: 'jpeg', quality: 1 },
-      html2canvas: { scale: 2, useCORS: true, backgroundColor: null },
-      jsPDF: { unit: 'pt', format: 'a4', orientation: 'landscape' },
-    };
-    html2pdf().set(opt).from(cert).save().then(() => {
+    cert.style.display = "block";
+    html2pdf().from(cert).save(`${examName}-Certificate.pdf`);
+    setTimeout(() => {
       cert.style.display = "none";
-    });
+    }, 1000);
   };
+
+  if (questions.length === 0) return <div>Loading...</div>;
 
   return (
     <div className='keyboard'>
@@ -273,23 +291,23 @@ const Gk = () => {
         {!showResult && (
           <>
             <div className="question-block">
-              <h3>Q{currentQ + 1}. {questionsData[currentQ].question}</h3>
-              {questionsData[currentQ].options.map((opt, i) => {
-                const inputId = `q${currentQ}_opt${i}`;
-                return (
-                  <div key={i} className="option">
-                    <input
-                      type="radio"
-                      id={inputId}
-                      name={`q${currentQ}`}
-                      checked={selectedOptions[currentQ] === opt}
-                      onChange={() => handleOptionSelect(opt)}
-                    />
-                    <label htmlFor={inputId}>{opt}</label>
-                  </div>
-                );
-              })}
-            </div>
+  <h3>Q{currentQ + 1}. {questions[currentQ].question}</h3>
+  {questions[currentQ].options.map((opt, i) => {
+    const inputId = `q${currentQ}_opt${i}`;
+    return (
+      <div key={i} className="option">
+        <input
+          type="radio"
+          id={inputId}
+          name={`q${currentQ}`}
+          checked={selectedOptions[currentQ] === opt}
+          onChange={() => handleOptionSelect(opt)}
+        />
+        <label htmlFor={inputId}>{opt}</label>
+      </div>
+    );
+  })}
+</div>
 
             <div className="progress-bar">
               <div
@@ -424,7 +442,16 @@ const Gk = () => {
             alignItems: 'center'
           }}>
             <div style={{ textAlign: 'left' }}>
-              <p style={{ fontSize: '32px', marginBottom: '1px', fontfamily: 'Brush Script MT', marginLeft: '40px',marginLeft:'-0vh'}}>Akash Maity</p>
+                <p
+        style={{
+          fontSize: "5vh",
+          marginBottom: "0px",
+          marginLeft: "3vh",
+          fontFamily:"Brush Script MT ,cursive"
+        }}
+      >
+        Akash Maity
+      </p>
               <p style={{ color: "black", marginTop: '-2vh' }}>_____________________</p>
               <p style={{ fontSize: '13px' }}>Founder & Project Head, NovaExam</p>
             </div>

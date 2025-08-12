@@ -158,9 +158,7 @@ function LoginPage() {
             </span>
           </div>
 
-          <div className="have1">
-            <Link to="/forgot-password" className="logp">Forgot Password?</Link>
-          </div>
+          
 
           <button type="submit" className="create-account">
             Submitted

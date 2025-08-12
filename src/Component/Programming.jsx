@@ -155,36 +155,14 @@ const questionsData = [
     correct: "try-except"
   }
 ];
-
-
-const downloadCertificate = () => {
-  const cert = document.getElementById("certificate");
-  
-  cert.style.display = "block"; // temporarily show it for PDF
-
-  const opt = {
-    margin: 0,
-    filename: 'NovaExam_Certificate.pdf',
-    image: { type: 'jpeg', quality: 1 },
-    html2canvas: {
-      scale: 2,
-      useCORS: true,
-      backgroundColor: null
-    },
-    jsPDF: {
-      unit: 'pt',
-      format: 'a4',
-      orientation: 'landscape'
-    }
-  };
-
-  html2pdf().set(opt).from(cert).save().then(() => {
-    cert.style.display = "none"; 
-  });
-};
-
-
-
+function shuffleArray(array) {
+  const arr = array.slice();
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
 
 const saveResultToLocal = (examName, score, total) => {
   const existing = JSON.parse(localStorage.getItem("examHistory")) || [];
@@ -197,24 +175,35 @@ const getGrade = (score) => {
   if (score >= 27) return "Ex";
   if (score >= 24) return "A+";
   if (score >= 21) return "A";
-   if (score >= 18) return "B";
-  if (score >= 15) return "c";
+  if (score >= 18) return "B";
+  if (score >= 15) return "C";
   if (score >= 10) return "D";
   return "F";
 };
 
 const Programming = () => {
+  const [questions, setQuestions] = useState([]);
   const [currentQ, setCurrentQ] = useState(0);
-  const [selectedOptions, setSelectedOptions] = useState(Array(questionsData.length).fill(null));
+  const [selectedOptions, setSelectedOptions] = useState([]);
   const [timeLeft, setTimeLeft] = useState(900);
   const [showResult, setShowResult] = useState(false);
   const [score, setScore] = useState(0);
   const navigate = useNavigate();
+
   const userName = localStorage.getItem("userName") || "Student";
   const examName = "Programming Test";
 
+  // Shuffle questions once on component mount
+  useEffect(() => {
+    const shuffled = shuffleArray(questionsData);
+    setQuestions(shuffled);
+    setSelectedOptions(Array(shuffled.length).fill(null));
+  }, []);
+
   useEffect(() => {
     if (showResult) return;
+    if (questions.length === 0) return;
+
     const timer = setInterval(() => {
       setTimeLeft((prev) => {
         if (prev <= 1) {
@@ -225,8 +214,9 @@ const Programming = () => {
         return prev - 1;
       });
     }, 1000);
+
     return () => clearInterval(timer);
-  }, [showResult]);
+  }, [showResult, questions]);
 
   const formatTime = (seconds) => {
     const mins = Math.floor(seconds / 60);
@@ -241,7 +231,7 @@ const Programming = () => {
   };
 
   const handleNext = () => {
-    if (currentQ < questionsData.length - 1) {
+    if (currentQ < questions.length - 1) {
       setCurrentQ(currentQ + 1);
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } else {
@@ -256,36 +246,35 @@ const Programming = () => {
     }
   };
 
- const calculateResult = () => {
-  let finalScore = 0;
-  selectedOptions.forEach((ans, i) => {
-    const correct = questionsData[i].correct; 
-    if (Array.isArray(correct)) {
-      if (correct.includes(ans)) finalScore++;
-    } else {
-      if (ans === correct) finalScore++;
-    }
-  });
-  setScore(finalScore);
-  setShowResult(true);
-  saveResultToLocal(examName, finalScore, questionsData.length);
-};
-
-
+  const calculateResult = () => {
+    let finalScore = 0;
+    selectedOptions.forEach((ans, i) => {
+      const correct = questions[i].correct;
+      if (Array.isArray(correct)) {
+        if (correct.includes(ans)) finalScore++;
+      } else {
+        if (ans === correct) finalScore++;
+      }
+    });
+    setScore(finalScore);
+    setShowResult(true);
+    saveResultToLocal(examName, finalScore, questions.length);
+  };
 
   const handleResultClose = () => {
     navigate('/home');
   };
 
- const downloadCertificate = () => {
-  const cert = document.getElementById("certificate");
-  cert.style.display = "block";
-  html2pdf().from(cert).save(`${examName}-Certificate.pdf`);
-  setTimeout(() => {
-    cert.style.display = "none";
-  }, 1000);
-};
+  const downloadCertificate = () => {
+    const cert = document.getElementById("certificate");
+    cert.style.display = "block";
+    html2pdf().from(cert).save(`${examName}-Certificate.pdf`);
+    setTimeout(() => {
+      cert.style.display = "none";
+    }, 1000);
+  };
 
+  if (questions.length === 0) return <div>Loading...</div>;
 
   return (
     <div className='keyboard'>
@@ -298,24 +287,24 @@ const Programming = () => {
 
         {!showResult && (
           <>
-            <div className="question-block">
-              <h3>Q{currentQ + 1}. {questionsData[currentQ].question}</h3>
-              {questionsData[currentQ].options.map((opt, i) => {
-                const inputId = `q${currentQ}_opt${i}`;
-                return (
-                  <div key={i} className="option">
-                    <input
-                      type="radio"
-                      id={inputId}
-                      name={`q${currentQ}`}
-                      checked={selectedOptions[currentQ] === opt}
-                      onChange={() => handleOptionSelect(opt)}
-                    />
-                    <label htmlFor={inputId}>{opt}</label>
-                  </div>
-                );
-              })}
-            </div>
+           <div className="question-block">
+  <h3>Q{currentQ + 1}. {questions[currentQ].question}</h3>
+  {questions[currentQ].options.map((opt, i) => {
+    const inputId = `q${currentQ}_opt${i}`;
+    return (
+      <div key={i} className="option">
+        <input
+          type="radio"
+          id={inputId}
+          name={`q${currentQ}`}
+          checked={selectedOptions[currentQ] === opt}
+          onChange={() => handleOptionSelect(opt)}
+        />
+        <label htmlFor={inputId}>{opt}</label>
+      </div>
+    );
+  })}
+</div>
 
             <div className="progress-bar">
               <div
@@ -371,100 +360,187 @@ const Programming = () => {
 
 
         {/* start */}
-<div id="certificate" style={{
-display: 'none',
-    width: '660px',
-    height: '440px',
-    margin: '30px auto',
-    border: '8px double #00594c',
-    padding: '40px',
-    textAlign: 'center',
-    fontFamily: 'Georgia, serif',
-    position: 'relative',
-    backgroundColor: '#f9fdfc'  
-}}>
-
-  {/* NovaExam Title */}
- <div style={{
-  display: 'flex',
-  justifyContent: 'space-between',
-  alignItems: 'center',
-  padding: '10px 40px 0',
-  borderBottom: '2px solid #ccc',
-}}>
-  {/* Left: NovaExam with subtitle */}
-  <div>
-    <h1 style={{
-      margin: '0',
-      fontSize: '36px',
-      fontFamily: 'Poppins, sans-serif',
-      fontWeight: 'bold'
-    }}>
-      <span style={{ color: '#00b386' }}>Nova</span>
-      <span style={{ color: 'rgba(2, 113, 97, 0.9)' }}>Exam</span>
-    </h1>
-    <p style={{
-      margin: '0',
-      fontSize: '16px',
-      color: '#333',
-      fontFamily: 'Georgia, serif'
-    }}>
-      Certificate of Achievement
-    </p>
+<div
+  id="certificate"
+  style={{
+    display: "none",
+    width: "660px",
+    height: "440px",
+    margin: "30px auto",
+    border: "8px double #00594c",
+    padding: "40px",
+    textAlign: "center",
+    fontFamily: "Georgia, serif",
+    position: "relative",
+    background: "linear-gradient(135deg, #f9fdfc, #e8f8f5)",
+    boxShadow: "0 8px 20px rgba(0,0,0,0.15)",
+  }}
+>
+  {/* Decorative Corners */}
+  <div
+    style={{
+      position: "absolute",
+      top: "10px",
+      left: "10px",
+      fontSize: "22px",
+      color: "#c9a646",
+    }}
+  >
+    ★
+  </div>
+  <div
+    style={{
+      position: "absolute",
+      top: "10px",
+      right: "10px",
+      fontSize: "22px",
+      color: "#c9a646",
+    }}
+  >
+    ★
+  </div>
+  <div
+    style={{
+      position: "absolute",
+      bottom: "10px",
+      left: "10px",
+      fontSize: "22px",
+      color: "#c9a646",
+    }}
+  >
+    ★
+  </div>
+  <div
+    style={{
+      position: "absolute",
+      bottom: "10px",
+      right: "10px",
+      fontSize: "22px",
+      color: "#c9a646",
+    }}
+  >
+    ★
   </div>
 
-  {/* Logo image */}
-  <img
-    src="/images/main.png"
-    alt="NovaExam Seal"
+  {/* Header */}
+  <div
     style={{
-      width: '80px',
-      height: '80px',
-      objectFit: 'contain'
+      display: "flex",
+      justifyContent: "space-between",
+      alignItems: "center",
+      padding: "10px 40px 0",
+      borderBottom: "2px solid #ccc",
     }}
-  />
-</div>
+  >
+    <div>
+      <h1
+        style={{
+          margin: "0",
+          fontSize: "36px",
+          fontFamily: "Poppins, sans-serif",
+          fontWeight: "bold",
+          letterSpacing: "1px",
+        }}
+      >
+        <span style={{ color: "#00b386" }}>Nova</span>
+        <span style={{ color: "rgba(2, 113, 97, 0.9)" }}>Exam</span>
+      </h1>
+      <p
+        style={{
+          margin: "0",
+          fontSize: "16px",
+          color: "#555",
+          fontFamily: "Georgia, serif",
+        }}
+      >
+        Certificate of Achievement
+      </p>
+    </div>
+    <img
+      src="/images/main.png"
+      alt="NovaExam Seal"
+      style={{
+        width: "80px",
+        height: "80px",
+        objectFit: "contain",
+      }}
+    />
+  </div>
 
-  <p style={{ fontSize: '16px',paddingTop:'4vh'}}>This is proudly presented to</p>
-   <h1 style={{
-    fontSize: '32px',
-    color: '#00594c',
-    margin: '10px 0 30px',
-    fontWeight: 'bold',
-    textTransform: 'uppercase'
-  }}>
+  {/* Body */}
+  <p style={{ fontSize: "16px", paddingTop: "4vh", color: "#333" }}>
+    This is proudly presented to
+  </p>
+  <h1
+    style={{
+      fontSize: "32px",
+      color: "#00594c",
+      margin: "10px 0 30px",
+      fontWeight: "bold",
+      textTransform: "uppercase",
+      letterSpacing: "2px",
+    }}
+  >
     {userName}
   </h1>
 
-  <p style={{ fontSize: '17px', margin: '10px 0',marginTop:'-5vh' }}>
+  <p
+    style={{
+      fontSize: "17px",
+      margin: "10px 0",
+      marginTop: "-5vh",
+      color: "#333",
+    }}
+  >
     For successfully completing the <strong>{examName}</strong> exam
   </p>
 
-<p style={{ fontSize: '16px',color:'black', marginTop:'-1vh'}}>Grade: <strong>{getGrade(score)}</strong></p>
-  <div style={{
-    position: 'absolute',
-    bottom: '40px',
-    left: '50px',
-    right: '50px',
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center'
-  }}>
-    <div style={{ textAlign: 'left' }}>
-      <p style={{ fontSize: '28px', marginBottom: '0px', marginLeft: '50px', marginLeft: '-0vh' }}
+  <p style={{ fontSize: "16px", color: "black", marginTop: "-1vh" }}>
+    Grade:{" "}
+    <strong style={{ color: "#c9a646" }}>{getGrade(score)}</strong>
+  </p>
 
-className='Akash'>Akash Maity</p>
-      <p style={{color:"black",marginTop:'-3vh'}}>_____________________</p>
-      <p style={{ fontSize: '13px' }}>Founder & Project Head, NovaExam</p>
+  {/* Footer */}
+  <div
+    style={{
+      position: "absolute",
+      bottom: "40px",
+      left: "50px",
+      right: "50px",
+      display: "flex",
+      justifyContent: "space-between",
+      alignItems: "center",
+    }}
+  >
+    <div style={{ textAlign: "left" }}>
+      <p
+        style={{
+          fontSize: "5vh",
+          marginBottom: "0px",
+          marginLeft: "3vh",
+          fontFamily:"Brush Script MT ,cursive"
+        }}
+      >
+        Akash Maity
+      </p>
+      <p style={{ color: "black", marginTop: "-3vh" }}>
+        _____________________
+      </p>
+      <p style={{ fontSize: "13px" }}>
+        Founder & Project Head, NovaExam
+      </p>
     </div>
-    <div style={{marginLeft:'-14vh'}}>
-        <img src="/images/QR.png" alt="" srcset="" />
+
+    <div style={{ marginLeft: "-14vh" }}>
+      <img src="/images/QR.png" alt="QR Code" />
     </div>
-    <div style={{ textAlign: 'right', fontSize: '13px' }}>
+
+    <div style={{ textAlign: "right", fontSize: "13px" }}>
       Date: {new Date().toLocaleDateString()}
     </div>
   </div>
 </div>
+
         {/* end */}
       </div>
     </div>

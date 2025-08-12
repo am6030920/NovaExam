@@ -61,16 +61,25 @@
   height: 10vh;
   animation: navGlowBackground 8s ease-in-out infinite;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+  animation-fill-mode: forwards;
+  animation-name: slideInDown, navGlowBackground;
+  animation-duration: 0.5s, 8s;
+  animation-timing-function: ease-out, ease-in-out;
+  animation-iteration-count: 1, infinite;
+  animation-delay: 0s, 0s;
+  flex-wrap: nowrap;
 }
 
 .branding {
   display: flex;
   align-items: center;
   gap: 12px;
+  user-select: none;
 }
 
 .name {
   height: 60px;
+  user-select: none;
 }
 
 .nova, .exam {
@@ -78,8 +87,8 @@
   font-family: "ADORN serif", serif;
   font-size: 32px;
   font-weight: bold;
+  user-select: none;
 }
-
 
 .signup,
 .Log {
@@ -102,6 +111,7 @@
   overflow: hidden;
   margin: 10px 10px;
   z-index: 1;
+  white-space: nowrap;
 }
 
 /* Glow border behind the button */
@@ -134,12 +144,11 @@
 .Log:hover {
   background-position: right center;
   transform: translateY(-4px) scale(1.05);
-  /* Keep original box-shadow and add a new stronger shadow on top */
   box-shadow: 
-    0 0 15px rgba(56, 239, 125, 0.4),   /* original glow */
-    0 0 30px rgba(17, 153, 142, 0.4),   /* original glow */
-    0 12px 24px rgba(56, 239, 125, 0.3), /* new stronger glow */
-    0 0 40px rgba(17, 153, 142, 0.5);    /* new stronger glow */
+    0 0 15px rgba(56, 239, 125, 0.4),
+    0 0 30px rgba(17, 153, 142, 0.4),
+    0 12px 24px rgba(56, 239, 125, 0.3),
+    0 0 40px rgba(17, 153, 142, 0.5);
   color: #051937;
 }
 
@@ -186,7 +195,7 @@
   }
 }
 
-
+/* =================== Responsive =================== */
 
 @media (max-width: 1024px) {
   .Nav {
@@ -222,12 +231,14 @@
   .Nav {
     flex-direction: column;
     align-items: center;
-    padding: 10px;
+    padding: 10px 15px;
+    height: auto;
   }
 
   .branding {
     flex-direction: column;
     align-items: center;
+    gap: 6px;
   }
 
   .name {
@@ -236,6 +247,7 @@
 
   .nova, .exam {
     font-size: 18px;
+    text-align: center;
   }
 
   .signup,
@@ -243,6 +255,6 @@
     width: 90%;
     font-size: 15px;
     padding: 10px 20px;
+    margin: 8px 0;
   }
 }
-
